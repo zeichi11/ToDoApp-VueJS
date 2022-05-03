@@ -6,6 +6,8 @@
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack-dev-server --mode development",
+    "lint": "eslint --ext .js,.vue .",
+    "lint:fix": "eslint --fix --ext .js,.vue .",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -17,7 +19,7 @@
   "bugs": {
     "url": "https://github.com/zeichi11/ToDoApp-VueJS/issues"
   },
-  "browserlist": [
+  "browserslist": [
     "last 2 versions",
     "ie >= 10"
   ],
@@ -26,9 +28,17 @@
     "@babel/core": "^7.17.10",
     "@babel/preset-env": "^7.17.10",
     "autoprefixer": "^10.4.6",
+    "babel-eslint": "^10.1.0",
     "babel-loader": "^8.2.5",
     "clean-webpack-plugin": "^4.0.0",
     "css-loader": "^6.7.1",
+    "eslint": "^5.16.0",
+    "eslint-config-standard": "^12.0.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-promise": "^6.0.0",
+    "eslint-plugin-standard": "^5.0.0",
+    "eslint-plugin-vue": "^8.7.1",
     "html-webpack-plugin": "^5.5.0",
     "node-sass": "^4.14.1",
     "postcss-loader": "^6.2.1",

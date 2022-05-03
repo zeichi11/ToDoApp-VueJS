@@ -8,8 +8,8 @@ export default {
     return {
       msg: 'Hello Vue'
     }
-  }    
-} 
+  }
+}
 </script>
 
 <style scoped lang="scss">
