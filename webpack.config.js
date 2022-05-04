@@ -54,20 +54,21 @@ module.exports = (env, opts) => {
   }
 
   if (opts.mode === 'development') {
-    // 개발용
-    return merge(baseConfig, {
-      devServer: {
-        open: false,
-        hot: true
-      },
-      devtool: 'eval'
-    })
-  } else {
-    // production
-    // 제품용
-    return merge(baseConfig, {
-      devtool: 'cheap-module-source-map',
-      plugins: [new CleanWebpackPlugin()]
-    })
-  }
+		// 개발용
+		return merge(baseConfig, {
+			devServer: {
+				open: false,
+        hot: true,
+        port: 5000
+			},
+			devtool: "eval",
+		});
+	} else {
+		// production
+		// 제품용
+		return merge(baseConfig, {
+			devtool: 'cheap-module-source-map',
+			plugins: [new CleanWebpackPlugin()],
+		});
+	}
 }

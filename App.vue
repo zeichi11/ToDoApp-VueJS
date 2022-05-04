@@ -1,13 +1,13 @@
 <template>
-  <h1>{{ msg }}</h1>
+  <todo-app />
 </template>
 
 <script>
+import TodoApp from './src/TodoApp.vue'
+
 export default {
-  data () {
-    return {
-      msg: 'Hello Vue'
-    }
+  components: {
+    TodoApp // 'todo-app': TodoApp
   }
 }
 </script>
