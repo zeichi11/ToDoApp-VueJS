@@ -50,7 +50,13 @@ module.exports = (env, opts) => {
         inject: false,
         template: path.join(__dirname, 'index.html')
       })
-    ]
+    ],
+    resolve: {
+      fallback: {
+        fs: false,
+        path: false
+      }
+    }
   }
 
   if (opts.mode === 'development') {
