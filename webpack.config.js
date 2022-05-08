@@ -50,9 +50,9 @@ module.exports = (env, opts) => {
 		resolve: {
 			fallback: {
 				fs: false,
-        path: false
-			}
-		}
+				path: false
+      }
+    }
 	};
 
   if (opts.mode === 'development') {
