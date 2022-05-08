@@ -7,10 +7,9 @@
 
 <script>
 import { Low, LocalStorage } from 'lowdb';
-import cryptoRendomString from 'crypto-random-string';
-import TodoCreator from './components/Creator';
-import TodoItem from './components/Item';
 import cryptoRandomString from 'crypto-random-string';
+import TodoCreator from './components/Creator.vue';
+import TodoItem from './components/Item.vue';
 
 export default {
   components: {
@@ -37,7 +36,7 @@ export default {
     },
     createTodo (title) {
       const newTodo = {
-        id: cryptoRendomString({ length: 10 }),
+        id: cryptoRandomString({ length: 10 }),
         title,
         createdAt: new Date(),
         updatedAt: new Date(),
