@@ -54,8 +54,9 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "crypto-random-string": "^4.0.0",
+    "dayjs": "^1.8.36",
     "lodash": "^4.17.21",
-    "lowdb": "^3.0.0",
+    "lowdb": "^1.0.0",
     "vue": "^2.6.10"
   }
 }

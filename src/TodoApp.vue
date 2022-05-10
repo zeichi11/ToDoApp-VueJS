@@ -1,13 +1,22 @@
 <template>
   <div>
-    <todo-item />
-    <todo-creator />
+    <todo-item 
+      v-for="todo in todos"
+      :key="todo.id"
+      :todo="todo"
+      @update-todo="updateTodo"
+      @delete-todo="deleteTodo"
+    />
+    <hr/>
+    <todo-creator @create-todo="createTodo"/>
   </div>
 </template>
 
 <script>
-import { Low, LocalStorage } from 'lowdb';
+import lowdb from 'lowdb';
+import LocalStorage from 'lowdb/adapters/LocalStorage';
 import cryptoRandomString from 'crypto-random-string';
+import _cloneDeep from 'lodash/cloneDeep';
 import TodoCreator from './components/Creator.vue';
 import TodoItem from './components/Item.vue';
 
@@ -18,7 +27,8 @@ export default {
   },
   data () {
     return {
-      db: null
+      db: null,
+      todos: []
     }
   },
   created () {
@@ -27,12 +37,18 @@ export default {
   methods: {
     initDB() {
       const adapter = new LocalStorage('todo-app'); // DB, todo-app: dbName
-      this.db = new Low(adapter);
+      this.db = lowdb(adapter);
 
-      this.db.data = {
-        todos: [] // Collection
-      }; // write to lowdb
-      this.db.write();
+      const hasLocalData = this.db.has('todos').value();
+      if (hasLocalData) {
+        this.todos = _cloneDeep(this.db.getState().todos);
+      } else {
+        this.db.defaults({
+          todos: []
+        }).write();
+      }
+
+      
     },
     createTodo (title) {
       const newTodo = {
@@ -41,12 +57,18 @@ export default {
         createdAt: new Date(),
         updatedAt: new Date(),
         done: false
-      }
+      };
 
       this.db
         .get('todos') // lodash
         .push(newTodo) // lodash
         .write() // lowdb
+    },
+    updateTodo (todo, value) {
+      console.log(todo, value);
+    },
+    deleteTodo (todo) {
+      console.log(todo);
     }
   }
 }
