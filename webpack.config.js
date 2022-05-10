@@ -1,9 +1,9 @@
-const path = require('path')
-const { VueLoaderPlugin } = require('vue-loader')
-const HtmlWebpackPlugin = require('html-webpack-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
-const { merge } = require('webpack-merge')
-require('@babel/polyfill')
+const path = require('path');
+const { VueLoaderPlugin } = require('vue-loader');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
+const { CleanWebpackPlugin } = require('clean-webpack-plugin');
+const merge = require("webpack-merge");
+require('@babel/polyfill');
 
 module.exports = (env, opts) => {
   const baseConfig = {
@@ -46,13 +46,13 @@ module.exports = (env, opts) => {
 				inject: false,
 				template: path.join(__dirname, "index.html"),
 			}),
-		],
-		resolve: {
-			fallback: {
-				fs: false,
-				path: false
-      }
-    }
+		]
+		// resolve: {
+		// 	fallback: {
+		// 		fs: false,
+		// 		path: false
+    //   }
+    // }
 	};
 
   if (opts.mode === 'development') {
