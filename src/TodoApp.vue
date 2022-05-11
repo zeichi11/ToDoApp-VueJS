@@ -17,6 +17,9 @@ import lowdb from 'lowdb';
 import LocalStorage from 'lowdb/adapters/LocalStorage';
 import cryptoRandomString from 'crypto-random-string';
 import _cloneDeep from 'lodash/cloneDeep';
+import _find from 'lodash/find';
+import _assign from 'lodash/assign';
+import _findIndex from 'lodash/findIndex';
 import TodoCreator from './components/Creator.vue';
 import TodoItem from './components/Item.vue';
 
@@ -35,6 +38,9 @@ export default {
     this.initDB();
   },
   methods: {
+    /**
+     * init Database
+     */
     initDB() {
       const adapter = new LocalStorage('todo-app'); // DB, todo-app: dbName
       this.db = lowdb(adapter);
@@ -47,9 +53,12 @@ export default {
           todos: []
         }).write();
       }
-
-      
     },
+
+    /**
+     * create Todo data
+     * @param {stirng} title
+     */
     createTodo (title) {
       const newTodo = {
         id: cryptoRandomString({ length: 10 }),
@@ -62,13 +71,41 @@ export default {
       this.db
         .get('todos') // lodash
         .push(newTodo) // lodash
-        .write() // lowdb
+        .write(); // lowdb
+
+      // 컴포넌트 업데이트
+      this.todos.push(newTodo);
     },
+
+    /**
+     * update Todo data
+     * @param {object} todo
+     * @param {object} value
+     */
     updateTodo (todo, value) {
-      console.log(todo, value);
+      this.db
+        .get('todos')
+        .find({ id: todo.id })
+        .assign(value)
+        .write();
+
+      const targetTodo = _find(this.todos, { id: todo.id });
+      _assign(targetTodo, value);
     },
+
+    /**
+     * delete Todo data
+     * @param {object} todo
+     */
     deleteTodo (todo) {
-      console.log(todo);
+      this.db
+        .get('todos')
+        .remove({ id: todo.id })
+        .write();
+
+      const targetIndex = _findIndex(this.todos, { id: todo.id });
+      // 객체의 속성을 삭제한다. 객체가 반응형이면 뷰 업데이트를 발생시킨다.
+      this.$delete(this.todos, targetIndex);
     }
   }
 }
