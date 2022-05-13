@@ -14,23 +14,31 @@
       />
       <div class="item__actions">
         <button 
+          class="btn btn--primary"
           key="complete" 
           @click="completeEditing">
-            {{ RESOURCES.COMPLETE_EDITING }}
+            <i class="material-icons">done</i>
         </button>
         <button 
+          class="btn"
           key="cancel" 
           @click="offEditMode">
-            {{ RESOURCES.CANCEL_EDITING }}
+            <i class="material-icons">clear</i>
         </button>
       </div>
     </div>
 
     <div v-else class="item__inner item--normal">
-      <input 
-        v-model="done"
-        type="checkbox"
-      />
+      <label>
+        <input 
+          v-model="done"
+          type="checkbox"
+        />
+        <span class="icon">
+          <i class="material-icons">check</i>
+        </span>
+      </label>
+
       <div class="item__title-wrap">
         <div class="item__title">
           {{ todo.title }}
@@ -42,14 +50,16 @@
       
       <div class="item__actions">
         <button 
+          class="btn"
           key="update" 
           @click="onEditMode">
-            {{ RESOURCES.EDIT_ITEM }}
+            <i class="material-icons">edit</i>
         </button>
         <button 
+          class="btn btn--danger"
           key="delete" 
           @click="deleteTodo">
-            {{ RESOURCES.DELETE_ITEM }}
+            <i class="material-icons">delete</i>
         </button>
       </div>
     </div>
@@ -145,23 +155,3 @@ export default {
   }
 }
 </script>
-
-
-<style scoped lang="scss">
-  .todo-item {
-    margin-bottom: 10px;
-
-    &.done {
-      .item__title {
-        text-decoration: line-through;
-      }
-    }
-
-    .item__inner {
-      display: flex;
-    }
-    .item__date {
-      font-size: 12px;
-    }
-  }
-</style>

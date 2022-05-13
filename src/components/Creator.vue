@@ -1,6 +1,8 @@
 <template>
   <div>
-    <button @click="createTodo">추가</button>
+    <button @click="createTodo">
+      <i class="material-icons">add</i>
+    </button>
     <input 
       :value="title"
       :placeholder="placeholder"
@@ -37,6 +39,10 @@ export default {
       // 부모 컴포넌트에서 선언된 현재 컴포넌트의 이벤트 핸들 처리(v-on 디렉티브)와 매핑된다. @create-todo 
       this.$emit('create-todo', this.title);
       this.title = '';
+
+      this.$nextTick(() => {
+        window.scrollTo(0, document.body.scrollHeight);
+      });
     }
   }
 }
