@@ -13,12 +13,20 @@
         @keypress.esc="offEditMode"
       />
       <div class="item__actions">
-        <button key="complete" @click="completeEditing">완료</button>
-        <button key="cancel" @click="offEditMode">취소</button>
+        <button 
+          key="complete" 
+          @click="completeEditing">
+            {{ RESOURCES.COMPLETE_EDITING }}
+        </button>
+        <button 
+          key="cancel" 
+          @click="offEditMode">
+            {{ RESOURCES.CANCEL_EDITING }}
+        </button>
       </div>
     </div>
 
-    <div v-else class="item_inner item--normal">
+    <div v-else class="item__inner item--normal">
       <input 
         v-model="done"
         type="checkbox"
@@ -33,8 +41,16 @@
       </div>
       
       <div class="item__actions">
-        <button key="update" @click="onEditMode">수정</button>
-        <button key="delete" @click="deleteTodo">삭제</button>
+        <button 
+          key="update" 
+          @click="onEditMode">
+            {{ RESOURCES.EDIT_ITEM }}
+        </button>
+        <button 
+          key="delete" 
+          @click="deleteTodo">
+            {{ RESOURCES.DELETE_ITEM }}
+        </button>
       </div>
     </div>
   </div>
@@ -55,6 +71,12 @@ export default {
     }
   },
   computed: {
+    RESOURCES () {
+      return RESOURCES;
+    },
+    DEFAULTS () {
+      return DEFAULTS;
+    },
     done: {
       get () {
         return this.todo.done;
