@@ -19,15 +19,30 @@
             {{ RESOURCES.COMPLETED_ITEMS }} ( {{completedCount}} )
         </button>
       </div>
-    </div>
 
-    <div class="actions">
-      <input 
-        v-model="allDone"
-        type="checkbox"/>
-      <button @click="clearComplete">
-        {{ RESOURCES.CLEAR_COMPLETED_ITEMS }}
-      </button>
+      <div class="actions clearfix">
+        <div class="float--left">
+          <label :title="RESOURCES.SELECT_ALL">
+            <input 
+              v-model="allDone"
+              type="checkbox" />
+            <span class="icon">
+              <i class="material-icons">done_all</i>
+            </span>
+          </label>
+          
+        </div>
+        <div class="float--right">
+          <button
+            class="btn btn--danger"
+            :title="RESOURCES.CLEAR_COMPLETED_ITEMS"
+            @click="clearComplete">
+            
+            <i class="material-icons">delete_sweep</i>
+          </button>
+        </div>
+        
+      </div>
     </div>
 
     <div class="todo-app__list">
@@ -39,8 +54,6 @@
         @delete-todo="deleteTodo"
       />
     </div>
-
-    <hr/>
 
     <todo-creator 
       class="todo-app__creator" 

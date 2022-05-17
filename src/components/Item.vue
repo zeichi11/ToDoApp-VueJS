@@ -15,13 +15,15 @@
       <div class="item__actions">
         <button 
           class="btn btn--primary"
-          key="complete" 
+          key="complete"
+          :title="RESOURCES.COMPLETE_EDITING"
           @click="completeEditing">
             <i class="material-icons">done</i>
         </button>
         <button 
           class="btn"
-          key="cancel" 
+          key="cancel"
+          :title="RESOURCES.CANCEL_EDITING" 
           @click="offEditMode">
             <i class="material-icons">clear</i>
         </button>
@@ -51,13 +53,15 @@
       <div class="item__actions">
         <button 
           class="btn"
-          key="update" 
+          key="update"
+          :title="RESOURCES.EDIT_ITEM"
           @click="onEditMode">
             <i class="material-icons">edit</i>
         </button>
         <button 
           class="btn btn--danger"
-          key="delete" 
+          key="delete"
+          :title="RESOURCES.DELETE_ITEM"
           @click="deleteTodo">
             <i class="material-icons">delete</i>
         </button>

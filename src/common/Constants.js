@@ -11,6 +11,7 @@ const MSG_CONST = {
     ALL_ITEMS: '모든 항목',
     ACTIVE_ITEMS: '해야 할 항목',
     COMPLETED_ITEMS: '완료된 항목',
+    SELECT_ALL: '모든 항목 선택',
     CLEAR_COMPLETED_ITEMS: '완료된 항목 삭제'
 	},
 	DEFAULTS = {
