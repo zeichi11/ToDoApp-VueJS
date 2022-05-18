@@ -72,9 +72,9 @@ import _find from 'lodash/find';
 import _assign from 'lodash/assign';
 import _findIndex from 'lodash/findIndex';
 import _forEachRight from 'lodash/forEachRight';
-import TodoCreator from './components/Creator.vue';
-import TodoItem from './components/Item.vue';
-import { RESOURCES, DEFAULTS } from './common/Constants';
+import TodoCreator from 'componentPath/Creator.vue';
+import TodoItem from 'componentPath/Item.vue';
+import { RESOURCES, DEFAULTS } from 'commonPath/Constants.js';
 
 export default {
   components: {
@@ -244,5 +244,5 @@ export default {
 </script>
 
 <style lang="scss">
-  @import "./scss/style"
+  @import "../scss/style"
 </style>
