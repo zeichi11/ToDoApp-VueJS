@@ -7,6 +7,16 @@ require('@babel/polyfill');
 
 module.exports = (env, opts) => {
   const baseConfig = {
+		resolve: {
+			extensions: [".vue", ".js"],
+			alias: {
+				"~": path.join(__dirname),
+				componentPath: path.join(__dirname, "./src/components"),
+				viewPath: path.join(__dirname, "./src/views"),
+				commonPath: path.join(__dirname, "./src/common"),
+				scssPath: path.join(__dirname, "./src/scss")
+			},
+		},
 		entry: {
 			main: ["@babel/polyfill", path.join(__dirname, "App.js")],
 		},
@@ -46,13 +56,13 @@ module.exports = (env, opts) => {
 				inject: false,
 				template: path.join(__dirname, "index.html"),
 			}),
-		]
+		],
 		// resolve: {
 		// 	fallback: {
 		// 		fs: false,
 		// 		path: false
-    //   }
-    // }
+		//   }
+		// }
 	};
 
   if (opts.mode === 'development') {
