@@ -3,10 +3,20 @@
     <router-link to="/" class="to-home">
       <i class="material-icons">home</i>
     </router-link>
-    
+
     <router-view />
   </div>
 </template>
+
+<script>
+export default {
+  created () {
+    console.log('Router', this.$router);
+    console.log('Route', this.$route);
+  }
+}
+</script>
+
 
 <style lang="scss">
   // 현재 페이지가 router-link 태그의 to 속성에 해당하는 페이지인 경우 
