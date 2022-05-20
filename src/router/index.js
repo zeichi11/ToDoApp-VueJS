@@ -10,16 +10,24 @@ Vue.use(VueRouter);
 const routes = [
 	// config
 	{
-		path: "/",
-		component: Home,
+		name: 'index',
+    path: '/',
+		component: Home
 	},
 	{
-		path: "/about",
-		component: About,
+		name: 'about',
+    path: '/about',
+		component: About
 	},
-	{
-		path: "/todos",
-		component: TodoApp,
+  {
+    name: 'todos',
+		path: '/todos',
+    component: TodoApp,
+    children: [
+      {
+        path: ':id'
+      }
+    ]
 	}
 ];
 
