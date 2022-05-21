@@ -27,17 +27,20 @@ export default {
     createTodo () {
       const newTitle = this.title.trim();
       const isValidTitle = !!newTitle;
-
+      
       if (!isValidTitle) {
         alert(MSG_CONST.INVALID_TITLE_ERROR);
         this.title = newTitle;
         return;
       }
-
+      
       // $emit 부모 컴포넌트로 특정 이벤트를 올려주는 처리. 
       // 부모 컴포넌트에 this.title 인자와 함께 create-todo 이벤트로 전달.
-      // 부모 컴포넌트에서 선언된 현재 컴포넌트의 이벤트 핸들 처리(v-on 디렉티브)와 매핑된다. @create-todo 
-      this.$emit('create-todo', this.title);
+      // 부모 컴포넌트에서 선언된 현재 컴포넌트의 이벤트 핸들링 처리(v-on 디렉티브)와 매핑된다. "@create-todo"
+      // this.$emit('create-todo', this.title);
+
+      // store 사용으로 변경
+      this.$store.dispatch('todoApp/createTodo', this.title);
       this.title = '';
 
       this.$nextTick(() => {

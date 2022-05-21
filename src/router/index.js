@@ -8,27 +8,28 @@ import TodoApp from 'viewPath/TodoApp.vue';
 Vue.use(VueRouter);
 
 const routes = [
-	// config
-	{
-		name: 'index',
+  // config
+  {
+    name: 'index',
     path: '/',
-		component: Home
-	},
-	{
-		name: 'about',
+    component: Home
+  },
+  {
+    name: 'about',
     path: '/about',
-		component: About
-	},
+    component: About
+  },
   {
     name: 'todos',
-		path: '/todos',
+    path: '/todos',
+    redirect: '/todos/all',
     component: TodoApp,
     children: [
       {
         path: ':id'
       }
     ]
-	}
+  }
 ];
 
 export default new VueRouter({ routes });

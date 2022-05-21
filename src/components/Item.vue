@@ -13,17 +13,17 @@
         @keypress.esc="offEditMode"
       />
       <div class="item__actions">
-        <button 
+        <button
           class="btn btn--primary"
           key="complete"
           :title="RESOURCES.COMPLETE_EDITING"
           @click="completeEditing">
             <i class="material-icons">done</i>
         </button>
-        <button 
+        <button
           class="btn"
           key="cancel"
-          :title="RESOURCES.CANCEL_EDITING" 
+          :title="RESOURCES.CANCEL_EDITING"
           @click="offEditMode">
             <i class="material-icons">clear</i>
         </button>
@@ -32,7 +32,7 @@
 
     <div v-else class="item__inner item--normal">
       <label>
-        <input 
+        <input
           v-model="done"
           type="checkbox"
         />
@@ -49,16 +49,16 @@
           {{ date }}
         </div>
       </div>
-      
+
       <div class="item__actions">
-        <button 
+        <button
           class="btn"
           key="update"
           :title="RESOURCES.EDIT_ITEM"
           @click="onEditMode">
             <i class="material-icons">edit</i>
         </button>
-        <button 
+        <button
           class="btn btn--danger"
           key="delete"
           :title="RESOURCES.DELETE_ITEM"
@@ -82,7 +82,7 @@ export default {
     return {
       isEditMode: false,
       editedTitle: ''
-    }
+    };
   },
   computed: {
     RESOURCES () {
@@ -96,7 +96,7 @@ export default {
         return this.todo.done;
       },
       set (done) {
-        this.updateTodo({ done })
+        this.updateTodo({ done });
       }
     },
     date () {
@@ -105,7 +105,7 @@ export default {
       if (isSameDate) {
         return date.format(DEFAULTS.DATE_FORM);
       }
-      return `${date.format(DEFAULTS.DATE_FORM)} (${RESOURCES.ITEM_EDITED})`
+      return `${date.format(DEFAULTS.DATE_FORM)} (${RESOURCES.ITEM_EDITED})`;
     }
   },
   methods: {
@@ -129,11 +129,11 @@ export default {
     onEditMode () {
       this.isEditMode = true;
       this.editedTitle = this.todo.title;
-      
-      // nextTick 다음 DOM 업데이트 사이클 이후 실행될 콜백을 설정할 수 있다. 
+
+      // nextTick 다음 DOM 업데이트 사이클 이후 실행될 콜백을 설정할 수 있다.
       this.$nextTick(() => {
         this.$refs.titleInput.focus();
-      })
+      });
     },
 
     /**
@@ -147,15 +147,20 @@ export default {
      * update todo trigger.
      */
     updateTodo (value) {
-      this.$emit('update-todo', this.todo, value);
+      // this.$emit('update-todo', this.todo, value);
+      this.$store.dispatch('todoApp/updateTodo', {
+        todo: this.todo,
+        value
+      });
     },
 
     /**
      * delete todo trigger.
      */
     deleteTodo () {
-      this.$emit('delete-todo', this.todo);
+      // this.$emit('delete-todo', this.todo);
+      this.$store.dispatch('todoApp/deleteTodo', this.todo);
     }
   }
-}
+};
 </script>

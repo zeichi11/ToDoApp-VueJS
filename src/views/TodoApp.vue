@@ -3,75 +3,63 @@
 
     <div class="todo-app__actions">
       <div class="filters">
-        <button
-          :class="{ active: filter === 'all' }" 
-          @click="changeFilter(DEFAULTS.ITEM_FILTER_ALL)">
+        <router-link
+          to="/todos/all"
+          tag="button">
             {{ RESOURCES.ALL_ITEMS }} ( {{ totalCount }} )
-        </button>
-        <button 
-          :class="{ active: filter === 'active' }" 
-          @click="changeFilter(DEFAULTS.ITEM_FILTER_ACTIVE)">
+        </router-link>
+        <router-link
+          to="/todos/active"
+          tag="button">
             {{ RESOURCES.ACTIVE_ITEMS }} ( {{ activeCount }} )
-        </button>
-        <button 
-          :class="{ active: filter === 'completed' }" 
-          @click="changeFilter(DEFAULTS.ITEM_FILTER_COMPLETED)">
-            {{ RESOURCES.COMPLETED_ITEMS }} ( {{completedCount}} )
-        </button>
+        </router-link>
+        <router-link
+          to="/todos/completed"
+          tag="button">
+            {{ RESOURCES.COMPLETED_ITEMS }} ( {{ completedCount }} )
+        </router-link>
       </div>
 
       <div class="actions clearfix">
         <div class="float--left">
           <label :title="RESOURCES.SELECT_ALL">
-            <input 
+            <input
               v-model="allDone"
               type="checkbox" />
             <span class="icon">
               <i class="material-icons">done_all</i>
             </span>
           </label>
-          
+
         </div>
         <div class="float--right">
           <button
             class="btn btn--danger"
             :title="RESOURCES.CLEAR_COMPLETED_ITEMS"
             @click="clearComplete">
-            
+
             <i class="material-icons">delete_sweep</i>
           </button>
         </div>
-        
+
       </div>
     </div>
 
     <div class="todo-app__list">
-      <todo-item 
+      <todo-item
         v-for="todo in filteredTodos"
         :key="todo.id"
         :todo="todo"
-        @update-todo="updateTodo"
-        @delete-todo="deleteTodo"
       />
     </div>
 
-    <todo-creator 
-      class="todo-app__creator" 
-      @create-todo="createTodo"
-    />
-  
+    <todo-creator class="todo-app__creator"/>
+
   </div>
 </template>
 
 <script>
-import lowdb from 'lowdb';
-import LocalStorage from 'lowdb/adapters/LocalStorage';
-import cryptoRandomString from 'crypto-random-string';
-import _cloneDeep from 'lodash/cloneDeep';
-import _find from 'lodash/find';
-import _assign from 'lodash/assign';
-import _findIndex from 'lodash/findIndex';
-import _forEachRight from 'lodash/forEachRight';
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'; // store의 state와 getters의 바인딩을 지원하는 helpers
 import TodoCreator from 'componentPath/Creator.vue';
 import TodoItem from 'componentPath/Item.vue';
 import { RESOURCES, DEFAULTS } from 'commonPath/Constants.js';
@@ -83,43 +71,40 @@ export default {
   },
   data () {
     return {
-      db: null,
-      todos: [],
       filter: DEFAULTS.ITEM_FILTER_ALL
     };
   },
+
   computed: {
+    // Helpers - mapState
+    // computed 객체에 store의 state를 바인딩한다. (this 객체로 store의 data를 접근하기 위한 방법)
+    // 첫번째 인자 : namespace(없는 경우 생략-두번째 인자만 전달), 두번째 인자 : 바인딩 타겟 data 리스트
+    ...mapState('todoApp', [
+      'todos'
+    ]),
+    // Helpers - mapGetters
+    // computed 객체에 store의 getters를 바인딩한다. (this 객체로 store의 getters 메소드를 접근하기 위한 방법)
+    // 첫번째 인자 : namespace(없는 경우 생략-두번째 인자만 전달), 두번째 인자 : 바인딩 타겟 data 리스트
+    ...mapGetters('todoApp', [
+      'totalCount',
+      'activeCount',
+      'completedCount',
+      'filteredTodos'
+    ]),
     RESOURCES () {
       return RESOURCES;
     },
     DEFAULTS () {
       return DEFAULTS;
     },
-    filteredTodos () {
-      switch (this.filter) {
-        case DEFAULTS.ITEM_FILTER_ACTIVE:
-          return this.todos.filter( todo => !todo.done )
-          break;
-        case DEFAULTS.ITEM_FILTER_COMPLETED:
-          return this.todos.filter( todo => todo.done )
-        case DEFAULTS.ITEM_FILTER_ALL:
-        default:
-          return this.todos;
-      }
-    },
-    totalCount () {
-      return this.todos.length;
-    },
-    activeCount () {
-      return this.todos.filter( todo => !todo.done ).length;
-    },
-    completedCount () {
-      return this.totalCount - this.activeCount;
-    },
+    // ** store의 data를 this 객체로 접근하기 위한 방법 **
+    // todos () {
+    //   return this.$store.state.todoApp.todos;
+    // },
     allDone: {
       get () {
         // 전체 아이템 수와 완료된 아이템 수가 같은 경우 모두 완료되었다고 판단한다.
-        return this.total > 0 && this.totalCount === this.completedCount;
+        return this.totalCount > 0 && this.totalCount === this.completedCount;
       },
       set (checked) {
         this.completeAll(checked);
@@ -129,76 +114,22 @@ export default {
   created () {
     this.initDB();
   },
+
   methods: {
-    /**
-     * init Database
-     */
-    initDB() {
-      const adapter = new LocalStorage('todo-app'); // DB, todo-app: dbName
-      this.db = lowdb(adapter);
-
-      const hasLocalData = this.db.has('todos').value();
-      if (hasLocalData) {
-        this.todos = _cloneDeep(this.db.getState().todos);
-      } else {
-        this.db.defaults({
-          todos: []
-        }).write();
-      }
-    },
-
-    /**
-     * create Todo data
-     * @param {stirng} title
-     */
-    createTodo (title) {
-      const newTodo = {
-        id: cryptoRandomString({ length: 10 }),
-        title,
-        createdAt: new Date(),
-        updatedAt: new Date(),
-        done: false
-      };
-
-      this.db
-        .get('todos') // lodash
-        .push(newTodo) // lodash
-        .write(); // lowdb
-
-      // 컴포넌트 업데이트
-      this.todos.push(newTodo);
-    },
-
-    /**
-     * update Todo data
-     * @param {object} todo
-     * @param {object} value
-     */
-    updateTodo (todo, value) {
-      this.db
-        .get('todos')
-        .find({ id: todo.id })
-        .assign(value)
-        .write();
-
-      const targetTodo = _find(this.todos, { id: todo.id });
-      _assign(targetTodo, value);
-    },
-
-    /**
-     * delete Todo data
-     * @param {object} todo
-     */
-    deleteTodo (todo) {
-      this.db
-        .get('todos')
-        .remove({ id: todo.id })
-        .write();
-
-      const targetIndex = _findIndex(this.todos, { id: todo.id });
-      // 객체의 속성을 삭제한다. 객체가 반응형이면 뷰 업데이트를 발생시킨다.
-      this.$delete(this.todos, targetIndex);
-    },
+    // Helpers - mapActions
+    // methods 객체에 store의 actions를 바인딩한다. (this 객체로 store의 actions를 접근하기 위한 방법)
+    // 첫번째 인자 : namespace(없는 경우 생략-두번째 인자만 전달), 두번째 인자 : 바인딩 타겟 data 리스트
+    ...mapActions('todoApp', [
+      'initDB',
+      'completeAll',
+      'clearComplete'
+    ]),
+    // Helpers - mapMutations
+    // methods 객체에 store의 mutations를 바인딩한다. (this 객체로 store의 mutations를 접근하기 위한 방법)
+    // 첫번째 인자 : namespace(없는 경우 생략-두번째 인자만 전달), 두번째 인자 : 바인딩 타겟 data 리스트
+    ...mapMutations('todoApp', [
+      'updateFilter'
+    ]),
 
     /**
      * set filter type
@@ -206,43 +137,24 @@ export default {
      */
     changeFilter (filter) {
       this.filter = filter;
-    },
-
-    /**
-     * set all items to done.
-     * @param {boolean} checked
-     */
-    completeAll (checked) {
-      // DB
-      const newTodos = this.db
-        .get('todos')
-        .forEach(todo => {
-          todo.done = checked;
-        })
-        .write();
-
-     // Local todos
-      // this.todos.forEach(todo => {
-      //   todo.done = checked;
-      // });
-      this.todos = _cloneDeep(newTodos);
-    },
-
-    /**
-     * delete done items
-     */
-    clearComplete () {
-      // 삭제 시에는 index 문제가 발생하지 않도록 뒤에서부터.
-      _forEachRight(this.todos, todo => {
-        if (todo.done) {
-          this.deleteTodo(todo);
-        }
-      })
+    }
+  },
+  // 특정 정보가 업데이트 시 실행되는 함수 그룹
+  watch: {
+    // this.$route에 대한 watch 메소드
+    $route () {
+      // this.$store.commit('todoApp/updateFilter', this.$route.params.id);
+      this.updateFilter(this.$route.params.id); // mapMutations
     }
   }
-}
+};
 </script>
 
 <style lang="scss">
-  @import "../scss/style"
+  @import "../scss/style";
+
+  .filters button.router-link-active {
+    background: royalblue;
+    color: white;
+  }
 </style>

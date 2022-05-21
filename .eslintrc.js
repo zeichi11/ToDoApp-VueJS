@@ -17,6 +17,7 @@ module.exports = {
     'vue'
   ],
   rules: {
-    'no-new': 0
+    'no-new': 0,
+    'semi': [2, 'always']
   }
 }
