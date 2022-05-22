@@ -1,0 +1,30 @@
+{
+  "name": "todoapp-vuejs",
+  "version": "1.0.0",
+  "description": "Todo app with VueJS",
+  "main": "main.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --mode development",
+    "lint": "eslint --ext .js,.vue .",
+    "lint:fix": "eslint --fix --ext .js,.vue .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/zeichi11/ToDoApp-VueJS.git"
+  },
+  "author": "zeichi",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/zeichi11/ToDoApp-VueJS/issues"
+  },
+  "browserslist": [
+    "last 2 versions",
+    "ie >= 10"
+  ],
+  "homepage": "https://github.com/zeichi11/ToDoApp-VueJS#readme",
+  "devDependencies": {
+    "prettier": "^2.2.1"
+  }
+}
