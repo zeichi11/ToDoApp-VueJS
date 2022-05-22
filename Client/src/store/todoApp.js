@@ -4,17 +4,17 @@
  * 모듈 형태로 추가된 store에 namespaced 속성 설정이 없는 경우 해당 store 모듈은 전역 범주로 설정되니 주의.
  */
 
-import Vue from 'vue';
-import lowdb from 'lowdb';
-import LocalStorage from 'lowdb/adapters/LocalStorage';
-import cryptoRandomString from 'crypto-random-string';
-import { DEFAULTS } from 'commonPath/Constants.js';
+import Vue from 'vue'
+import lowdb from 'lowdb'
+import LocalStorage from 'lowdb/adapters/LocalStorage'
+import cryptoRandomString from 'crypto-random-string'
+import { DEFAULTS } from 'commonPath/Constants.js'
 
-import _assign from 'lodash/assign';
-import _find from 'lodash/find';
-import _cloneDeep from 'lodash/cloneDeep';
-import _findIndex from 'lodash/findIndex';
-import _forEachRight from 'lodash/forEachRight';
+import _assign from 'lodash/assign'
+import _find from 'lodash/find'
+import _cloneDeep from 'lodash/cloneDeep'
+import _findIndex from 'lodash/findIndex'
+import _forEachRight from 'lodash/forEachRight'
 
 export default {
   namespaced: true,
@@ -25,31 +25,31 @@ export default {
   state: () => ({
     db: null,
     todos: [],
-    filter: 'all'
+    filter: 'all',
   }),
   // Computed
   getters: {
-    filteredTodos (state) {
+    filteredTodos(state) {
       switch (state.filter) {
         case DEFAULTS.ITEM_FILTER_ACTIVE:
-          return state.todos.filter((todo) => !todo.done);
+          return state.todos.filter((todo) => !todo.done)
         case DEFAULTS.ITEM_FILTER_COMPLETED:
-          return state.todos.filter((todo) => todo.done);
+          return state.todos.filter((todo) => todo.done)
         case DEFAULTS.ITEM_FILTER_ALL:
         default:
-          return state.todos;
+          return state.todos
       }
     },
-    totalCount (state) {
-      return state.todos.length;
+    totalCount(state) {
+      return state.todos.length
     },
-    activeCount (state) {
-      return state.todos.filter((todo) => !todo.done).length;
+    activeCount(state) {
+      return state.todos.filter((todo) => !todo.done).length
     },
     // getters 내에서 다른 getter 함수를 참조하기 위해서는 두번째 인자인 getters를 사용한다.
-    completedCount (state, getters) {
-      return getters.totalCount - getters.activeCount;
-    }
+    completedCount(state, getters) {
+      return getters.totalCount - getters.activeCount
+    },
   },
   // Methods
   // 실제 값을 변경할 때 (비동기 처리 안됨)
@@ -57,56 +57,56 @@ export default {
   // actions에서 실제 값을 변경해야 하는 경우 mutarions 에 변경 로직을 추가하고 관리해야한다.
   mutations: {
     /*
-		 * DB
-		 */
-    assignDB (state, db /* payload */) {
-      state.db = db;
+     * DB
+     */
+    assignDB(state, db /* payload */) {
+      state.db = db
     },
-    createDB (state, newTodo /* payload */) {
+    createDB(state, newTodo /* payload */) {
       state.db
         .get('todos') // lodash
         .push(newTodo) // lodash
-        .write(); // lowdb
+        .write() // lowdb
     },
-    updateDB (state, payload) {
-      const { todo, value } = payload;
-      state.db.get('todos').find({ id: todo.id }).assign(value).write();
+    updateDB(state, payload) {
+      const { todo, value } = payload
+      state.db.get('todos').find({ id: todo.id }).assign(value).write()
     },
-    deleteDB (state, todo) {
-      state.db.get('todos').remove({ id: todo.id }).write();
-    },
-
-    /*
-		 * Todos
-		 */
-    assignTodos (state, todos /* payload */) {
-      state.todos = todos;
+    deleteDB(state, todo) {
+      state.db.get('todos').remove({ id: todo.id }).write()
     },
 
     /*
-		 * Todo
-		 */
-    assignTodo (state, payload) {
-      const { targetTodo, value } = payload;
-      _assign(targetTodo, value);
-    },
-    pushTodo (state, newTodo) {
-      state.todos.push(newTodo);
-    },
-    deleteTodo (state, targetIndex) {
-      Vue.delete(state.todos, targetIndex);
-    },
-    updateTodo (state, payload) {
-      const { todo, key, value } = payload;
-      todo[key] = value;
+     * Todos
+     */
+    assignTodos(state, todos /* payload */) {
+      state.todos = todos
     },
 
     /*
-		 *  Filter
-		 */
-    updateFilter (state, filter) {
-      state.filter = filter;
-    }
+     * Todo
+     */
+    assignTodo(state, payload) {
+      const { targetTodo, value } = payload
+      _assign(targetTodo, value)
+    },
+    pushTodo(state, newTodo) {
+      state.todos.push(newTodo)
+    },
+    deleteTodo(state, targetIndex) {
+      Vue.delete(state.todos, targetIndex)
+    },
+    updateTodo(state, payload) {
+      const { todo, key, value } = payload
+      todo[key] = value
+    },
+
+    /*
+     *  Filter
+     */
+    updateFilter(state, filter) {
+      state.filter = filter
+    },
   },
   // Methods
   // 일반 로직 (비동기 처리 가능)
@@ -119,83 +119,83 @@ export default {
   // context.dispatch : 현재 store의 actions 내 메소드를 호출하기 위한 속성
   actions: {
     /**
-		 * init Database
-		 */
-    initDB (context) {
-      const { state, commit } = context;
-      const adapter = new LocalStorage('todo-app'); // DB, todo-app: dbName
+     * init Database
+     */
+    initDB(context) {
+      const { state, commit } = context
+      const adapter = new LocalStorage('todo-app') // DB, todo-app: dbName
       // state.db = lowdb(adapter);
-      commit('assignDB', lowdb(adapter));
+      commit('assignDB', lowdb(adapter))
 
-      const hasLocalData = state.db.has('todos').value();
+      const hasLocalData = state.db.has('todos').value()
       if (hasLocalData) {
         // state.todos = _cloneDeep(state.db.getState().todos);
-        commit('assignTodos', _cloneDeep(state.db.getState().todos));
+        commit('assignTodos', _cloneDeep(state.db.getState().todos))
       } else {
         // LocalDB 초기화
         state.db
           .defaults({
-            todos: []
+            todos: [],
           })
-          .write();
+          .write()
       }
     },
 
     /**
-		 * create Todo data
-		 * @param {stirng} title
-		 */
-    createTodo (context, title /* payload */) {
-      const { state, commit } = context;
+     * create Todo data
+     * @param {stirng} title
+     */
+    createTodo(context, title /* payload */) {
+      const { state, commit } = context
       const newTodo = {
         id: cryptoRandomString({ length: 10 }),
         title,
         createdAt: new Date(),
         updatedAt: new Date(),
-        done: false
-      };
+        done: false,
+      }
 
-      console.log('asasasasas');
-      commit('createDB', newTodo); // Create DB
+      console.log('asasasasas')
+      commit('createDB', newTodo) // Create DB
       // 컴포넌트 업데이트
-      commit('pushTodo', newTodo); // push Todo
+      commit('pushTodo', newTodo) // push Todo
     },
 
     /**
-		 * update Todo data
-		 * @param {object} todo
-		 * @param {object} value
-		 */
-    updateTodo (context, payload) {
-      const { state, commit } = context;
-      const { todo, value } = payload;
+     * update Todo data
+     * @param {object} todo
+     * @param {object} value
+     */
+    updateTodo(context, payload) {
+      const { state, commit } = context
+      const { todo, value } = payload
 
-      commit('updateDB', { todo, value });
+      commit('updateDB', { todo, value })
 
-      const targetTodo = _find(state.todos, { id: todo.id });
-      commit('assignTodo', { targetTodo, value });
+      const targetTodo = _find(state.todos, { id: todo.id })
+      commit('assignTodo', { targetTodo, value })
     },
 
     /**
-		 * delete Todo data
-		 * @param {object} todo
-		 */
-    deleteTodo (context, todo) {
-      const { state, commit } = context;
-      commit('deleteDB', todo); // Delete DB
+     * delete Todo data
+     * @param {object} todo
+     */
+    deleteTodo(context, todo) {
+      const { state, commit } = context
+      commit('deleteDB', todo) // Delete DB
 
-      const targetIndex = _findIndex(state.todos, { id: todo.id });
+      const targetIndex = _findIndex(state.todos, { id: todo.id })
       // 객체의 속성을 삭제한다. 객체가 반응형이면 뷰 업데이트를 발생시킨다.
       // this.$delete(state.todos, targetIndex);
-      commit('deleteTodo', targetIndex); // Delete todo
+      commit('deleteTodo', targetIndex) // Delete todo
     },
 
     /**
-		 * set all items to done.
-		 * @param {boolean} checked
-		 */
-    completeAll (context, checked) {
-      const { state, commit } = context;
+     * set all items to done.
+     * @param {boolean} checked
+     */
+    completeAll(context, checked) {
+      const { state, commit } = context
       // DB
       const newTodos = state.db
         .get('todos')
@@ -204,30 +204,30 @@ export default {
           commit('updateTodo', {
             todo,
             key: 'done',
-            value: checked
-          });
+            value: checked,
+          })
         })
-        .write();
+        .write()
 
       // Local todos
       // this.todos.forEach(todo => {
       //   todo.done = checked;
       // });
       // state.todos = _cloneDeep(newTodos);
-      commit("assignTodos", _cloneDeep(newTodos));
+      commit('assignTodos', _cloneDeep(newTodos))
     },
 
     /**
-		 * delete done items
-		 */
-    clearComplete (context, todo) {
-      const { state, dispatch } = context;
+     * delete done items
+     */
+    clearComplete(context, todo) {
+      const { state, dispatch } = context
       // 삭제 시에는 index 문제가 발생하지 않도록 뒤에서부터.
       _forEachRight(state.todos, (todo) => {
         if (todo.done) {
-          dispatch('deleteTodo', todo);
+          dispatch('deleteTodo', todo)
         }
-      });
-    }
-  }
-};
+      })
+    },
+  },
+}
