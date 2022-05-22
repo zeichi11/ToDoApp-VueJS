@@ -29,7 +29,7 @@ export default {
   }),
   // Computed
   getters: {
-    filteredTodos(state) {
+    filteredTodos (state) {
       switch (state.filter) {
         case DEFAULTS.ITEM_FILTER_ACTIVE:
           return state.todos.filter((todo) => !todo.done)
@@ -40,14 +40,14 @@ export default {
           return state.todos
       }
     },
-    totalCount(state) {
+    totalCount (state) {
       return state.todos.length
     },
-    activeCount(state) {
+    activeCount (state) {
       return state.todos.filter((todo) => !todo.done).length
     },
     // getters 내에서 다른 getter 함수를 참조하기 위해서는 두번째 인자인 getters를 사용한다.
-    completedCount(state, getters) {
+    completedCount (state, getters) {
       return getters.totalCount - getters.activeCount
     }
   },
@@ -59,44 +59,44 @@ export default {
     /*
      * DB
      */
-    assignDB(state, db /* payload */) {
+    assignDB (state, db /* payload */) {
       state.db = db
     },
-    createDB(state, newTodo /* payload */) {
+    createDB (state, newTodo /* payload */) {
       state.db
         .get('todos') // lodash
         .push(newTodo) // lodash
         .write() // lowdb
     },
-    updateDB(state, payload) {
+    updateDB (state, payload) {
       const { todo, value } = payload
       state.db.get('todos').find({ id: todo.id }).assign(value).write()
     },
-    deleteDB(state, todo) {
+    deleteDB (state, todo) {
       state.db.get('todos').remove({ id: todo.id }).write()
     },
 
     /*
      * Todos
      */
-    assignTodos(state, todos /* payload */) {
+    assignTodos (state, todos /* payload */) {
       state.todos = todos
     },
 
     /*
      * Todo
      */
-    assignTodo(state, payload) {
+    assignTodo (state, payload) {
       const { targetTodo, value } = payload
       _assign(targetTodo, value)
     },
-    pushTodo(state, newTodo) {
+    pushTodo (state, newTodo) {
       state.todos.push(newTodo)
     },
-    deleteTodo(state, targetIndex) {
+    deleteTodo (state, targetIndex) {
       Vue.delete(state.todos, targetIndex)
     },
-    updateTodo(state, payload) {
+    updateTodo (state, payload) {
       const { todo, key, value } = payload
       todo[key] = value
     },
@@ -104,7 +104,7 @@ export default {
     /*
      *  Filter
      */
-    updateFilter(state, filter) {
+    updateFilter (state, filter) {
       state.filter = filter
     }
   },
@@ -121,7 +121,7 @@ export default {
     /**
      * init Database
      */
-    initDB(context) {
+    initDB (context) {
       const { state, commit } = context
       const adapter = new LocalStorage('todo-app') // DB, todo-app: dbName
       // state.db = lowdb(adapter);
@@ -145,7 +145,7 @@ export default {
      * create Todo data
      * @param {stirng} title
      */
-    createTodo(context, title /* payload */) {
+    createTodo (context, title /* payload */) {
       const { commit } = context
       const newTodo = {
         id: cryptoRandomString({ length: 10 }),
@@ -166,7 +166,7 @@ export default {
      * @param {object} todo
      * @param {object} value
      */
-    updateTodo(context, payload) {
+    updateTodo (context, payload) {
       const { state, commit } = context
       const { todo, value } = payload
 
@@ -180,7 +180,7 @@ export default {
      * delete Todo data
      * @param {object} todo
      */
-    deleteTodo(context, todo) {
+    deleteTodo (context, todo) {
       const { state, commit } = context
       commit('deleteDB', todo) // Delete DB
 
@@ -194,7 +194,7 @@ export default {
      * set all items to done.
      * @param {boolean} checked
      */
-    completeAll(context, checked) {
+    completeAll (context, checked) {
       const { state, commit } = context
       // DB
       const newTodos = state.db
@@ -220,7 +220,7 @@ export default {
     /**
      * delete done items
      */
-    clearComplete(context, todo) {
+    clearComplete (context, todo) {
       const { state, dispatch } = context
       // 삭제 시에는 index 문제가 발생하지 않도록 뒤에서부터.
       _forEachRight(state.todos, (todo) => {
