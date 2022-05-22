@@ -9,15 +9,9 @@ module.exports = {
     browser: true,
     node: true
   },
-  extends: [
-    'standard',
-    'plugin:vue/essential'
-  ],
-  plugins: [
-    'vue'
-  ],
+  extends: ['standard', 'plugin:vue/essential'],
+  plugins: ['vue'],
   rules: {
-    'no-new': 0,
-    'semi': [2, 'always']
+    'no-new': 0
   }
 }

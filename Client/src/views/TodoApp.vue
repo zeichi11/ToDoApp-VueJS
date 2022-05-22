@@ -59,10 +59,10 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'; // store의 state와 getters의 바인딩을 지원하는 helpers
-import TodoCreator from 'componentPath/Creator.vue';
-import TodoItem from 'componentPath/Item.vue';
-import { RESOURCES, DEFAULTS } from 'commonPath/Constants.js';
+import { mapState, mapGetters, mapMutations, mapActions } from 'vuex' // store의 state와 getters의 바인딩을 지원하는 helpers
+import TodoCreator from 'componentPath/Creator.vue'
+import TodoItem from 'componentPath/Item.vue'
+import { RESOURCES, DEFAULTS } from 'commonPath/Constants.js'
 
 export default {
   components: {
@@ -72,7 +72,7 @@ export default {
   data () {
     return {
       filter: DEFAULTS.ITEM_FILTER_ALL
-    };
+    }
   },
 
   computed: {
@@ -92,10 +92,10 @@ export default {
       'filteredTodos'
     ]),
     RESOURCES () {
-      return RESOURCES;
+      return RESOURCES
     },
     DEFAULTS () {
-      return DEFAULTS;
+      return DEFAULTS
     },
     // ** store의 data를 this 객체로 접근하기 위한 방법 **
     // todos () {
@@ -104,15 +104,15 @@ export default {
     allDone: {
       get () {
         // 전체 아이템 수와 완료된 아이템 수가 같은 경우 모두 완료되었다고 판단한다.
-        return this.totalCount > 0 && this.totalCount === this.completedCount;
+        return this.totalCount > 0 && this.totalCount === this.completedCount
       },
       set (checked) {
-        this.completeAll(checked);
+        this.completeAll(checked)
       }
     }
   },
   created () {
-    this.initDB();
+    this.initDB()
   },
 
   methods: {
@@ -136,7 +136,7 @@ export default {
      * @param {string} filter
      */
     changeFilter (filter) {
-      this.filter = filter;
+      this.filter = filter
     }
   },
   // 특정 정보가 업데이트 시 실행되는 함수 그룹
@@ -144,10 +144,10 @@ export default {
     // this.$route에 대한 watch 메소드
     $route () {
       // this.$store.commit('todoApp/updateFilter', this.$route.params.id);
-      this.updateFilter(this.$route.params.id); // mapMutations
+      this.updateFilter(this.$route.params.id) // mapMutations
     }
   }
-};
+}
 </script>
 
 <style lang="scss">

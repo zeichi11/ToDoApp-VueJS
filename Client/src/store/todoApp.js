@@ -25,7 +25,7 @@ export default {
   state: () => ({
     db: null,
     todos: [],
-    filter: 'all',
+    filter: 'all'
   }),
   // Computed
   getters: {
@@ -49,7 +49,7 @@ export default {
     // getters 내에서 다른 getter 함수를 참조하기 위해서는 두번째 인자인 getters를 사용한다.
     completedCount(state, getters) {
       return getters.totalCount - getters.activeCount
-    },
+    }
   },
   // Methods
   // 실제 값을 변경할 때 (비동기 처리 안됨)
@@ -106,7 +106,7 @@ export default {
      */
     updateFilter(state, filter) {
       state.filter = filter
-    },
+    }
   },
   // Methods
   // 일반 로직 (비동기 처리 가능)
@@ -135,7 +135,7 @@ export default {
         // LocalDB 초기화
         state.db
           .defaults({
-            todos: [],
+            todos: []
           })
           .write()
       }
@@ -146,13 +146,13 @@ export default {
      * @param {stirng} title
      */
     createTodo(context, title /* payload */) {
-      const { state, commit } = context
+      const { commit } = context
       const newTodo = {
         id: cryptoRandomString({ length: 10 }),
         title,
         createdAt: new Date(),
         updatedAt: new Date(),
-        done: false,
+        done: false
       }
 
       console.log('asasasasas')
@@ -204,7 +204,7 @@ export default {
           commit('updateTodo', {
             todo,
             key: 'done',
-            value: checked,
+            value: checked
           })
         })
         .write()
@@ -228,6 +228,6 @@ export default {
           dispatch('deleteTodo', todo)
         }
       })
-    },
-  },
+    }
+  }
 }

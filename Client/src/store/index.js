@@ -1,8 +1,8 @@
-import Vue from 'vue';
-import Vuex from 'vuex';
-import todoApp from './todoApp.js';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import todoApp from './todoApp.js'
 
-Vue.use(Vuex);
+Vue.use(Vuex)
 
 export default new Vuex.Store({
   // strict: true // 배포 시에는 strict 모드인 경우 성능 이슈가 발생할 수 있다.
@@ -11,4 +11,4 @@ export default new Vuex.Store({
   modules: {
     todoApp
   }
-});
+})
