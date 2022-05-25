@@ -1,9 +1,15 @@
 // @ts-check
 const express = require('express')
+
+const userRouter = require('./router/user.js')
+
 const fs = require('fs')
 
 const app = express()
 const PORT = 8000
+
+// regiter router
+app.use('/users', userRouter)
 
 app.use('/', (req, res) => {
   res.send('Hello, express')
