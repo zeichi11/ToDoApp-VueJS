@@ -1,7 +1,7 @@
 // @ts-check
 const express = require('express')
 
-const userRouter = require('./router/user.js')
+const userRouter = require('./routes/user.js')
 
 const fs = require('fs')
 
