@@ -1,7 +1,6 @@
-const express = require('express')
+import express from 'export'
 
 const userRouter = express.Router()
-
 const USER = {
   220525: {
     nickname: 'foo'
@@ -34,4 +33,4 @@ userRouter.post('/:id/name', (req, res) => {
   res.send(`User name updated: ${nickname}`)
 })
 
-module.exports = userRouter
+export default userRouter;
