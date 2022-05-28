@@ -3,6 +3,7 @@
     "strict": true,
     "target": "ES5",
     "module": "CommonJS",
+    "esModuleInterop": true,
     "alwaysStrict": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
