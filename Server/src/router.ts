@@ -1,8 +1,11 @@
+import { Express } from 'express'
+import { RouteTableType } from './routes/interface';
+
 export default {
-  set (app, routerMap) {
-    for (let prop in routerMap) {
-      if (routerMap.hasOwnProperty(prop)) {
-        app.use(prop, routerMap[prop]);
+  set (app: Express, routerTable: RouteTableType) {
+    for (let prop in routerTable) {
+      if (routerTable.hasOwnProperty(prop)) {
+        app.use(prop, routerTable[prop]);
       }
     }
   }
