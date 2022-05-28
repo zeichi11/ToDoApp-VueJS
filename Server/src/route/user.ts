@@ -1,5 +1,5 @@
 import { Router, Request, Response } from 'express'
-import User from '../modules/user'
+import User from '../module/user'
 
 const router: Router = express.Router()
 
