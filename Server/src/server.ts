@@ -1,7 +1,7 @@
 import express, { Express } from 'express'
 import Router from './router'
 import { RouteTableType } from './routes/interface'
-import { configType } from './interfaces/'
+import { configType } from './interfaces'
 
 let _server: Express;
 
