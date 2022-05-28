@@ -5,11 +5,11 @@ let _server: express = null;
 
 const _initialize = function (routeMap: ) {
   _server = express()
-  Router.set(_server, routeMap);
+  Router.set(_server, routeMap)
 }
 
 const start = function (config, routeMap) {
-  !_server && _initialize(routeMap);
+  !_server && _initialize(routeMap)
 
   _server.listen(config.port, () => {
     console.log(`The Express server is listening at port: ${config.port}`)
