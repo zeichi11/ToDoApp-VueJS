@@ -13,9 +13,9 @@ db.once('open', () => {
 })
 
 // Schema 생성
-const userSchema = mongoose.Schema({
-  name: 'string',
-  age: 'number',
+const userSchema = new mongoose.Schema({
+  name: String,
+  age: Number,
 })
 
 // 정의된 스키마를 객체처럼 사용할 수 있도록 변환
