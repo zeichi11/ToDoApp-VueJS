@@ -1,7 +1,7 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema }from 'mongoose'
 
-const todoItemSchema = new mongoose.Schema({
-  id: mongoose.Schema.Types.ObjectId,
+const todoItem = new Schema({
+  _id: Schema.Types.ObjectId,
   title: { type: String, default: '' },
   createdAt: { type: Date, required: true, default: Date.now },
   editedAt: { type: Date, default: Date.now },
@@ -10,4 +10,4 @@ const todoItemSchema = new mongoose.Schema({
 
 // todoItemSchema.index({})
 
-export default todoItemSchema;
+export default mongoose.model('TodoItem', todoItem)

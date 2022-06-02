@@ -1,14 +1,21 @@
-import mongoose from 'mongoose';
-import TodoDocsSchema from './todo/docs';
+import mongoose, { Schema } from 'mongoose'
 
-const boardSchema = new mongoose.Schema({
-  id: mongoose.Schema.Types.ObjectId,
+const todoDoc = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    ref: 'TodoDoc',
+    required: true
+  }
+})
+
+const board = new Schema({
+  _id: Schema.Types.ObjectId,
   uId: { type: String, required: true },
   title: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now },
-  todoDocs: [ TodoDocsSchema ]
+  todoDocs: [ todoDoc ]
 })
 
-// boardSchema.index({})
+// board.index({})
 
-export default boardSchema
+export default mongoose.model('Board', board)
