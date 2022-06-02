@@ -1,14 +1,21 @@
-import mongoose from 'mongoose';
-import TodoItemSchema from './item';
+import mongoose, { Schema } from 'mongoose'
 
-const todoListSchema = new mongoose.Schema({
-  id: mongoose.Schema.Types.ObjectId,
+const todoItem = new Schema({
+  _id: {
+    type: Schema.Types.ObjectId,
+    ref: 'TodoItem',
+    required: true
+  }
+})
+
+const todoList = new Schema({
+  id: Schema.Types.ObjectId,
   title: { type: String, default: '' },
   createdAt: { type: Date, required: true, default: Date.now },
   editedAt: { type: Date, default: Date.now },
-  items: [ TodoItemSchema ]
+  items: [ todoItem ]
 })
 
 // todoListSchema.index({})
 
-export default todoListSchema
+export default mongoose.model('TodoList', todoList)

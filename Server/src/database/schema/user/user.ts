@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from 'mongoose'
 import imageSchema from '../resource/image'
 
 const userSchema = new mongoose.Schema({
