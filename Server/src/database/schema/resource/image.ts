@@ -1,7 +1,7 @@
-import mongoose from 'mongoose'
+import mongoose, { Schema }from 'mongoose'
 
-export default new mongoose.Schema({
-  src: String,
-  width: Number,
-  height: Number
+export default new Schema({
+  src: { type: String, required: true },
+  width: { type: Number, required: true },
+  height: { type: Number, required: true }
 })

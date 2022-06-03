@@ -1,10 +1,9 @@
-import { Router, Request, Response } from 'express'
+import { Router } from 'express'
+import dashboardController from '../module/dashboard'
+import auth from '../middleware/authorization/auth'
 
 const router: Router = express.Router()
 
-router.get('/', (req: Request, res: Response) => {
-  res.send('dashboard page')
-});
-
+router.get('/', auth, dashboardController.getDashboard);
 
 export default router;
