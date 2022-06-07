@@ -3,6 +3,7 @@ To Do App with VueJS
 
 
 Client stack
+
   VueJS
     vue-router
   Vuex
