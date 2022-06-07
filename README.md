@@ -2,19 +2,23 @@
 To Do App with VueJS
 
 
-Client stack
+Client stack  
+- VueJS  
+- vue-router  
+- Vuex  
+- Lodash  
+- LowDB  
+- Webpack  
 
-  VueJS
-    vue-router
-  Vuex
-  Lodash
-  LowDB
-  Webpack
+Server stack  
+- Express  
+- TypeScript
+- mongoose
 
-Server stack
-  Express
-  TypeScript
+Formatting  
+- Prettier  
 
-Formatting: Prettier
-Linting: ESLint
+Linting  
+- ESLint  
+
 Type checking: TypeScript
