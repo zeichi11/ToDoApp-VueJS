@@ -1,9 +1,9 @@
 import { Router } from 'express'
-import dashboardController from '../module/dashboard'
+import workspaceRouteHandler from './workspace'
 import auth from '../middleware/authorization/auth'
 
 const router: Router = express.Router()
 
-router.get('/', auth, dashboardController.getDashboard);
+router.post('/', auth, WorkspaceRouteHandler.get);
 
 export default router;

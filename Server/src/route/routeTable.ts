@@ -1,9 +1,9 @@
-import User from './user'
-import Dashboard from './dashboard'
-import Todos from './todos'
+import UserRouter from './userRouter'
+import WorkspaceRouter from './workspaceRouter'
+import TodosRouter from './todosRouter'
 
 export default {
-  '/user': User,
-  '/dashboard': Dashboard,
-  '/todos': Todos,
+  '/user': UserRouter,
+  '/workspace': WorkspaceRouter,
+  '/todos': TodosRouter
 }

@@ -1,14 +1,14 @@
 import mongoose, { Schema } from 'mongoose'
 
-const todoDoc = new Schema({
+const board = new Schema({
   _id: {
     type: Schema.Types.ObjectId,
-    ref: 'TodoDoc',
+    ref: 'Board',
     required: true
   }
 })
 
-const board = new Schema({
+const workspace = new Schema({
   _id: Schema.Types.ObjectId,
   uId: { type: String, required: true },
   title: { type: String, default: '' },
@@ -18,4 +18,4 @@ const board = new Schema({
 
 // board.index({})
 
-export default mongoose.model('Board', board)
+export default mongoose.model('Workspace', workspace)

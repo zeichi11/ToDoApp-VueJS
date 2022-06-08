@@ -1,11 +1,10 @@
 import { Router, Request, Response } from 'express'
-import User from '../module/user'
+import UserRouteHandler from './user'
+import auth from '../middleware/authorization/auth'
 
 const router: Router = express.Router()
 
-router.post('/', (req: Request, res: Response) => {
-  res.send('user page')
-})
+router.post('/', auth, UserRouteHandler.get)
 
 export default router;
 
