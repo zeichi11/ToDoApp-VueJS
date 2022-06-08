@@ -1,20 +1,24 @@
 import express, { Express } from 'express'
 import Router from './router'
-import { RouteTableType } from './routes/interface'
-import { configType } from './interfaces'
+import Database from './database'
+import Config from './util/config'
+
+import { RouteTableType } from './route/interface'
 
 let _server: Express;
 
-const _initialize = function (routeTable: RouteTableType) {
+function _initialize (routeTable: RouteTableType) {
   _server = express()
   Router.set(_server, routeTable)
 }
 
-const start = function (config: configType, routeTable: RouteTableType) {
+function start (routeTable: RouteTableType) {
   !_server && _initialize(routeTable)
 
-  _server.listen(config.port, () => {
-    console.log(`The Express server is listening at port: ${config.port}`)
+  Database.initDB()
+
+  _server.listen(Config.PORT, () => {
+    console.log(`The Express server is listening at port: ${Config.PORT}`)
   })
 }
 
