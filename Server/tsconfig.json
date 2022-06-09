@@ -2,12 +2,17 @@
   "compilerOptions": {
     "strict": true,
     "target": "ES5",
-    "module": "CommonJS",
+    "module": "system",
     "esModuleInterop": true,
     "alwaysStrict": true,
     "noImplicitAny": true,
     "noImplicitThis": true,
     "sourceMap": true,
-    "downlevelIteration": true
-  }
+    "downlevelIteration": true,
+    "moduleResolution": "node",
+    "outDir": "dist-server"
+  },
+  "include": [
+    "src/**/*"
+  ]
 }
