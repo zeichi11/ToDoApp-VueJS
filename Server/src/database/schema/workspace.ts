@@ -13,7 +13,7 @@ const workspace = new Schema({
   uId: { type: String, required: true },
   title: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now },
-  todoDocs: [ todoDoc ]
+  board: [ board ]
 })
 
 // board.index({})

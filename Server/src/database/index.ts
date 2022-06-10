@@ -1,7 +1,7 @@
 import mongoose, { Connection } from 'mongoose'
 import Config from '../util/config'
 
-let _db: Connection = null;
+let _db: Connection;
 
 function getDBUri(): string {
   const PROTOCOL = 'mongodb://'
