@@ -9,7 +9,6 @@ const todoItem = new Schema({
 })
 
 const todoList = new Schema({
-  id: Schema.Types.ObjectId,
   title: { type: String, default: '' },
   createdAt: { type: Date, required: true, default: Date.now },
   editedAt: { type: Date, default: Date.now },
@@ -18,4 +17,4 @@ const todoList = new Schema({
 
 // todoListSchema.index({})
 
-export default mongoose.model('TodoList', todoList)
+export default todoList

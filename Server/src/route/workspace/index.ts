@@ -1,7 +1,7 @@
 import { Request, Response } from 'express'
 
 export default {
-  get: (req: Request, res: Response) => {
+  getWorkspace: (req: Request, res: Response) => {
     res.send('workspace page')
   }
 }

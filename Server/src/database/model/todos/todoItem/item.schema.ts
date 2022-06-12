@@ -9,4 +9,4 @@ const todoItem = new Schema({
 
 // todoItemSchema.index({})
 
-export default mongoose.model('TodoItem', todoItem)
+export default todoItem

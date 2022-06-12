@@ -1,5 +1,5 @@
 import dotenv from 'dotenv'
-import { configType } from '../interface'
+import { configType } from './config.type'
 
 /**
  * init
