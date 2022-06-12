@@ -1,5 +1,5 @@
 import mongoose from 'mongoose'
-import imageSchema from '../resource/imageSchema'
+import imageSchema from '../resource/image.schema'
 
 const userSchema = new mongoose.Schema({
   id: mongoose.Schema.Types.ObjectId,

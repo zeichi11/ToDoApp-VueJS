@@ -1,4 +1,4 @@
-import List from '../database/schema/todo/listSchema'
+import List from '../database/todoDoc/todoList/list.schema'
 
 async function addList(id, title, createdAt) {
   const list = new List({
