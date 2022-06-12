@@ -4,6 +4,6 @@ import auth from '../middleware/authorization/auth'
 
 const router: Router = express.Router()
 
-router.post('/', auth, workspaceRouteHandler.get);
+router.post('/', auth, workspaceRouteHandler.getWorkspace);
 
 export default router;

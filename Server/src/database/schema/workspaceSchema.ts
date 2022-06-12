@@ -8,13 +8,15 @@ const board = new Schema({
   }
 })
 
-const workspace = new Schema({
+const workspace: Schema = new Schema({
   _id: Schema.Types.ObjectId,
   uId: { type: String, required: true },
   title: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now },
   board: [ board ]
 })
+
+workspace.statics.getById()
 
 // board.index({})
 
