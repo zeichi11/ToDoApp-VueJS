@@ -24,7 +24,7 @@ export default class Workspace {
    */
   open() {
     try {
-      this._board = new Board(boardId)
+      this._board = new Board(this._boardId)
       console.log('open')
     } catch (e: any) {
       console.error(e.message)
@@ -81,18 +81,18 @@ export default class Workspace {
   }
 
   addBoard() {
+    
+  }
+
+  removeBoard(boardId: string) {
 
   }
 
-  removeBoard(boardId) {
+  setBoardTitle(boardId: string, boardTitle: string) {
 
   }
 
-  setBoardTitle(boardId, boardTitle) {
-
-  }
-
-  moveBoard(boardId, fromIndex, toIndex) {
+  moveBoard(boardId: string, fromIndex: number, toIndex: number) {
 
   }
 }

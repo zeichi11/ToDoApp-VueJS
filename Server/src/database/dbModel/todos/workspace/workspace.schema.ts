@@ -1,20 +1,21 @@
 import { Schema } from 'mongoose'
+import { getAllBoards } from './workspace.methods'
+import { findById } from './workspace.statics'
 
-const board = new Schema({
-  _id: {
-    type: Schema.Types.ObjectId,
-    ref: 'Board',
-    required: true
-  }
-})
-
-const workspace: Schema = new Schema({
+const workspaceSchema: Schema = new Schema({
   // uId: { type: String, required: true },
   title: { type: String, default: '' },
   createdAt: { type: Date, default: Date.now },
-  boards: [ board ]
+  boards: [{
+    type: Schema.Types.ObjectId,
+    ref: 'Board',
+    required: true
+  }]
 })
+
+workspaceSchema.statics.findById = findById
+workspaceSchema.methods.getAllBoards = getAllBoards
 
 // board.index({})
 
-export default workspace
+export default workspaceSchema

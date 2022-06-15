@@ -1,18 +1,18 @@
-import mongoose, { Schema } from 'mongoose'
-
-const todoList = new Schema({
-  _id: {
-    type: Schema.Types.ObjectId,
-    ref: 'TodoList',
-    required: true
-  }
-})
+import { Schema } from 'mongoose'
 
 const board = new Schema({
   createdAt: { type: Date, required: true, default: Date.now },
   editedAt: { type: Date, default: Date.now },
   title: { type: String, default: '' },
-  todoList: [ todoList ]
+  boardId: {
+    type: Schema.Types.ObjectId,
+    ref: 'Workspace'
+  },
+  todoList: [{
+    type: Schema.Types.ObjectId,
+    ref: 'TodoList',
+    required: true
+  }]
 })
 
 // board.index({})
