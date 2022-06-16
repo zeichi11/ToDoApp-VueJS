@@ -8,8 +8,10 @@ export interface IWorkspace {
 }
 
 // methods
-export interface IWorkspaceDocument extends IWorkspace, Document {}
+export interface IWorkspaceDocument extends IWorkspace, Document {
+  getAllBoards: () => Promise<IBoard[]>
+}
 
-// static
-export interface IWorkspaceModel extends Model<IWorkspaceDocument> {}
-
+export interface IWorkspaceModel extends Model<IWorkspaceDocument> {
+  findWorkspcaeById: (this: IWorkspaceModel, workspaceId: string) => Promise<IWorkspaceDocument>
+}

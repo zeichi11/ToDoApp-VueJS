@@ -4,6 +4,7 @@ export interface ValueType {
 }
 
 export interface CommandType {
+  cmd: string,
   type: string,
   listIndex: number,
   value: ValueType

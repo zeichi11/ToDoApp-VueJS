@@ -4,7 +4,7 @@ const board = new Schema({
   createdAt: { type: Date, required: true, default: Date.now },
   editedAt: { type: Date, default: Date.now },
   title: { type: String, default: '' },
-  boardId: {
+  workspaceId: {
     type: Schema.Types.ObjectId,
     ref: 'Workspace'
   },

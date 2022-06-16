@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose'
 import { getAllBoards } from './workspace.methods'
-import { findById } from './workspace.statics'
+import { findWorkspcaeById } from './workspace.statics'
 
 const workspaceSchema: Schema = new Schema({
   // uId: { type: String, required: true },
@@ -13,7 +13,7 @@ const workspaceSchema: Schema = new Schema({
   }]
 })
 
-workspaceSchema.statics.findById = findById
+workspaceSchema.statics.findWorkspcaeById = findWorkspcaeById
 workspaceSchema.methods.getAllBoards = getAllBoards
 
 // board.index({})
