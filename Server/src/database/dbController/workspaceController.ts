@@ -43,16 +43,23 @@ export default {
     return await board.save()
   },
 
-  removeBoard: async function (boardId: string) {
+  removeBoard: async function (boardId: string, callback: function) {
     try {
-      const board = Board.findById(boardId)
-      if (board) {
-        board.remove().exec()
-      }
+      Board.remove({ _id: boardId }, callback)
     } catch (e: any) {
       console.error(e.message)
     }
   },
+
+  changeBoardOrder: async function (boardId: string, orderList: Array<string>, callback: function) {
+    try {
+      Board.update({ _id: boardId }, {
+        $set: {
+          todoList: orderList
+        }
+      }, callback)
+    }
+  }
 
   getBoardById: async function (boardId: string) {
     try {
