@@ -13,5 +13,5 @@ export interface IWorkspaceDocument extends IWorkspace, Document {
 }
 
 export interface IWorkspaceModel extends Model<IWorkspaceDocument> {
-  findWorkspcaeById: (this: IWorkspaceModel, workspaceId: string) => Promise<IWorkspaceDocument>
+  findWorkspaceById: (this: Model<IWorkspaceDocument>, workspaceId: string) => Promise<IWorkspaceDocument>
 }

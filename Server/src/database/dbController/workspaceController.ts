@@ -53,13 +53,13 @@ export default {
 
   changeBoardOrder: async function (boardId: string, orderList: Array<string>, callback: function) {
     try {
-      Board.update({ _id: boardId }, {
+      Board.updateOne({ _id: boardId }, {
         $set: {
           todoList: orderList
         }
       }, callback)
     }
-  }
+  },
 
   getBoardById: async function (boardId: string) {
     try {
