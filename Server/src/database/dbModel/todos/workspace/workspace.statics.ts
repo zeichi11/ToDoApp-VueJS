@@ -6,6 +6,6 @@ export async function findWorkspaceById(this: Model<IWorkspaceDocument>, workspa
   if (found) {
     return found
   } else {
-    return this.create({ workspaceId })
+    return await this.create({ workspaceId })
   }
 }

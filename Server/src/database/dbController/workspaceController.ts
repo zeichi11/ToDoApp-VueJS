@@ -13,11 +13,11 @@ async function _createWorkspace(title: string) {
 }
 
 export default {
-  createWorkspace: async function (title: string) {
+  createWorkspace: function (title: string) {
     const promise = _createWorkspace(title)
     promise.then((doc) => {
       const workspaceId = doc._id
-      // const workspace = Workspace.findWorkspaceById(workspaceId)
+      const workspace = Workspace.findWorkspaceById(workspaceId)
       BoardController.createBoard(workspaceId, 'board1')
     })
   }

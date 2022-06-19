@@ -3,7 +3,7 @@ import { IBoard } from '../board/board.type'
 
 export interface IWorkspace {
   title: string,
-  createdAt: string,
+  createdAt: Date,
   boards: Array<IBoard>
 }
 
@@ -13,5 +13,6 @@ export interface IWorkspaceDocument extends IWorkspace, Document {
 }
 
 export interface IWorkspaceModel extends Model<IWorkspaceDocument> {
-  findWorkspaceById: (this: Model<IWorkspaceDocument>, workspaceId: string) => Promise<IWorkspaceDocument>
+  // findWorkspaceById: (this: IWorkspaceModel, workspaceId: string) => Promise<IWorkspaceDocument>
+  findWorkspaceById: (this: IWorkspaceModel, workspaceId: string) => Promise<IWorkspaceDocument>
 }
