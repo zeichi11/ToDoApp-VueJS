@@ -8,7 +8,7 @@ let _db: Connection;
 function getDBUri(): string {
   const PROTOCOL = 'mongodb://'
   // return `${PROTOCOL}${Config.MONGO_HOST}:${Config.MONGO_PORT}/${Config.MONGO_CONTEXT}`
-  return `${PROTOCOL}localhost:27018/todoApp`
+  return `${PROTOCOL}localhost:27018/todoAppTest`
 }
 
 function initDB(): void {
