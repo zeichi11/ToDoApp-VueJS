@@ -6,7 +6,7 @@ import { configType } from './config.type'
  */
 function initialize() {
   // TODO 경로 script 인자로 넘길것 
-  const env = process.env.NODE_ENV
+  const env = process.env.NODE_ENV || "dev"
   dotenv.config({ path: `/config/${env}.config.env` });
 }
 

@@ -10,8 +10,7 @@ const board = new Schema({
   },
   todoList: [{
     type: Schema.Types.ObjectId,
-    ref: 'TodoList',
-    required: true
+    ref: 'TodoList'
   }]
 })
 

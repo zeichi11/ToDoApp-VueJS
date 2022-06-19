@@ -9,15 +9,14 @@ function getDBUri(): string {
 }
 
 function initDB() {
-  _db && (_db = mongoose.connection)
-  
-  mongoose.connect(getDBUri())
-  mongoose.Promise = global.Promise
-
+  _db = mongoose.connection
   _db.on('error', console.error)
   _db.once('open', () => {
     console.log('Connected to mongoDB Server')
   })
+
+  mongoose.Promise = global.Promise
+  mongoose.connect(getDBUri())
 }
 
 export default {

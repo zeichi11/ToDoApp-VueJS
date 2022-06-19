@@ -5,6 +5,7 @@ Client/package-lock.json
 Server/node_modules/
 Server/package-lock.json
 Server/dist-server/
+Server/dist-dbtest-server/
 
 node_modules/
 package-lock.json

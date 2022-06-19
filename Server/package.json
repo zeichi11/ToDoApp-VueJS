@@ -5,8 +5,11 @@
   "main": "index.js",
   "scripts": {
     "clean": "rimraf dist-server",
-    "transpile": "tsc --outfile ./dist-server/server.js",
+    "transpile": "tsc",
     "build": "npm-run-all clean transpile",
+    "transpileDBTest": "tsc --project ./test/dbTsconfig.json",
+    "runDBTest": "node ./dist-dbtest-server/dbTester.js",
+    "buildDBTest": "npm-run-all clean transpileDBTest",
     "server:dev": "NODE_PATH=src nodemon --exec ts-node src/app.ts",
     "dev": "NODE_ENV=development npm run server:dev",
     "start:dev": "npm run dev",
