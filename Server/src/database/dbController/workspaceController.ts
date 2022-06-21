@@ -1,5 +1,4 @@
 import Workspace from '../dbModel/todos/workspace/workspace.model'
-import Board from '../dbModel/todos/board/board.model'
 import BoardController from './boardController'
 
 async function _createWorkspace(title: string) {
