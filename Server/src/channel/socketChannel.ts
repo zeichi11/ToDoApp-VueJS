@@ -46,6 +46,7 @@ function _disconnect(reason) {
  */
 function _connection(socket) {
   console.log('Socket connected to client.')
+  // namespace, room join 처리 필요
   
   _socket = socket
   _socket.on('disconnect', _disconnect)
