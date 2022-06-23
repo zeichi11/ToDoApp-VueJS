@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import todoApp from './todoApp.js'
+import board from './board.js'
 
 Vue.use(Vuex)
 
@@ -9,6 +9,15 @@ export default new Vuex.Store({
   // 개발 시에만 strict 모드로 설정되도록 처리
   strict: process.env.NODE_ENV !== 'production',
   modules: {
-    todoApp
+    board
   }
+
+  // modules: {
+  //   board: {
+  //     namespaced: true,
+  //     modules: {
+  //       todoList
+  //     }
+  //   }
+  // }
 })
