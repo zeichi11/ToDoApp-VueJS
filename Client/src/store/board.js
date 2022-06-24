@@ -5,8 +5,6 @@
  */
 
 import Vue from 'vue'
-import lowdb from 'lowdb'
-import LocalStorage from 'lowdb/adapters/LocalStorage'
 import cryptoRandomString from 'crypto-random-string'
 import { DEFAULTS } from 'commonPath/Constants.js'
 import Loader from '../requester/Loader'
@@ -82,48 +80,40 @@ export default {
     },
 
     /*
-     * Todos
+     * Assign todoList
      */
-    assignTodos (state, todos /* payload */) {
-      state.todos = todos
-    },
     assignTodoList (state, listId, todoList) {
       const index = _findIndex(state.todoLists, { listId })
       state.todoLists[index] = todoList
     },
 
     /*
-     * Todo
+     * Assign item
      */
-    assignTodo (state, payload) {
-      const { targetTodo, value } = payload
-      _assign(targetTodo, value)
-    },
     assignItem (state, payload) {
       const { targetItem, value } = payload
       _assign(targetItem, value)
     },
 
-    pushTodo (state, newTodo) {
-      state.todos.push(newTodo)
-    },
+    /**
+     * push item
+     */
     pushItem (state, listId, newItem) {
       const found = _find(state.todoLists, { listId })
       found.push(newItem)
     },
 
-    deleteTodo (state, targetIndex) {
-      Vue.delete(state.todos, targetIndex)
-    },
+    /**
+     * Delete item
+     */
     deleteItem (state, listId, index) {
       const found = _find(state.todoLists, { listId })
       Vue.delete(found, index)
     },
 
-    updateTodo (state, payload) {
-      const { todo, key, value } = payload
-      todo[key] = value
-    },
+    /**
+     * Update item
+     */
     updateItem (state, payload) {
       const { item, key, value } = payload
       item[key] = value
@@ -146,6 +136,9 @@ export default {
   // context.commit : store 값의 변경을 위해 mutations 메소드를 호출하기 위한 속성
   // context.dispatch : 현재 store의 actions 내 메소드를 호출하기 위한 속성
   actions: {
+    /**
+     * initialize board
+     */
     async initBoard (context, boardId) {
       const { commit } = context
       const boardData = await Loader.loadBoard(boardId)
@@ -168,8 +161,7 @@ export default {
     // },
 
     /**
-     * create Todo data
-     * @param {stirng} title
+     * create Todo item
      */
     createTodo (context, title /* payload */) {
       const { commit } = context
@@ -182,14 +174,12 @@ export default {
       }
 
       console.log('asasasasas')
-      commit('createDB', newTodo) // Create DB
       // 컴포넌트 업데이트
       commit('pushTodo', newTodo) // push Todo
     },
 
     /**
      * create Todo item
-     * @param {stirng} title
      */
     createItem (context, listId, title, content /* payload */) {
       const { commit } = context
@@ -203,27 +193,17 @@ export default {
 
       console.log('create Item')
       // 컴포넌트 업데이트
-      commit('pushItem', listId, newTodo) // push Todo
+      commit('pushItem', listId, newItem) // push Todo
     },
 
     /**
      * update Todo data
-     * @param {object} todo
-     * @param {object} value
      */
-    updateTodo (context, payload) {
-      const { state, commit } = context
-      const { todo, value } = payload
-
-      commit('updateDB', { todo, value })
-
-      const targetTodo = _find(state.todos, { id: todo.id })
-      commit('assignTodo', { targetTodo, value })
-    },
     updateItem (context, payload) {
       const { state, commit } = context
-      const { listItem, itemId, value } = payload
+      const { listId, itemId, value } = payload
       const foundList = _find(state.todoLists, { listId })
+
       if (foundList) {
         const foundItem = _find(foundList, { itemId })
         foundItem && commit('assignTodo', { foundItem, value })
@@ -247,20 +227,10 @@ export default {
 
     /**
      * delete Todo data
-     * @param {object} todo
      */
-    deleteTodo (context, todo) {
-      const { state, commit } = context
-      commit('deleteDB', todo) // Delete DB
-
-      const targetIndex = _findIndex(state.todos, { id: todo.id })
-      // 객체의 속성을 삭제한다. 객체가 반응형이면 뷰 업데이트를 발생시킨다.
-      // this.$delete(state.todos, targetIndex);
-      commit('deleteTodo', targetIndex) // Delete todo
-    },
     deleteItem (context, payload) {
       const { state, commit } = context
-      const { listId, itemId }
+      const { listId, itemId } = payload
       const foundList = _find(state.todoLists, { listId })
 
       if (foundList) {

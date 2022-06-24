@@ -4,16 +4,27 @@ import VueRouter from 'vue-router'
 import Home from 'viewPath/Home.vue'
 import About from 'viewPath/About.vue'
 import TodoApp from 'viewPath/TodoApp.vue'
+import Board from 'viewPath/Board.vue'
 
 Vue.use(VueRouter)
 
 const routes = [
   // config
   {
-    name: 'index',
+    name: 'board',
     path: '/',
-    component: Home
+    component: Board,
+    children: [
+      {
+        path: 'id'
+      }
+    ]
   },
+  // {
+  //   name: 'index',
+  //   path: '/',
+  //   component: Home
+  // },
   {
     name: 'about',
     path: '/about',
@@ -29,16 +40,7 @@ const routes = [
         path: ':id'
       }
     ]
-  },
-  {
-    name: 'board',
-    path: '/board',
-    children: [
-      {
-        path: 'id'
-      }
-    ]
   }
-];
+]
 
 export default new VueRouter({ routes })
