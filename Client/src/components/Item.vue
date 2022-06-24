@@ -1,5 +1,6 @@
 <template>
   <div
+    :id="todo.itemId"
     :class="{ done: done }"
     class="todo-item"
   >
@@ -71,8 +72,8 @@
 </template>
 
 <script>
-import dayjs from 'dayjs';
-import { RESOURCES, DEFAULTS } from '../common/Constants.js';
+import dayjs from 'dayjs'
+import { RESOURCES, DEFAULTS } from '../common/Constants.js'
 
 export default {
   props: {
@@ -86,26 +87,26 @@ export default {
   },
   computed: {
     RESOURCES () {
-      return RESOURCES;
+      return RESOURCES
     },
     DEFAULTS () {
-      return DEFAULTS;
+      return DEFAULTS
     },
     done: {
       get () {
-        return this.todo.done;
+        return this.todo.done
       },
       set (done) {
-        this.updateTodo({ done });
+        this.updateTodo({ done })
       }
     },
     date () {
-      const date = dayjs(this.todo.createdAt);
-      const isSameDate = date.isSame(this.todo.updatedAt);
+      const date = dayjs(this.todo.createdAt)
+      const isSameDate = date.isSame(this.todo.updatedAt)
       if (isSameDate) {
-        return date.format(DEFAULTS.DATE_FORM);
+        return date.format(DEFAULTS.DATE_FORM)
       }
-      return `${date.format(DEFAULTS.DATE_FORM)} (${RESOURCES.ITEM_EDITED})`;
+      return `${date.format(DEFAULTS.DATE_FORM)} (${RESOURCES.ITEM_EDITED})`
     }
   },
   methods: {
@@ -117,7 +118,7 @@ export default {
         this.updateTodo({
           title: this.editedTitle,
           updatedAt: new Date()
-        });
+        })
       }
 
       this.offEditMode();
@@ -128,11 +129,11 @@ export default {
      */
     onEditMode () {
       this.isEditMode = true;
-      this.editedTitle = this.todo.title;
+      this.editedTitle = this.todo.title
 
       // nextTick 다음 DOM 업데이트 사이클 이후 실행될 콜백을 설정할 수 있다.
       this.$nextTick(() => {
-        this.$refs.titleInput.focus();
+        this.$refs.titleInput.focus()
       });
     },
 
@@ -140,7 +141,7 @@ export default {
      * off edit mode handler
      */
     offEditMode () {
-      this.isEditMode = false;
+      this.isEditMode = false
     },
 
     /**
@@ -151,7 +152,7 @@ export default {
       this.$store.dispatch('todoApp/updateTodo', {
         todo: this.todo,
         value
-      });
+      })
     },
 
     /**
@@ -159,7 +160,7 @@ export default {
      */
     deleteTodo () {
       // this.$emit('delete-todo', this.todo);
-      this.$store.dispatch('todoApp/deleteTodo', this.todo);
+      this.$store.dispatch('todoApp/deleteTodo', this.todo)
     }
   }
 };

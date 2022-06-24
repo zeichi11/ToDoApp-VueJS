@@ -22,10 +22,27 @@ export default {
   // state는 vue의 data와 동일하게 함수로 정의되어야 한다.
   // 함수로 정의되는 이유 : 객체로 선언 시 실제 data를 사용하는 상황에서 참조관계가 발생함
   // 함수로 정의하고 객체 리터럴을 생성하여 반환하여 참조관계 발생을 방지하기 위함
+
+  // todoLists: [
+  //   {
+  //     listId: 'list-12341',
+  //     title: 'list title 1',
+  //     createdAt: 'date',
+  //     updatedAt: 'date',
+  //     items: [
+  //       {
+  //         itemId: 'item-123123',
+  //         title: 'itme title 1',
+  //         content: 'innerHTML',
+  //         createdAt: 'date',
+  //         updatedAt: 'date'
+  //       }
+  //     ]
+  //   }
+  // ]
+
   state: () => ({
-    db: null,
-    todos: [],
-    filter: 'all'
+    todoLists: []
   }),
   // Computed
   getters: {
@@ -54,33 +71,17 @@ export default {
   // Methods
   // 실제 값을 변경할 때 (비동기 처리 안됨)
   // state의 값을 변경할 수 있는 권한은 mutations 에만 있으며
-  // actions에서 실제 값을 변경해야 하는 경우 mutarions 에 변경 로직을 추가하고 관리해야한다.
+  // actions에서 실제 값을 변경해야 하는 경우 mutations 에 변경 로직을 추가하고 관리해야한다.
   mutations: {
-    /*
-     * DB
-     */
-    assignDB(state, db /* payload */) {
-      state.db = db
-    },
-    createDB(state, newTodo /* payload */) {
-      state.db
-        .get('todos') // lodash
-        .push(newTodo) // lodash
-        .write() // lowdb
-    },
-    updateDB(state, payload) {
-      const { todo, value } = payload
-      state.db.get('todos').find({ id: todo.id }).assign(value).write()
-    },
-    deleteDB(state, todo) {
-      state.db.get('todos').remove({ id: todo.id }).write()
-    },
-
     /*
      * Todos
      */
     assignTodos(state, todos /* payload */) {
       state.todos = todos
+    },
+    assignTodoList(state, listId, todoList) {
+      const index = _findIndex(state.todoLists, { listId })
+      state.todoLists[index] = todoList
     },
 
     /*
@@ -90,15 +91,34 @@ export default {
       const { targetTodo, value } = payload
       _assign(targetTodo, value)
     },
+    assignItem(state, payload) {
+      const { targetItem, value } = payload
+      _assign(targetItem, value)
+    },
+
     pushTodo(state, newTodo) {
       state.todos.push(newTodo)
     },
+    pushItem(state, listId, newItem) {
+      const found = _find(state.todoLists, { listId })
+      found.push(newItem)
+    },
+
     deleteTodo(state, targetIndex) {
       Vue.delete(state.todos, targetIndex)
     },
+    deleteItem(state, listId, index) {
+      const found = _find(state.todoLists, { listId })
+      Vue.delete(found, index)
+    },
+
     updateTodo(state, payload) {
       const { todo, key, value } = payload
       todo[key] = value
+    },
+    updateItem(state, payload) {
+      const { item, key, value } = payload
+      item[key] = value
     },
 
     /*
@@ -118,27 +138,38 @@ export default {
   // context.commit : store 값의 변경을 위해 mutations 메소드를 호출하기 위한 속성
   // context.dispatch : 현재 store의 actions 내 메소드를 호출하기 위한 속성
   actions: {
+    // /**
+    //  * init Database
+    //  */
+    // initDB(context) {
+    //   const { state, commit } = context
+    //   const adapter = new LocalStorage('todo-app') // DB, todo-app: dbName
+    //   // state.db = lowdb(adapter);
+    //   commit('assignDB', lowdb(adapter))
+
+    //   const hasLocalData = state.db.has('todos').value()
+    //   if (hasLocalData) {
+    //     // state.todos = _cloneDeep(state.db.getState().todos);
+    //     commit('assignTodos', _cloneDeep(state.db.getState().todos))
+    //   } else {
+    //     // LocalDB 초기화
+    //     state.db
+    //       .defaults({
+    //         todos: []
+    //       })
+    //       .write()
+    //   }
+    // },
     /**
      * init Database
      */
-    initDB(context) {
+    async initBoard(context, boardId) {
       const { state, commit } = context
-      const adapter = new LocalStorage('todo-app') // DB, todo-app: dbName
-      // state.db = lowdb(adapter);
-      commit('assignDB', lowdb(adapter))
+      const board = await fetch(
+        `http://localhost:8000/todoApp/board?id=${boardId}`
+      )
 
-      const hasLocalData = state.db.has('todos').value()
-      if (hasLocalData) {
-        // state.todos = _cloneDeep(state.db.getState().todos);
-        commit('assignTodos', _cloneDeep(state.db.getState().todos))
-      } else {
-        // LocalDB 초기화
-        state.db
-          .defaults({
-            todos: []
-          })
-          .write()
-      }
+      commit('SET_BOARD', await board.json())
     },
 
     /**
@@ -162,6 +193,25 @@ export default {
     },
 
     /**
+     * create Todo item
+     * @param {stirng} title
+     */
+    createItem(context, listId, title, content /* payload */) {
+      const { commit } = context
+      const newItem = {
+        id: cryptoRandomString({ length: 10 }),
+        title,
+        content,
+        createdAt: new Date(),
+        updatedAt: new Date()
+      }
+
+      console.log('create Item')
+      // 컴포넌트 업데이트
+      commit('pushItem', listId, newTodo) // push Todo
+    },
+
+    /**
      * update Todo data
      * @param {object} todo
      * @param {object} value
@@ -174,6 +224,30 @@ export default {
 
       const targetTodo = _find(state.todos, { id: todo.id })
       commit('assignTodo', { targetTodo, value })
+    },
+    updateItem(context, payload) {
+      const { state, commit } = context
+      const { listItem, itemId, value } = payload
+      const foundList = _find(state.todoLists, { listId })
+      if (foundList) {
+        const foundItem = _find(foundList, { itemId })
+        foundItem && commit('assignTodo', { foundItem, value })
+      }
+    },
+
+    moveItem(context, payload) {
+      const { state, commit } = context
+      const { fromListId, toListId, itemId, targetIndex } = payload
+      const fromList = _find(state.todoLists, { fromListId })
+      const toList = _find(state.todoLists, { toListId })
+
+      if (fromList && toList) {
+        const foundItem = _find(fromList, { itemId })
+        const index = _find(fromList, { itemId })
+
+        commit('deleteItem', { fromListId, index })
+        commit('insertItemAt', { toList, foundItem })
+      }
     },
 
     /**
@@ -188,6 +262,16 @@ export default {
       // 객체의 속성을 삭제한다. 객체가 반응형이면 뷰 업데이트를 발생시킨다.
       // this.$delete(state.todos, targetIndex);
       commit('deleteTodo', targetIndex) // Delete todo
+    },
+    deleteItem(context, payload) {
+      const { state, commit } = context
+      const { listId, itemId }
+      const foundList = _find(state.todoLists, { listId })
+
+      if (foundList) {
+        const index = _findIndex(foundList, { itemId })
+        index > -1 && commit('deleteItem', index)
+      }
     },
 
     /**

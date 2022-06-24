@@ -1,4 +1,4 @@
-import { CommandType, ValueType } from '../command.type'
+import { CommandType, ValueType } from './command.type'
 
 export default class Command {
   _commandModel: CommandType | null = null

@@ -9,6 +9,7 @@ import lowdb from 'lowdb'
 import LocalStorage from 'lowdb/adapters/LocalStorage'
 import cryptoRandomString from 'crypto-random-string'
 import { DEFAULTS } from 'commonPath/Constants.js'
+import Loader from '../requester/Loader'
 
 import _assign from 'lodash/assign'
 import _find from 'lodash/find'
@@ -40,7 +41,7 @@ export default {
   //     ]
   //   }
   // ]
-  
+
   state: () => ({
     todoLists: []
   }),
@@ -64,7 +65,7 @@ export default {
       return state.todos.filter((todo) => !todo.done).length
     },
     // getters 내에서 다른 getter 함수를 참조하기 위해서는 두번째 인자인 getters를 사용한다.
-    completedCount(state, getters) {
+    completedCount (state, getters) {
       return getters.totalCount - getters.activeCount
     }
   },
@@ -73,69 +74,65 @@ export default {
   // state의 값을 변경할 수 있는 권한은 mutations 에만 있으며
   // actions에서 실제 값을 변경해야 하는 경우 mutations 에 변경 로직을 추가하고 관리해야한다.
   mutations: {
+    /**
+     * Board의 todoList들을 초기화 한다.
+     */
+    initBoard (state, todoLists) {
+      todoLists && (state.todoLists = todoLists)
+    },
+
     /*
      * Todos
      */
-    assignTodos(state, todos /* payload */) {
+    assignTodos (state, todos /* payload */) {
       state.todos = todos
     },
-    assignTodoList(state, listId, todoList) {
+    assignTodoList (state, listId, todoList) {
       const index = _findIndex(state.todoLists, { listId })
       state.todoLists[index] = todoList
-    }
-
+    },
 
     /*
      * Todo
      */
-    assignTodo(state, payload) {
+    assignTodo (state, payload) {
       const { targetTodo, value } = payload
       _assign(targetTodo, value)
     },
-    assignItem(state, payload) {
+    assignItem (state, payload) {
       const { targetItem, value } = payload
       _assign(targetItem, value)
-    }
+    },
 
-
-
-
-    pushTodo(state, newTodo) {
+    pushTodo (state, newTodo) {
       state.todos.push(newTodo)
     },
-    pushItem(state, listId, newItem) {
+    pushItem (state, listId, newItem) {
       const found = _find(state.todoLists, { listId })
       found.push(newItem)
-    }
+    },
 
-
-
-    deleteTodo(state, targetIndex) {
+    deleteTodo (state, targetIndex) {
       Vue.delete(state.todos, targetIndex)
     },
-    deleteItem(state, listId, index) {
+    deleteItem (state, listId, index) {
       const found = _find(state.todoLists, { listId })
       Vue.delete(found, index)
-    }
+    },
 
-
-
-    updateTodo(state, payload) {
+    updateTodo (state, payload) {
       const { todo, key, value } = payload
       todo[key] = value
     },
-    updateItem(state, payload) {
+    updateItem (state, payload) {
       const { item, key, value } = payload
       item[key] = value
-    }
-
-
-
+    },
 
     /*
      *  Filter
      */
-    updateFilter(state, filter) {
+    updateFilter (state, filter) {
       state.filter = filter
     }
   },
@@ -149,44 +146,32 @@ export default {
   // context.commit : store 값의 변경을 위해 mutations 메소드를 호출하기 위한 속성
   // context.dispatch : 현재 store의 actions 내 메소드를 호출하기 위한 속성
   actions: {
+    async initBoard (context, boardId) {
+      const { commit } = context
+      const boardData = await Loader.loadBoard(boardId)
+
+      if (boardData) {
+        commit('initBoard', boardData)
+      }
+    },
+
     // /**
     //  * init Database
     //  */
-    // initDB(context) {
+    // async initBoard (context, boardId) {
     //   const { state, commit } = context
-    //   const adapter = new LocalStorage('todo-app') // DB, todo-app: dbName
-    //   // state.db = lowdb(adapter);
-    //   commit('assignDB', lowdb(adapter))
+    //   const board = await fetch(
+    //     `http://localhost:8000/todoApp/board?id=${boardId}`
+    //   )
 
-    //   const hasLocalData = state.db.has('todos').value()
-    //   if (hasLocalData) {
-    //     // state.todos = _cloneDeep(state.db.getState().todos);
-    //     commit('assignTodos', _cloneDeep(state.db.getState().todos))
-    //   } else {
-    //     // LocalDB 초기화
-    //     state.db
-    //       .defaults({
-    //         todos: []
-    //       })
-    //       .write()
-    //   }
+    //   commit('SET_BOARD', await board.json())
     // },
-    /**
-     * init Database
-     */
-    async initBoard(context, boardId) {
-      const { state, commit } = context
-      const board = await fetch(`http://localhost:8000/todoApp/board?id=${boardId}`)
-
-      commit('SET_BOARD', await board.json())
-    },
-
 
     /**
      * create Todo data
      * @param {stirng} title
      */
-    createTodo(context, title /* payload */) {
+    createTodo (context, title /* payload */) {
       const { commit } = context
       const newTodo = {
         id: cryptoRandomString({ length: 10 }),
@@ -206,7 +191,7 @@ export default {
      * create Todo item
      * @param {stirng} title
      */
-    createItem(context, listId, title, content /* payload */) {
+    createItem (context, listId, title, content /* payload */) {
       const { commit } = context
       const newItem = {
         id: cryptoRandomString({ length: 10 }),
@@ -221,18 +206,12 @@ export default {
       commit('pushItem', listId, newTodo) // push Todo
     },
 
-
-
-
-
-
-
     /**
      * update Todo data
      * @param {object} todo
      * @param {object} value
      */
-    updateTodo(context, payload) {
+    updateTodo (context, payload) {
       const { state, commit } = context
       const { todo, value } = payload
 
@@ -241,7 +220,7 @@ export default {
       const targetTodo = _find(state.todos, { id: todo.id })
       commit('assignTodo', { targetTodo, value })
     },
-    updateItem(context, payload) {
+    updateItem (context, payload) {
       const { state, commit } = context
       const { listItem, itemId, value } = payload
       const foundList = _find(state.todoLists, { listId })
@@ -250,10 +229,6 @@ export default {
         foundItem && commit('assignTodo', { foundItem, value })
       }
     },
-
-
-
-
 
     moveItem (context, payload) {
       const { state, commit } = context
@@ -264,22 +239,17 @@ export default {
       if (fromList && toList) {
         const foundItem = _find(fromList, { itemId })
         const index = _find(fromList, { itemId })
-        
+
         commit('deleteItem', { fromListId, index })
         commit('insertItemAt', { toList, foundItem })
       }
-    }
-
-
-
-
-
+    },
 
     /**
      * delete Todo data
      * @param {object} todo
      */
-    deleteTodo(context, todo) {
+    deleteTodo (context, todo) {
       const { state, commit } = context
       commit('deleteDB', todo) // Delete DB
 
@@ -288,7 +258,7 @@ export default {
       // this.$delete(state.todos, targetIndex);
       commit('deleteTodo', targetIndex) // Delete todo
     },
-    deleteItem(context, payload) {
+    deleteItem (context, payload) {
       const { state, commit } = context
       const { listId, itemId }
       const foundList = _find(state.todoLists, { listId })
@@ -297,18 +267,13 @@ export default {
         const index = _findIndex(foundList, { itemId })
         index > -1 && commit('deleteItem', index)
       }
-    }
-
-
-
-
-
+    },
 
     /**
      * set all items to done.
      * @param {boolean} checked
      */
-    completeAll(context, checked) {
+    completeAll (context, checked) {
       const { state, commit } = context
       // DB
       const newTodos = state.db
@@ -334,7 +299,7 @@ export default {
     /**
      * delete done items
      */
-    clearComplete(context, todo) {
+    clearComplete (context, todo) {
       const { state, dispatch } = context
       // 삭제 시에는 index 문제가 발생하지 않도록 뒤에서부터.
       _forEachRight(state.todos, (todo) => {

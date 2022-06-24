@@ -1,6 +1,8 @@
 {
   "[javascript]": {
-    "editor.formatOnSave": true,
+    "editor.formatOnType": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
-  }
+  },
+  "javascript.format.insertSpaceBeforeFunctionParenthesis": true,
+  "typescript.format.insertSpaceBeforeFunctionParenthesis": true
 }
