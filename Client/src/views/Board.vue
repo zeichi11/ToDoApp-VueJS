@@ -36,8 +36,8 @@
         background: coral;
         position: absolute;
         border-right: 1px #eaeaea solid;
-        transform: translateX(-94%);
-        -webkit-transform: translageX(-94%);
+        transform: translateX(-93%);
+        -webkit-transform: translageX(-93%);
 
         &.slide-in {
           animation: slide-in 0.5s forwards;
@@ -57,12 +57,12 @@
 
         @keyframes slide-out {
           0% { transform: translateX(0%); }
-          100% { transform: translateX(-97%); }
+          100% { transform: translateX(-93%); }
         }
 
         @-webkit-keyframes slide-out {
           0% { -webkit-transform: translateX(0%); }
-          100% { -webkit-transform: translateX(-97%); }
+          100% { -webkit-transform: translateX(-93%); }
         }
 
         .icon-wrap {
@@ -89,25 +89,85 @@
           display: flex;
           flex-direction: row;
 
-
+          .todo__list-inner-first{
+            margin-left: 20px;
+          }
           .todo__list-inner {
             display: flex;
             flex-direction: row;
+            align-items: flex-start;
             margin-top: 10px;
-            margin-left: 20px;
 
-          .list-container {
-            width: 300px;
-            height: auto;
-            margin-right: 10px;
-            margin-left: 10px;
-            padding: 10px 10px 10px 10px;
-            border-radius: 5px;
+            .list-container {
+              width: 280px;
+              height: auto;
+              margin-right: 7px;
+              margin-left: 7px;
+              padding: 0px 10px 0px 10px;
+              border-radius: 4px;
+              -webkit-box-shadow: 0px 3px 5px -3px rgba(0,0,0,0.7); 
+              box-shadow: 0px 3px 5px -3px rgba(0,0,0,0.7);
+            }
+            .todo__list {
+              background: #dddede;
+
+              .list-title {
+                font-size: 0.78em;
+                font-weight: 600;
+                color: #4f4f4f;
+                margin-top: 17px;
+                margin-bottom: 17px;
+              }
+
+              .todo__item {
+                margin: 10px 0px 10px 0px;
+                background: white;
+                border-radius: 4px;
+                -webkit-box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7); 
+                box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7);
+
+                .item__inner {
+                  padding: 10px 10px 10px 10px;
+                  color: #5f5f5f;
+                  font-weight: 200;
+
+                  .item__title {
+                    padding: 5px 0px 5px 0px;
+                    font-size: 0.72em;
+                  }
+
+                  .item__content {
+                    padding: 7px 10px 7px 10px;
+                    font-size: 0.71em;
+                  }
+                }
+              }
+
+              .add-todo-item {
+                margin: 10px 0px 10px 0px;
+                padding: 10px 10px 10px 10px;
+                font-size: 0.69em;
+                color: #5f5f5f
+              }
+              .add-todo-item:hover {
+                background: darken(#dddcdc, 10%);
+                border-radius: 4px;
+              }
+            }
+
+            .todo__add-list {
+              background:cornflowerblue;
+
+              .add-todo-list {
+                font-size: 0.69em;
+                color: white;
+                margin: 17px 10px 17px 10px;
+              }
+            }
+            .todo__add-list:hover {
+              background: lighten(cornflowerblue, 5%)
+            }
           }
-          .todo__list {
-            background: grey;
-          }
-        }
         }
         
       }
@@ -134,20 +194,37 @@
           <div class="todo__section">
             <ul class="todo__list-wrapper">
               
-              <li class="todo__list-inner">
+              <li class="todo__list-inner todo__list-inner-first">
                 
 
                 <div class="list-container todo__list">
                   <div class="list-title">
-                    <span>To Do</span>
+                    <h2>To Do</h2>
                   </div>
                   <ul>
+                    
                     <li class="todo__item">
-                      <div></div>
+                      <div class="item__inner">
+                        <div class="item__title">
+                          <span>Python 스터디</span>
+                        </div>
+                        <div class="item__content">
+                          <span>Python 프로젝트 개발</span>
+                        </div>
+                      </div>
                     </li>
+                    
                     <li class="todo__item">
-                      <div></div>
+                      <div class="item__inner">
+                        <div class="item__title">
+                          <span>Spring 스터디</span>
+                        </div>
+                        <div class="item__content">
+                          <span>Spring 프로젝트 개발</span>
+                        </div>
+                      </div>
                     </li>
+                  
                   </ul>
                   <div class="add-todo-item">
                     <span> + Add a Plan item</span>
@@ -156,19 +233,73 @@
                 </div>
                 
                 <div class="list-container todo__list">
+                  <div class="list-title">
+                    <h2>Doing</h2>
+                  </div>
                   <ul>
+                    
                     <li class="todo__item">
-                      <div></div>
+                      <div class="item__inner">
+                        <div class="item__title">
+                          <span>VueJS 스터디</span>
+                        </div>
+                        <div class="item__content">
+                          <span>VueJS 프로젝트 개발</span>
+                        </div>
+                      </div>
                     </li>
+                    
+                    <li class="todo__item">
+                      <div class="item__inner">
+                        <div class="item__title">
+                          <span>React 스터디</span>
+                        </div>
+                        <div class="item__content">
+                          <span>React 프로젝트 개발</span>
+                        </div>
+                      </div>
+                    </li>
+
+                    <li class="todo__item">
+                      <div class="item__inner">
+                        <div class="item__title">
+                          <span>express 스터디</span>
+                        </div>
+                        <div class="item__content">
+                          <span>express 프로젝트 개발</span>
+                        </div>
+                      </div>
+                    </li>
+
                   </ul>
+                  <div class="add-todo-item">
+                    <span> + Add a Plan item</span>
+                    <span></span>
+                  </div>
+
                 </div>
                 
                 <div class="list-container todo__list">
+                  <div class="list-title">
+                    <h2>Done</h2>
+                  </div>
                   <ul>
                     <li class="todo__item">
-                      <div></div>
+                      <div class="item__inner">
+                        <div class="item__title">
+                          <span>JavaScript 스터디</span>
+                        </div>
+                        <div class="item__content">
+                          <span>JavaScript 프로젝트 개발</span>
+                        </div>
+                      </div>
                     </li>
                   </ul>
+
+                  <div class="add-todo-item">
+                    <span> + Add a Plan item</span>
+                    <span></span>
+                  </div>
                 </div>
               
 
@@ -176,7 +307,9 @@
 
               <li class="todo__list-inner">
                 <div class="list-container todo__add-list">
-                  
+                  <div class="add-todo-list">
+                    <span> + Add another list</span>
+                  </div>
                 </div>
               </li>
 
