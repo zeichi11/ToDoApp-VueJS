@@ -1,42 +1,192 @@
+<style lang="scss">
+  // .filters button.router-link-active {
+  //   background: royalblue;
+  //   color: white;
+  // }
+  body {
+    height: 100vh;
+    min-height: 100vh;
+  }
+  .wrapper {
+    height: 100%;
+    width: 100%;
+  }
+  .board__wrapper {
+    width: 100%;
+    height: 100%;
+    margin: 0px;
+
+    .board__navigator {
+      width: 100%;
+      height: 45px;
+      background: royalblue;
+    }
+
+    .board__container {
+      width: 100%;
+      height: 100%;
+      background: white;
+      flex: 1 1 0%;
+      position: relative;
+      overflow-y: auto;
+    
+      .board__sidebar {
+        width: 260px;
+        height: 100%;
+        background: coral;
+        position: absolute;
+        border-right: 1px #eaeaea solid;
+        transform: translateX(-94%);
+        -webkit-transform: translageX(-94%);
+
+        &.slide-in {
+          animation: slide-in 0.5s forwards;
+          -webkit-animation: slide-in 0.5s forwards
+        }
+        @keyframes slide-in {
+          100% { transform: translateX(0%) }
+        }
+        @-webkit-keyframes slide-in {
+          100% { -webkit-transform: translateX(0%) }
+        }
+
+        &.slide-out {
+          animation: slide-out 0.5s forwards;
+          -webkit-animation: slide-out 0.5s forwards;
+        }
+
+        @keyframes slide-out {
+          0% { transform: translateX(0%); }
+          100% { transform: translateX(-97%); }
+        }
+
+        @-webkit-keyframes slide-out {
+          0% { -webkit-transform: translateX(0%); }
+          100% { -webkit-transform: translateX(-97%); }
+        }
+
+        .icon-wrap {
+          position: absolute;
+          top: 9px;
+          right: -14px;
+          width: 28px;
+          height: 28px;
+          border-radius: 50%;
+          background: coral;
+          border: 1px #eaeaea solid;
+        }
+      }
+
+
+      .board__main-container {
+        .board__top-menu {
+          width: 100%;
+          height: 50px;
+          background:lightseagreen;
+        }
+
+        .todo__list-wrapper {
+          display: flex;
+          flex-direction: row;
+
+
+          .todo__list-inner {
+            display: flex;
+            flex-direction: row;
+            margin-top: 10px;
+            margin-left: 20px;
+
+          .list-container {
+            width: 300px;
+            height: auto;
+            margin-right: 10px;
+            margin-left: 10px;
+            padding: 10px 10px 10px 10px;
+            border-radius: 5px;
+          }
+          .todo__list {
+            background: grey;
+          }
+        }
+        }
+        
+      }
+    }
+  }
+
+</style>
+
 <template>
   <div class="board__wrapper">
-    <div class="board__navigator"></div>
-    <div class="board__top-menu"></div>
+    <nav class="board__navigator"></nav>
     <div class="board__container">
-      <section class="side-bar__section"></section>
-      
-      <section class="todo__section">
-        <ul class="todo__list-wrapper">
-          
-          <li class="todo__list-inner">
-            
-            <div class="todo__list">
-              <ul>
-                <li class="todo__item">
-                  <div></div>
-                </li>
-              </ul>
-            </div>
-            
-            <div class="todo__list">
-              <ul>
-                <li class="todo__item">
-                  <div></div>
-                </li>
-              </ul>
-            </div>
-            
-            <div class="todo__list">
-              <ul>
-                <li class="todo__item">
-                  <div></div>
-                </li>
-              </ul>
-            </div>
-          
-          </li>
-        </ul>
-      </section>
+      <nav class="board__sidebar">
+        <div class="icon-wrap"
+          @click="slideSidebar"
+        >
+          <span class></span>
+        </div>
+        <div></div>
+      </nav>
+      <main class="board__main-container">
+        <div class="board__top-menu"></div>
+        <div class="board__todo-container">
+          <div class="todo__section">
+            <ul class="todo__list-wrapper">
+              
+              <li class="todo__list-inner">
+                
+
+                <div class="list-container todo__list">
+                  <div class="list-title">
+                    <span>To Do</span>
+                  </div>
+                  <ul>
+                    <li class="todo__item">
+                      <div></div>
+                    </li>
+                    <li class="todo__item">
+                      <div></div>
+                    </li>
+                  </ul>
+                  <div class="add-todo-item">
+                    <span> + Add a Plan item</span>
+                    <span></span>
+                  </div>
+                </div>
+                
+                <div class="list-container todo__list">
+                  <ul>
+                    <li class="todo__item">
+                      <div></div>
+                    </li>
+                  </ul>
+                </div>
+                
+                <div class="list-container todo__list">
+                  <ul>
+                    <li class="todo__item">
+                      <div></div>
+                    </li>
+                  </ul>
+                </div>
+              
+
+              </li>
+
+              <li class="todo__list-inner">
+                <div class="list-container todo__add-list">
+                  
+                </div>
+              </li>
+
+
+
+            </ul>
+          </div>
+        </div>
+
+      </main>
       
     </div>
     
@@ -60,6 +210,21 @@ export default {
       
     }
   },
+
+  methods: {
+    slideSidebar () {
+      const sidebar = document.querySelector('.board__sidebar')
+      if (sidebar) {
+        if (sidebar.classList.contains('slide-in')) {
+          sidebar.classList.remove('slide-in')
+          sidebar.classList.add('slide-out')
+        } else {
+          sidebar.classList.remove('slide-out')
+          sidebar.classList.add('slide-in')
+        }
+      }
+    }
+  }
 
   // computed: {
   //   // Helpers - mapState
@@ -138,12 +303,3 @@ export default {
   // },
 }
 </script>
-
-<style lang="scss">
-  @import "../scss/style";
-
-  .filters button.router-link-active {
-    background: royalblue;
-    color: white;
-  }
-</style>

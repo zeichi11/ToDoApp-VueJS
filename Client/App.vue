@@ -1,5 +1,6 @@
 <template>
-  <div>
+
+  <div class="wrapper">
     <router-link to="/" class="to-home">
       <i class="material-icons">home</i>
     </router-link>
@@ -14,7 +15,7 @@ export default {
     console.log('Router', this.$router)
     console.log('Route', this.$route)
   }
-};
+}
 </script>
 
 <style lang="scss">
