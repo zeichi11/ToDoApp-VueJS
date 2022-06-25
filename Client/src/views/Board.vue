@@ -120,8 +120,8 @@
               background: #dddede;
 
               .list-title {
-                font-size: 0.78em;
-                font-weight: 600;
+                font-size: 0.72em;
+                font-weight: 510;
                 color: #4f4f4f;
                 margin-top: 17px;
                 margin-bottom: 17px;
