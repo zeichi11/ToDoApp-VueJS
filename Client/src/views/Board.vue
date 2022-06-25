@@ -76,6 +76,14 @@
           border: 1px #eaeaea solid;
         }
       }
+      .board__sidebar:hover {
+        &.slide-out {
+          background: lighten(coral, 10%);
+          .icon-wrap {
+            background: lighten(coral, 10%);
+          }
+        }
+      }
 
 
       .board__main-container {
@@ -180,7 +188,7 @@
   <div class="board__wrapper">
     <nav class="board__navigator"></nav>
     <div class="board__container">
-      <nav class="board__sidebar">
+      <nav class="board__sidebar slide-out">
         <div class="icon-wrap"
           @click="slideSidebar"
         >
