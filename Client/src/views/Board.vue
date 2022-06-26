@@ -33,21 +33,23 @@
       .board__sidebar {
         width: 260px;
         height: 100%;
+        left: -243px;
         background: coral;
         position: absolute;
+        box-sizing: border-box;
         border-right: 1px #eaeaea solid;
-        transform: translateX(-93%);
-        -webkit-transform: translageX(-93%);
+        transform: translateX(0%);
+        -webkit-transform: translageX(0%);
 
         &.slide-in {
           animation: slide-in 0.5s forwards;
           -webkit-animation: slide-in 0.5s forwards
         }
         @keyframes slide-in {
-          100% { transform: translateX(0%) }
+          100% { transform: translateX(240px) }
         }
         @-webkit-keyframes slide-in {
-          100% { -webkit-transform: translateX(0%) }
+          100% { -webkit-transform: translateX(240px) }
         }
 
         &.slide-out {
@@ -56,13 +58,13 @@
         }
 
         @keyframes slide-out {
-          0% { transform: translateX(0%); }
-          100% { transform: translateX(-93%); }
+          0% { transform: translateX(240px); }
+          100% { transform: translateX(0px); }
         }
 
         @-webkit-keyframes slide-out {
-          0% { -webkit-transform: translateX(0%); }
-          100% { -webkit-transform: translateX(-93%); }
+          0% { -webkit-transform: translateX(240px); }
+          100% { -webkit-transform: translateX(0px); }
         }
 
         .icon-wrap {
@@ -76,12 +78,10 @@
           border: 1px #eaeaea solid;
         }
       }
-      .board__sidebar:hover {
-        &.slide-out {
+      .slidebar-close:hover {
+        background: lighten(coral, 10%);
+        .icon-wrap {
           background: lighten(coral, 10%);
-          .icon-wrap {
-            background: lighten(coral, 10%);
-          }
         }
       }
 
@@ -107,7 +107,8 @@
             margin-top: 10px;
 
             .list-container {
-              width: 280px;
+              box-sizing: border-box;
+              width: 300px;
               height: auto;
               margin-right: 7px;
               margin-left: 7px;
@@ -151,35 +152,170 @@
                 }
               }
 
-              .add-todo-item {
+
+
+
+
+
+
+              .todo__add-item {
+                margin: 10px 0px 10px 0px;
+                .add-item__inner {
+                  margin: 10px 0px 10px 0px;
+                  .add-item__textarea {
+                    box-sizing: border-box;
+                    width:100%;
+                    height: auto;
+                    min-height: 60px;
+                    background: white;
+                    border: 0px;
+                    border-radius: 4px;
+                    -webkit-box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7); 
+                    box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7);
+                  }
+                }
+                .add-item__flex-inner {
+                  box-sizing: border-box;
+                  margin: 10px 0px 10px 0px;
+                  display: flex;
+
+                  .add-item__exec {
+                    display: flex;
+                    align-items: center;
+                    margin: 0px;
+                    padding: 0px;
+
+                    .add-item__submit {
+                      box-sizing: border-box;
+                      margin: 0px;
+                      padding: 0px;
+                      width: 90px;
+                      height: 35px;
+                      border: 0px;
+                      background: cornflowerblue;
+                      border-radius: 4px;
+                      font-size: 0.69em;
+                      color: white;
+                      cursor: pointer;
+                    }
+                    .add-item__submit:hover {
+                      background: darken(cornflowerblue, 5%)
+                    }
+                    .add-item__close {
+                      display: inline-flex;
+                      align-items: center;
+                      margin: 0px 20px 0px 20px;
+                      height: 35px;
+                      font-size: 20pt;
+                      cursor: pointer;
+                      color: #5f5f5f;
+                    }
+                  }
+                }
+              }
+              .add-item__show {
                 margin: 10px 0px 10px 0px;
                 padding: 10px 10px 10px 10px;
                 font-size: 0.69em;
-                color: #5f5f5f
+                color: #5f5f5f;
+                cursor: pointer;
               }
-              .add-todo-item:hover {
+              .add-item__show:hover {
                 background: darken(#dddcdc, 10%);
                 border-radius: 4px;
               }
+
+              
+
+
+
+
+
+
             }
 
             .todo__add-list {
               background:cornflowerblue;
 
-              .add-todo-list {
+              .todo__add-list {
+                margin: 10px 0px 10px 0px;
+                .add-list__inner {
+                  margin: 10px 0px 10px 0px;
+                  .add-list__input {
+                    box-sizing: border-box;
+                    width:100%;
+                    height: 30px;
+                    background: white;
+                    border: 0px;
+                    border-radius: 4px;
+                    -webkit-box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7); 
+                    box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7);
+                  }
+                }
+                .add-list__flex-inner {
+                  box-sizing: border-box;
+                  margin: 10px 0px 10px 0px;
+                  display: flex;
+
+                  .add-list__exec {
+                    display: flex;
+                    align-items: center;
+                    margin: 0px;
+                    padding: 0px;
+
+                    .add-list__submit {
+                      box-sizing: border-box;
+                      margin: 0px;
+                      padding: 0px;
+                      width: 90px;
+                      height: 35px;
+                      border: 0px;
+                      background: cornflowerblue;
+                      border-radius: 4px;
+                      font-size: 0.69em;
+                      color: white;
+                      cursor: pointer;
+                    }
+                    .add-list__submit:hover {
+                      background: darken(cornflowerblue, 5%)
+                    }
+                    .add-list__close {
+                      display: inline-flex;
+                      align-items: center;
+                      margin: 0px 20px 0px 20px;
+                      height: 35px;
+                      font-size: 20pt;
+                      cursor: pointer;
+                      color: #5f5f5f;
+                    }
+                  }
+                }
+              }
+
+
+
+
+
+              .add-list__show-btn {
                 font-size: 0.69em;
                 color: white;
                 margin: 17px 10px 17px 10px;
+                cursor: pointer;
               }
+
+              
             }
             .todo__add-list:hover {
-              background: lighten(cornflowerblue, 5%)
+              background: darken(cornflowerblue, 5%)
             }
+            
           }
         }
-        
       }
     }
+  }
+  .hide {
+    display: none;
   }
 
 </style>
@@ -188,15 +324,17 @@
   <div class="board__wrapper">
     <nav class="board__navigator"></nav>
     <div class="board__container">
-      <nav class="board__sidebar slide-out">
+      <nav class="board__sidebar sidebar-close">
         <div class="icon-wrap"
-          @click="slideSidebar"
+          @mouseup="slideSidebar"
         >
           <span class></span>
         </div>
         <div></div>
       </nav>
-      <main class="board__main-container">
+      <main class="board__main-container"
+        @mouseup="uiReset"
+      >
         <div class="board__top-menu"></div>
         <div class="board__todo-container">
           <div class="todo__section">
@@ -209,7 +347,8 @@
                   <div class="list-title">
                     <h2>To Do</h2>
                   </div>
-                  <ul>
+
+                  <ul class="todo__item-list">
                     
                     <li class="todo__item">
                       <div class="item__inner">
@@ -234,12 +373,48 @@
                     </li>
                   
                   </ul>
-                  <div class="add-todo-item">
-                    <span> + Add a Plan item</span>
-                    <span></span>
-                  </div>
+
+
+
+                  <ul class="todo__add-item-cotainer">
+
+                    <li class="todo__add-item add-item__show">
+                      <div class="add-item__show-btn"
+                        @mouseup="showAddItemForm"
+                      >
+                        <span> + Add a Plan item</span>
+                        <span></span>
+                      </div>
+                    </li>
+                    <li class="todo__add-item add-item__form hide">
+                      <div class="add-item__inner">
+                        <textarea class="add-item__textarea"/>
+                      </div>
+                      <div class="add-item__flex-inner">
+                        <div class="add-item__exec">
+                          <input class="add-item__submit" type="submit" value="Add item"/>
+                          <span class="add-item__close"
+                            @mouseup="showAddItemForm"
+                          >X</span>
+                        </div>
+                        <div class="add-item__more">
+                        </div>
+                      </div>
+                    </li>
+
+                  </ul>
+                  
+
+
+
                 </div>
                 
+
+
+
+
+
+
                 <div class="list-container todo__list">
                   <div class="list-title">
                     <h2>Doing</h2>
@@ -280,13 +455,41 @@
                     </li>
 
                   </ul>
-                  <div class="add-todo-item">
-                    <span> + Add a Plan item</span>
-                    <span></span>
-                  </div>
+                  <ul class="todo__add-item-cotainer">
+
+                    <li class="todo__add-item add-item__show">
+                      <div class="add-item__show-btn"
+                        @mouseup="showAddItemForm"
+                      >
+                        <span> + Add a Plan item</span>
+                        <span></span>
+                      </div>
+                    </li>
+                    <li class="todo__add-item add-item__form hide">
+                      <div class="add-item__inner">
+                        <textarea class="add-item__textarea"/>
+                      </div>
+                      <div class="add-item__flex-inner">
+                        <div class="add-item__exec">
+                          <input class="add-item__submit" type="submit" value="Add item"/>
+                          <span class="add-item__close"
+                            @mouseup="showAddItemForm"
+                          >X</span>
+                        </div>
+                        <div class="add-item__more">
+                        </div>
+                      </div>
+                    </li>
+
+                  </ul>
 
                 </div>
                 
+
+
+
+
+
                 <div class="list-container todo__list">
                   <div class="list-title">
                     <h2>Done</h2>
@@ -304,23 +507,74 @@
                     </li>
                   </ul>
 
-                  <div class="add-todo-item">
-                    <span> + Add a Plan item</span>
-                    <span></span>
-                  </div>
+                  <ul class="todo__add-item-cotainer">
+
+                    <li class="todo__add-item add-item__show">
+                      <div class="add-item__show-btn"
+                        @mouseup="showAddItemForm"
+                      >
+                        <span> + Add a Plan item</span>
+                        <span></span>
+                      </div>
+                    </li>
+                    <li class="todo__add-item add-item__form hide">
+                      <div class="add-item__inner">
+                        <textarea class="add-item__textarea"/>
+                      </div>
+                      <div class="add-item__flex-inner">
+                        <div class="add-item__exec">
+                          <input class="add-item__submit" type="submit" value="Add item"/>
+                          <span class="add-item__close"
+                            @mouseup="showAddItemForm"
+                          >X</span>
+                        </div>
+                        <div class="add-item__more">
+                        </div>
+                      </div>
+                    </li>
+
+                  </ul>
                 </div>
               
 
               </li>
 
+
+
+
+
               <li class="todo__list-inner">
                 <div class="list-container todo__add-list">
-                  <div class="add-todo-list">
-                    <span> + Add another list</span>
-                  </div>
+                  <ul class="todo__add-list-cotainer">
+
+                    <li class="todo__add-list add-list__show">
+                      <div class="add-list__show-btn"
+                        @mouseup="showAddItemForm"
+                      >
+                        <span> + Add another list</span>
+                        <span></span>
+                      </div>
+                    </li>
+                    <li class="todo__add-list add-list__form hide">
+                      <div class="add-list__inner">
+                        <input class="add-list__input"/>
+                      </div>
+                      <div class="add-list__flex-inner">
+                        <div class="add-list__exec">
+                          <input class="add-list__submit" type="submit" value="Add list"/>
+                          <span class="add-list__close"
+                            @mouseup="showAddItemForm"
+                          >X</span>
+                        </div>
+                        <div class="add-list__more">
+                        </div>
+                      </div>
+                    </li>
+                    
+                  </ul>
+
                 </div>
               </li>
-
 
 
             </ul>
@@ -353,15 +607,67 @@ export default {
   },
 
   methods: {
-    slideSidebar () {
+    slideSidebar (e) {
       const sidebar = document.querySelector('.board__sidebar')
       if (sidebar) {
         if (sidebar.classList.contains('slide-in')) {
+          sidebar.classList.add('sidebar-close')
           sidebar.classList.remove('slide-in')
           sidebar.classList.add('slide-out')
+        
         } else {
+          sidebar.classList.remove('sidebar-close')
           sidebar.classList.remove('slide-out')
           sidebar.classList.add('slide-in')
+        }
+      }
+    },
+    uiReset (e) {
+      const sidebar = document.querySelector('.board__sidebar')
+      if (sidebar && !sidebar.classList.contains('sidebar-close')) {
+        const iconWrap = sidebar.querySelector('.icon-wrap')
+        const event = new Event('mouseup')
+        iconWrap.dispatchEvent(event)
+      }
+    },
+
+    // TODO add item, add list form 중복되는 코드 많으니 append로 처리할 것
+    showAddItemForm (e) {
+      console.log(e)
+      const IS_ITEM = (function () {
+        return e.target.parentElement.classList.contains('add-item__show-btn') ||
+          e.target.parentElement.classList.contains('add-item__exec')
+      }())
+      const PARENT_TARGET = (function () {
+        return e.target.closest('.list-container')
+      }())
+
+      console.log(PARENT_TARGET)
+
+      const BTN_CLASS = IS_ITEM ? 'add-item__show' : 'add-list__show'
+      const FORM_CLASS = IS_ITEM ? 'add-item__form' : 'add-list__form'
+      const TARGET_CLASS = IS_ITEM ? 'add-item__textarea' : 'add-list__input'
+      
+      const btn = PARENT_TARGET.querySelector(`.${BTN_CLASS}`)
+      const form = PARENT_TARGET.querySelector(`.${FORM_CLASS}`)
+      
+      if (btn) {
+        const targetElement = PARENT_TARGET.querySelector(`.${TARGET_CLASS}`)
+
+        if (btn.classList.contains('hide')) {
+          // textArea?[0].value = ''; Vetur 오류 발생함 원인 확인 필요
+          if (targetElement) {
+            targetElement.value = ''
+          }
+          form.classList.add('hide')
+          btn.classList.remove('hide')
+        
+        } else {
+          if (targetElement) {
+            targetElement.focus()
+          }
+          form.classList.remove('hide')
+          btn.classList.add('hide')
         }
       }
     }
