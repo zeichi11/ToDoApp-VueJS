@@ -333,7 +333,7 @@
         <div></div>
       </nav>
       <main class="board__main-container"
-        @mouseup="uiReset"
+        @mouseup="resetSidebar"
       >
         <div class="board__top-menu"></div>
         <div class="board__todo-container">
@@ -387,17 +387,19 @@
                       </div>
                     </li>
                     <li class="todo__add-item add-item__form hide">
-                      <div class="add-item__inner">
-                        <textarea class="add-item__textarea"/>
-                      </div>
-                      <div class="add-item__flex-inner">
-                        <div class="add-item__exec">
-                          <input class="add-item__submit" type="submit" value="Add item"/>
-                          <span class="add-item__close"
-                            @mouseup="showAddItemForm"
-                          >X</span>
+                      <div id="add-item__form-wrapper">
+                        <div class="add-item__inner">
+                          <textarea class="add-item__textarea"/>
                         </div>
-                        <div class="add-item__more">
+                        <div class="add-item__flex-inner">
+                          <div class="add-item__exec">
+                            <input class="add-item__submit" type="submit" value="Add item"/>
+                            <span class="add-item__close"
+                              @mouseup="showAddItemForm"
+                            >X</span>
+                          </div>
+                          <div class="add-item__more">
+                          </div>
                         </div>
                       </div>
                     </li>
@@ -466,19 +468,6 @@
                       </div>
                     </li>
                     <li class="todo__add-item add-item__form hide">
-                      <div class="add-item__inner">
-                        <textarea class="add-item__textarea"/>
-                      </div>
-                      <div class="add-item__flex-inner">
-                        <div class="add-item__exec">
-                          <input class="add-item__submit" type="submit" value="Add item"/>
-                          <span class="add-item__close"
-                            @mouseup="showAddItemForm"
-                          >X</span>
-                        </div>
-                        <div class="add-item__more">
-                        </div>
-                      </div>
                     </li>
 
                   </ul>
@@ -518,19 +507,6 @@
                       </div>
                     </li>
                     <li class="todo__add-item add-item__form hide">
-                      <div class="add-item__inner">
-                        <textarea class="add-item__textarea"/>
-                      </div>
-                      <div class="add-item__flex-inner">
-                        <div class="add-item__exec">
-                          <input class="add-item__submit" type="submit" value="Add item"/>
-                          <span class="add-item__close"
-                            @mouseup="showAddItemForm"
-                          >X</span>
-                        </div>
-                        <div class="add-item__more">
-                        </div>
-                      </div>
                     </li>
 
                   </ul>
@@ -549,7 +525,7 @@
 
                     <li class="todo__add-list add-list__show">
                       <div class="add-list__show-btn"
-                        @mouseup="showAddItemForm"
+                        @mouseup="showAddListForm"
                       >
                         <span> + Add another list</span>
                         <span></span>
@@ -563,7 +539,7 @@
                         <div class="add-list__exec">
                           <input class="add-list__submit" type="submit" value="Add list"/>
                           <span class="add-list__close"
-                            @mouseup="showAddItemForm"
+                            @mouseup="showAddListForm"
                           >X</span>
                         </div>
                         <div class="add-list__more">
@@ -592,7 +568,9 @@
 // import { mapState, mapGetters, mapMutations, mapActions } from 'vuex' // store의 state와 getters의 바인딩을 지원하는 helpers
 // import TodoCreator from 'componentPath/Creator.vue'
 // import TodoItem from 'componentPath/Item.vue'
-// import { RESOURCES, DEFAULTS } from 'commonPath/Constants.js'
+import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
+
+
 
 export default {
   // components: {
@@ -622,7 +600,8 @@ export default {
         }
       }
     },
-    uiReset (e) {
+    
+    resetSidebar (e) {
       const sidebar = document.querySelector('.board__sidebar')
       if (sidebar && !sidebar.classList.contains('sidebar-close')) {
         const iconWrap = sidebar.querySelector('.icon-wrap')
@@ -631,28 +610,50 @@ export default {
       }
     },
 
+    resetAddItemMenu () {
+      const allBtn = document.querySelectorAll(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
+      allBtn.forEach(el => { el.classList.remove('hide') })
+      
+      const allForm = document.querySelectorAll(`.${CSS_NAME.ADD_ITEM_FORM}`)
+      allForm.forEach(el => { el.classList.add('hide') })
+      
+      const textArea = document.querySelector(`.${CSS_NAME.ADD_ITEM_EDITOR}`)
+      textArea && (textArea.value = '')
+    },
+
     // TODO add item, add list form 중복되는 코드 많으니 append로 처리할 것
     showAddItemForm (e) {
-      console.log(e)
-      const IS_ITEM = (function () {
-        return e.target.parentElement.classList.contains('add-item__show-btn') ||
-          e.target.parentElement.classList.contains('add-item__exec')
-      }())
-      const PARENT_TARGET = (function () {
-        return e.target.closest('.list-container')
-      }())
+      this.resetAddItemMenu()
 
-      console.log(PARENT_TARGET)
+      const IS_BTN = !!e.target.closest(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
+      const PARENT_TARGET = e.target.closest(`.${CSS_NAME.LIST_CONTAINER}`)
 
-      const BTN_CLASS = IS_ITEM ? 'add-item__show' : 'add-list__show'
-      const FORM_CLASS = IS_ITEM ? 'add-item__form' : 'add-list__form'
-      const TARGET_CLASS = IS_ITEM ? 'add-item__textarea' : 'add-list__input'
+      if (!IS_BTN || PARENT_TARGET === null) return
+
+      const btn = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
+      const form = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_ITEM_FORM}`)
+      const addFormLayout = document.querySelector(`#${CSS_ID.ADD_ITEM_FORM_WRAPPER}`)
       
-      const btn = PARENT_TARGET.querySelector(`.${BTN_CLASS}`)
-      const form = PARENT_TARGET.querySelector(`.${FORM_CLASS}`)
+      if (btn && form && addFormLayout) {
+        const textArea = addFormLayout.querySelector(`.${CSS_NAME.ADD_ITEM_TEXTAREA}`)
+        textArea && textArea.focus()
+
+        form.appendChild(addFormLayout)
+
+        form.classList.remove('hide')
+        btn.classList.add('hide')
+      }
+    },
+
+    showAddListForm (e) {
+      const PARENT_TARGET = e.target.closest(`.${CSS_NAME.LIST_CONTAINER}`)
+      if (PARENT_TARGET === null) return
       
-      if (btn) {
-        const targetElement = PARENT_TARGET.querySelector(`.${TARGET_CLASS}`)
+      const btn = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_SHOW_BTN}`)
+      const form = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_FORM}`)
+      
+      if (btn && form) {
+        const targetElement = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_INPUT}`)
 
         if (btn.classList.contains('hide')) {
           // textArea?[0].value = ''; Vetur 오류 발생함 원인 확인 필요

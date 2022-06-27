@@ -21,4 +21,18 @@ const DEFAULTS = {
   ITEM_FILTER_COMPLETED: 'completed'
 }
 
-export { MSG_CONST, RESOURCES, DEFAULTS }
+const CSS_NAME = {
+  LIST_CONTAINER: 'list-container',
+  ADD_ITEM_SHOW_BTN: 'add-item__show',
+  ADD_ITEM_FORM: 'add-item__form',
+  ADD_ITEM_TEXTAREA: 'add-item__textarea',
+  ADD_LIST_SHOW_BTN: 'add-list__show',
+  ADD_LIST_FORM: 'add-list__form',
+  ADD_LIST_INPUT: 'add-list__input'
+}
+
+const CSS_ID = {
+  ADD_ITEM_FORM_WRAPPER: 'add-item__form-wrapper'
+}
+
+export { MSG_CONST, RESOURCES, DEFAULTS, CSS_NAME, CSS_ID }
