@@ -41,7 +41,22 @@ export default {
   // ]
 
   state: () => ({
-    todoLists: []
+    todoLists: [
+      {
+        id: 1,
+        title: 'list name',
+        items: [
+          {
+            
+          }
+        ]
+      },
+      {
+        id: 2,
+        title: 'list name',
+        items: []
+      }
+    ]
   }),
   // Computed
   getters: {

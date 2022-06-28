@@ -83,7 +83,7 @@ export default {
     return {
       isEditMode: false,
       editedTitle: ''
-    };
+    }
   },
   computed: {
     RESOURCES () {
