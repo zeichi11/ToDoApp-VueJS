@@ -108,7 +108,7 @@
 
             .list-container {
               box-sizing: border-box;
-              width: 300px;
+              width: 280px;
               height: auto;
               margin-right: 7px;
               margin-left: 7px;
@@ -151,8 +151,6 @@
                   }
                 }
               }
-
-
 
 
 
@@ -423,107 +421,6 @@
 
 
 
-                </div>
-                
-
-
-
-
-
-
-                <div class="list-container todo__list">
-                  <div class="list-title">
-                    <h2>Doing</h2>
-                  </div>
-                  <ul>
-                    
-                    <li class="todo__item">
-                      <div class="item__inner">
-                        <div class="item__title">
-                          <span>VueJS 스터디</span>
-                        </div>
-                        <div class="item__content">
-                          <span>VueJS 프로젝트 개발</span>
-                        </div>
-                      </div>
-                    </li>
-                    
-                    <li class="todo__item">
-                      <div class="item__inner">
-                        <div class="item__title">
-                          <span>React 스터디</span>
-                        </div>
-                        <div class="item__content">
-                          <span>React 프로젝트 개발</span>
-                        </div>
-                      </div>
-                    </li>
-
-                    <li class="todo__item">
-                      <div class="item__inner">
-                        <div class="item__title">
-                          <span>express 스터디</span>
-                        </div>
-                        <div class="item__content">
-                          <span>express 프로젝트 개발</span>
-                        </div>
-                      </div>
-                    </li>
-
-                  </ul>
-                  <ul class="todo__add-item-cotainer">
-
-                    <li class="todo__add-item add-item__show">
-                      <div class="add-item__show-btn"
-                        @mouseup="showAddItemForm"
-                      >
-                        <span> + Add a Plan item</span>
-                        <span></span>
-                      </div>
-                    </li>
-                    <li class="todo__add-item add-item__form hide">
-                    </li>
-
-                  </ul>
-
-                </div>
-                
-
-
-
-
-
-                <div class="list-container todo__list">
-                  <div class="list-title">
-                    <h2>Done</h2>
-                  </div>
-                  <ul>
-                    <li class="todo__item">
-                      <div class="item__inner">
-                        <div class="item__title">
-                          <span>JavaScript 스터디</span>
-                        </div>
-                        <div class="item__content">
-                          <span>JavaScript 프로젝트 개발</span>
-                        </div>
-                      </div>
-                    </li>
-                  </ul>
-
-                  <ul class="todo__add-item-cotainer">
-
-                    <li class="todo__add-item add-item__show">
-                      <div class="add-item__show-btn"
-                        @mouseup="showAddItemForm"
-                      >
-                        <span> + Add a Plan item</span>
-                        <span></span>
-                      </div>
-                    </li>
-                    <li class="todo__add-item add-item__form hide">
-                    </li>
-
-                  </ul>
                 </div>
               
 

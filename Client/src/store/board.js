@@ -8,6 +8,7 @@ import Vue from 'vue'
 import cryptoRandomString from 'crypto-random-string'
 import { DEFAULTS } from 'commonPath/Constants.js'
 import Loader from '../requester/Loader'
+import Utils from '../common/Utils'
 
 import _assign from 'lodash/assign'
 import _find from 'lodash/find'
@@ -43,24 +44,125 @@ export default {
   state: () => ({
     todoLists: [
       {
-        id: 1,
-        title: 'list name',
+        id: Utils.generateListId(),
+        title: 'To Do (list title 1)',
+        createdAt: 'date',
+        updatedAt: 'date',
         items: [
           {
-            
+            id: Utils.generateItemId(),
+            title: 'list1-item1',
+            content: 'list1-item1-content',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'list1-item1',
+            content: 'list1-item2-content',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'list1-item1',
+            content: 'list1-item2-content',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'Python 스터디',
+            content: 'Python 프로젝트 개발',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'Spring 스터디',
+            content: 'Spring 프로젝트 개발',
+            createdAt: 'date',
+            updatedAt: 'date'
           }
         ]
       },
       {
-        id: 2,
-        title: 'list name',
-        items: []
+        id: Utils.generateListId(),
+        title: 'Doing (list title 2)',
+        createdAt: 'date',
+        updatedAt: 'date',
+        items: [
+          {
+            id: Utils.generateItemId(),
+            title: 'list2-item1',
+            content: 'list2-item1-content',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'list2-item2',
+            content: 'list2-item2-content',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'VueJS 스터디',
+            content: 'VueJS 프로젝트 개발',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'React 스터디',
+            content: 'React 프로젝트 개발',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'express 스터디',
+            content: 'express 프로젝트 개발',
+            createdAt: 'date',
+            updatedAt: 'date'
+          }
+        ]
+      },
+      {
+        id: Utils.generateListId(),
+        title: 'Done (list title 3)',
+        createdAt: 'date',
+        updatedAt: 'date',
+        items: [
+          {
+            id: Utils.generateItemId(),
+            title: 'list1-item1',
+            content: 'list1-item1-content',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'list1-item1',
+            content: 'list1-item2-content',
+            createdAt: 'date',
+            updatedAt: 'date'
+          },
+          {
+            id: Utils.generateItemId(),
+            title: 'JavaScript 스터디',
+            content: 'JavaScript 프로젝트 개발',
+            createdAt: 'date',
+            updatedAt: 'date'
+          }
+        ]
       }
     ]
   }),
   // Computed
   getters: {
-    filteredTodos (state) {
+    filteredTodos(state) {
       switch (state.filter) {
         case DEFAULTS.ITEM_FILTER_ACTIVE:
           return state.todos.filter((todo) => !todo.done)
@@ -71,14 +173,14 @@ export default {
           return state.todos
       }
     },
-    totalCount (state) {
+    totalCount(state) {
       return state.todos.length
     },
-    activeCount (state) {
+    activeCount(state) {
       return state.todos.filter((todo) => !todo.done).length
     },
     // getters 내에서 다른 getter 함수를 참조하기 위해서는 두번째 인자인 getters를 사용한다.
-    completedCount (state, getters) {
+    completedCount(state, getters) {
       return getters.totalCount - getters.activeCount
     }
   },
@@ -90,14 +192,14 @@ export default {
     /**
      * Board의 todoList들을 초기화 한다.
      */
-    initBoard (state, todoLists) {
+    initBoard(state, todoLists) {
       todoLists && (state.todoLists = todoLists)
     },
 
     /*
      * Assign todoList
      */
-    assignTodoList (state, listId, todoList) {
+    assignTodoList(state, listId, todoList) {
       const index = _findIndex(state.todoLists, { listId })
       state.todoLists[index] = todoList
     },
@@ -105,7 +207,7 @@ export default {
     /*
      * Assign item
      */
-    assignItem (state, payload) {
+    assignItem(state, payload) {
       const { targetItem, value } = payload
       _assign(targetItem, value)
     },
@@ -113,7 +215,7 @@ export default {
     /**
      * push item
      */
-    pushItem (state, listId, newItem) {
+    pushItem(state, listId, newItem) {
       const found = _find(state.todoLists, { listId })
       found.push(newItem)
     },
@@ -121,7 +223,7 @@ export default {
     /**
      * Delete item
      */
-    deleteItem (state, listId, index) {
+    deleteItem(state, listId, index) {
       const found = _find(state.todoLists, { listId })
       Vue.delete(found, index)
     },
@@ -129,7 +231,7 @@ export default {
     /**
      * Update item
      */
-    updateItem (state, payload) {
+    updateItem(state, payload) {
       const { item, key, value } = payload
       item[key] = value
     },
@@ -137,7 +239,7 @@ export default {
     /*
      *  Filter
      */
-    updateFilter (state, filter) {
+    updateFilter(state, filter) {
       state.filter = filter
     }
   },
@@ -154,7 +256,7 @@ export default {
     /**
      * initialize board
      */
-    async initBoard (context, boardId) {
+    async initBoard(context, boardId) {
       const { commit } = context
       const boardData = await Loader.loadBoard(boardId)
 
@@ -178,7 +280,7 @@ export default {
     /**
      * create Todo item
      */
-    createTodo (context, title /* payload */) {
+    createTodo(context, title /* payload */) {
       const { commit } = context
       const newTodo = {
         id: cryptoRandomString({ length: 10 }),
@@ -196,7 +298,7 @@ export default {
     /**
      * create Todo item
      */
-    createItem (context, listId, title, content /* payload */) {
+    createItem(context, listId, title, content /* payload */) {
       const { commit } = context
       const newItem = {
         id: cryptoRandomString({ length: 10 }),
@@ -214,7 +316,7 @@ export default {
     /**
      * update Todo data
      */
-    updateItem (context, payload) {
+    updateItem(context, payload) {
       const { state, commit } = context
       const { listId, itemId, value } = payload
       const foundList = _find(state.todoLists, { listId })
@@ -225,7 +327,7 @@ export default {
       }
     },
 
-    moveItem (context, payload) {
+    moveItem(context, payload) {
       const { state, commit } = context
       const { fromListId, toListId, itemId, targetIndex } = payload
       const fromList = _find(state.todoLists, { fromListId })
@@ -243,7 +345,7 @@ export default {
     /**
      * delete Todo data
      */
-    deleteItem (context, payload) {
+    deleteItem(context, payload) {
       const { state, commit } = context
       const { listId, itemId } = payload
       const foundList = _find(state.todoLists, { listId })
@@ -258,7 +360,7 @@ export default {
      * set all items to done.
      * @param {boolean} checked
      */
-    completeAll (context, checked) {
+    completeAll(context, checked) {
       const { state, commit } = context
       // DB
       const newTodos = state.db
@@ -284,7 +386,7 @@ export default {
     /**
      * delete done items
      */
-    clearComplete (context, todo) {
+    clearComplete(context, todo) {
       const { state, dispatch } = context
       // 삭제 시에는 index 문제가 발생하지 않도록 뒤에서부터.
       _forEachRight(state.todos, (todo) => {

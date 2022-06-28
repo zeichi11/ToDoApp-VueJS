@@ -1,11 +1,17 @@
 <template>
   <div class="list-container todo__list">
     <div class="list-title">
-      <h2>To Do</h2>
+      <h2>{{ list.title }}</h2>
     </div>
 
     <ul class="todo__item-list">
       
+      <item
+        v-for="item in list.items"
+        :key="item.id"
+        :item="item"
+      />
+
       <li class="todo__item">
         <div class="item__inner">
           <div class="item__title">
@@ -52,15 +58,15 @@
 // import { mapState, mapGetters, mapMutations, mapActions } from 'vuex' // store의 state와 getters의 바인딩을 지원하는 helpers
 // import TodoCreator from 'componentPath/Creator.vue'
 // import TodoItem from 'componentPath/Item.vue'
+import Item from './Item'
 import { CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 
 export default {
-  // components: {
-  //   TodoCreator,
-  //   TodoItem
-  // },
+  components: {
+    Item
+  },
   props: {
-    todoList: Array,
+    list: Object,
     showForm: Function
   },
 
