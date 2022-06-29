@@ -17,6 +17,12 @@ body {
     background: royalblue;
   }
 
+  .board__top-menu {
+    width: 100%;
+    height: 50px;
+    background:lightseagreen;
+  }
+
   .board__container {
     width: 100%;
     height: 100%;
@@ -82,12 +88,6 @@ body {
 
 
     .board__main-container {
-      .board__top-menu {
-        width: 100%;
-        height: 50px;
-        background:lightseagreen;
-      }
-
       .todo__list-wrapper {
         display: flex;
         flex-direction: row;

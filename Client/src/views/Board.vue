@@ -5,12 +5,13 @@
 <template>
   <div class="board__wrapper">
     <nav class="board__navigator"></nav>
+    <div class="board__top-menu"></div>
     <div class="board__container">
       <sidebar />
       <main class="board__main-container"
         @mouseup="resetSidebar"
       >
-        <div class="board__top-menu"></div>
+        
         <div class="board__todo-container">
           <div class="todo__section">
             <ul class="todo__list-wrapper">
