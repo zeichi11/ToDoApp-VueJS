@@ -1,6 +1,7 @@
 <template>
   <div id="add-item__form-wrapper">
     <div class="add-item__inner">
+      <input class="add-list__input"/>
       <textarea class="add-item__textarea"/>
     </div>
     <div class="add-item__flex-inner">

@@ -30,7 +30,7 @@
 
 <script>
 import TodoItem from './TodoItem'
-import ItemCreator from './ItemCreator'
+import ItemCreator from './Creator'
 import AddItemBtn from './AddItemBtn'
 
 export default {
