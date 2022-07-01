@@ -1,30 +1,32 @@
 <template>
-  <div class="list-container todo__list">
-    <div class="list-title">
-      <h2>{{ list.title }}</h2>
-    </div>
-
-    <todo-item-list :list="list" />
-    <todo-item-form
-      :isFirstList="isFirstList"
+  <ul class="todo__add-item-cotainer">
+    <add-item-btn
       :onEditMode="onEditMode"
-      @showForm="showForm"
+      @showForm="showAddItemForm"
       @setEditMode="setEditMode"
     />
-  </div>
+
+    <li class="todo__add-item add-item__form hide">
+      <item-creator
+        v-if="isFirstList"
+          :onEditMode="onEditMode"
+          @showForm="showAddItemForm"
+          @setEditMode="setEditMode"
+      />
+    </li>
+  </ul>
 </template>
 
 <script>
-import TodoItemList from './TodoItemList'
-import TodoItemForm from './TodoItemFrom'
+import ItemCreator from './Creator'
+import AddItemBtn from './AddItemBtn'
 
 export default {
   components: {
-    TodoItemList,
-    TodoItemForm
+    ItemCreator,
+    AddItemBtn
   },
   props: {
-    list: Object,
     showForm: Function,
     isFirstList: Boolean
   },

@@ -12,11 +12,12 @@
 <script>
 export default {
   props: {
+    onEdit: Boolean,
     showForm: Function
   },
   data () {
     return {
-      isShow: false
+      
     }
   },
 
