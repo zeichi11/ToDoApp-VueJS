@@ -1,7 +1,7 @@
 <template>
   <ul class="todo__item-list">
     <todo-item-card
-      v-for="item in list.items"
+      v-for="item in items"
       :key="item.id"
       :item="item"
     />
@@ -16,24 +16,18 @@ export default {
     TodoItemCard
   },
   props: {
-    list: Object
+    items: Array
   },
 
   data () {
     return {
-      onEditMode: false
     }
   },
   computed: {
 
   },
   methods: {
-    showAddItemForm: function (e) {
-      this.$emit('showForm', e)
-    },
-    setEditMode: function () {
-      this.onEditMode = !onEditMode
-    }
+    
   }
 }
 </script>

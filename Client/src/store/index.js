@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import board from './board'
+import uiState from './uiState'
 import todoApp from './todoApp'
 
 Vue.use(Vuex)
@@ -11,6 +12,7 @@ export default new Vuex.Store({
   strict: process.env.NODE_ENV !== 'production',
   modules: {
     todoApp,
+    uiState,
     board
   }
 

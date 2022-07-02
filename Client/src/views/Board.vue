@@ -16,19 +16,12 @@
           <div class="todo__section">
             <ul class="todo__list-wrapper">
               
-              <li class="todo__list-inner todo__list-inner-first">
-                <todo-list
-                  v-for="(list, index) in todoLists"
-                  :key="list.id"
-                  :list="list"
-                  :isFirstList="index === 0"
-                  @showForm="showAddItemForm"
-                />
-              </li>
+              <todo-list-iterator
+                :todoLists="todoLists"
+              />
 
               <li class="todo__list-inner">
                 <div class="list-container todo__add-list">
-
 
                   <ul class="todo__add-list-cotainer">
                     <li class="todo__add-list add-list__show">
@@ -76,18 +69,18 @@
 // import TodoItem from 'componentPath/Item.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import Sidebar from 'componentPath/Sidebar'
-import TodoList from 'componentPath/todos/TodoList'
+import TodoListIterator from 'componentPath/todos/TodoListIterator'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 
 export default {
   components: {
-    TodoList,
+    TodoListIterator,
     Sidebar
   },
 
   data () {
     return {
-      
+      addItemListId: ''
     }
   },
 
@@ -107,6 +100,13 @@ export default {
   },
 
   methods: {
+    setAddItemListId (listId) {
+      this.addItemListId = listId
+    },
+
+
+
+
     resetSidebar (e) {
       const sidebar = document.querySelector('.board__sidebar')
       if (sidebar && !sidebar.classList.contains('sidebar-close')) {
@@ -129,26 +129,30 @@ export default {
 
     // TODO add item, add list form 중복되는 코드 많으니 append로 처리할 것
     showAddItemForm ({target}) {
-      this.resetAddItemMenu()
-
-      const IS_BTN = !!target.closest(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
-      const PARENT_TARGET = target.closest(`.${CSS_NAME.LIST_CONTAINER}`)
-
-      if (!IS_BTN || PARENT_TARGET === null) return
-
-      const btn = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
-      const form = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_ITEM_FORM}`)
-      const addFormLayout = document.querySelector(`#${CSS_ID.ADD_ITEM_FORM_WRAPPER}`)
       
-      if (btn && form && addFormLayout) {
-        const textArea = addFormLayout.querySelector(`.${CSS_NAME.ADD_ITEM_TEXTAREA}`)
-        textArea && textArea.focus()
 
-        form.appendChild(addFormLayout)
 
-        form.classList.remove('hide')
-        btn.classList.add('hide')
-      }
+
+      // this.resetAddItemMenu()
+
+      // const IS_BTN = !!target.closest(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
+      // const PARENT_TARGET = target.closest(`.${CSS_NAME.LIST_CONTAINER}`)
+
+      // if (!IS_BTN || PARENT_TARGET === null) return
+
+      // const btn = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
+      // const form = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_ITEM_FORM}`)
+      // const addFormLayout = document.querySelector(`#${CSS_ID.ADD_ITEM_FORM_WRAPPER}`)
+      
+      // if (btn && form && addFormLayout) {
+      //   const textArea = addFormLayout.querySelector(`.${CSS_NAME.ADD_ITEM_TEXTAREA}`)
+      //   textArea && textArea.focus()
+
+      //   form.appendChild(addFormLayout)
+
+      //   form.classList.remove('hide')
+      //   btn.classList.add('hide')
+      // }
     },
 
     showAddListForm (e) {

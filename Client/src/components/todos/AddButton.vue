@@ -1,19 +1,16 @@
 <template>
-  <li class="todo__add-item add-item__show">
-        <div class="add-item__show-btn"
-          @mouseup="showAddItemForm"
-        >
-          <span> + Add a Plan item</span>
-          <span></span>
-        </div>
-      </li>
+    <div class="add-item__show-btn"
+      @mouseup="handleMouseUp"
+    >
+      <span> + Add a Plan item</span>
+      <span></span>
+    </div>
 </template>
 
 <script>
 export default {
   props: {
-    onEdit: Boolean,
-    showForm: Function
+    setFormTargetId: Function
   },
   data () {
     return {
@@ -26,8 +23,10 @@ export default {
   },
 
   methods: {
-    showAddItemForm: function (e) {
-      this.$emit('showForm', e)
+    handleMouseUp: function () {
+      console.log('11111')
+      // this.$emit('setFormTargetId')
+      this.setFormTargetId()
     }
   }
 }

@@ -7,9 +7,7 @@
     <div class="add-item__flex-inner">
       <div class="add-item__exec">
         <input class="add-item__submit" type="submit" value="Add item"/>
-        <span class="add-item__close"
-          @mouseup="showAddItemForm"
-        >X</span>
+        <span class="add-item__close">X</span>
       </div>
       <div class="add-item__more">
       </div>
@@ -20,29 +18,16 @@
 <script>
 export default {
   props: {
-    showForm: Function
   },
   data () {
     return {
-      isShow: false
     }
   },
 
   computed: {
-    
   },
 
   methods: {
-    showAddItemForm: function (e) {
-      this.$emit('showForm', e)
-    }
   }
 }
-// import { defineComponent } from '@vue/composition-api'
-
-// export default defineComponent({
-//   setup() {
-    
-//   },
-// })
 </script>
