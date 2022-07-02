@@ -18,6 +18,7 @@
 // import { CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 
 export default {
+  name: 'TodoItemCard',
   props: {
     item: Object
   },
