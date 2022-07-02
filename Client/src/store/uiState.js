@@ -15,11 +15,7 @@ export default {
   }),
   // Computed
   getters: {
-    isListFormActivated (state, listId) {
-      console.log('-------------------------')
-      console.log(state.formTargetId, listId)
-      return state.formTargetId === listId
-    }
+    
   },
   // Methods
   // 실제 값을 변경할 때 (비동기 처리 안됨)
@@ -27,12 +23,8 @@ export default {
   // actions에서 실제 값을 변경해야 하는 경우 mutations 에 변경 로직을 추가하고 관리해야한다.
   mutations: {
     updateFormTargetId (state, listId) {
-      console.log(listId)
-      console.log(state.formTargetId)
       if (state.formTargetId !== listId) {
-        console.log('111')
         state.formTargetId = listId
-        console.log(state.formTargetId)
       }
     },
 
@@ -50,14 +42,14 @@ export default {
   // context.commit : store 값의 변경을 위해 mutations 메소드를 호출하기 위한 속성
   // context.dispatch : 현재 store의 actions 내 메소드를 호출하기 위한 속성
   actions: {
-    updateFormTargetId(context, listId) {
+    updateFormTargetId (context, listId) {
       const { commit } = context
       if (listId && listId.length) {
         commit('updateFormTargetId', listId)
       }
     },
 
-    resetFormTargetd(context) {
+    resetFormTargetd (context) {
       const { commit } = context
       commit('resetFormTargetId')
     }

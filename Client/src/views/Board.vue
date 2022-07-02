@@ -32,20 +32,12 @@
                         <span></span>
                       </div>
                     </li>
+                    
                     <li class="todo__add-list add-list__form hide">
-                      <div class="add-list__inner">
-                        <input class="add-list__input"/>
-                      </div>
-                      <div class="add-list__flex-inner">
-                        <div class="add-list__exec">
-                          <input class="add-list__submit" type="submit" value="Add list"/>
-                          <span class="add-list__close"
-                            @mouseup="showAddListForm"
-                          >X</span>
-                        </div>
-                        <div class="add-list__more">
-                        </div>
-                      </div>
+                      <list-creator
+                        :formType="'list'"
+                        :handleMouseUp="showAddListForm"
+                      />
                     </li>
                   </ul>
 
@@ -70,12 +62,14 @@
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import Sidebar from 'componentPath/Sidebar'
 import TodoListIterator from 'componentPath/todos/TodoListIterator'
+import ListCreator from 'componentPath/todos/Creator'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 
 export default {
   components: {
     TodoListIterator,
-    Sidebar
+    Sidebar,
+    ListCreator
   },
 
   data () {

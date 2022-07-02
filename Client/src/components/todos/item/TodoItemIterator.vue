@@ -12,6 +12,7 @@
 import TodoItemCard from './TodoItemCard'
 
 export default {
+  name: 'TodoItemIterator',
   components: {
     TodoItemCard
   },

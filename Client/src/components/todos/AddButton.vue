@@ -9,6 +9,7 @@
 
 <script>
 export default {
+  name: 'AddButton',
   props: {
     setFormTargetId: Function
   },
@@ -24,8 +25,6 @@ export default {
 
   methods: {
     handleMouseUp: function () {
-      console.log('11111')
-      // this.$emit('setFormTargetId')
       this.setFormTargetId()
     }
   }

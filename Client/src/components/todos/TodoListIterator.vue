@@ -17,6 +17,7 @@ import TodoListContainer from 'componentPath/todos/TodoListContainer'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 
 export default {
+  name: 'TodoListIterator',
   components: {
     TodoListContainer
   },
