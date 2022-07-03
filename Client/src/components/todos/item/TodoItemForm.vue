@@ -3,15 +3,15 @@
     <li class="todo__add-item add-item__show">
       <add-item-btn
         v-if="!isActivated()"
-        :setFormTargetId="setFormTargetId"
+        :show-form-handler="showAddForm"
       />
     </li>
 
     <li class="todo__add-item add-item__form">
       <item-creator
         v-if="isActivated()"
-        :formType="'item'"
-        :handleMouseUp="resetFormTargetd"
+        :form-type="'item'"
+        :close-form-handler="resetFormTargetId"
       />
     </li>
   </ul>
@@ -30,7 +30,7 @@ export default {
   },
   props: {
     setFormTargetId: Function,
-    resetFormTargetd: Function,
+    resetFormTargetId: Function,
     listId: String
   },
 
@@ -46,6 +46,10 @@ export default {
   methods: {
     isActivated () {
       return this.listId === this.formTargetId
+    },
+    showAddForm () {
+      this.resetFormTargetId()
+      this.setFormTargetId()
     }
   }
 }

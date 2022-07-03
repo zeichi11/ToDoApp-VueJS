@@ -14,9 +14,7 @@ export default {
     formTargetId: ''
   }),
   // Computed
-  getters: {
-    
-  },
+  getters: {},
   // Methods
   // 실제 값을 변경할 때 (비동기 처리 안됨)
   // state의 값을 변경할 수 있는 권한은 mutations 에만 있으며
@@ -49,7 +47,7 @@ export default {
       }
     },
 
-    resetFormTargetd (context) {
+    resetFormTargetId (context) {
       const { commit } = context
       commit('resetFormTargetId')
     }

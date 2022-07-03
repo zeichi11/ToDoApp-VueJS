@@ -151,24 +151,50 @@ body {
             }
             
 
-
-
-
-
             .todo__add-item {
               margin: 10px 0px 10px 0px;
               .add-form__inner {
                 margin: 10px 0px 10px 0px;
-                .add-form__textarea {
+
+                .add-form__input {
                   box-sizing: border-box;
                   width:100%;
-                  height: auto;
-                  min-height: 60px;
+                  height: 30px;
+                  margin-top: 10px;
+                  margin-bottom: 7px;
+                  padding-left: 10px;
+                  padding-right: 10px;
                   background: white;
                   border: 0px;
                   border-radius: 4px;
                   -webkit-box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7); 
                   box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7);
+                  font-size: 0.65em;
+                  font-family: Arial, Helvetica, sans-serif;
+                }
+                
+                .add-form__input::placeholder {
+                  color: #bfbfbf;
+                }
+
+                .add-form__textarea {
+                  box-sizing: border-box;
+                  resize: none;
+                  width: 100%;
+                  height: auto;
+                  min-height: 70px;
+                  padding: 10px 10px 10px 10px;
+                  background: white;
+                  border: 0px;
+                  border-radius: 4px;
+                  -webkit-box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7); 
+                  box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7);
+                  font-size: 0.65em;
+                  font-family: Arial, Helvetica, sans-serif;
+                }
+
+                .add-form__textarea::placeholder {
+                  color: #bfbfbf;
                 }
               }
               .add-form__flex-inner {
@@ -217,7 +243,7 @@ body {
               color: #5f5f5f;
               cursor: pointer;
 
-              .add-item__show-btn {
+              .add-form__show-btn {
                 padding: 10px 0px 10px 0px;
               }
             }
@@ -225,14 +251,6 @@ body {
               background: darken(#dddcdc, 10%);
               border-radius: 4px;
             }
-
-            
-
-
-
-
-
-
           }
 
           .todo__add-list {
@@ -240,15 +258,22 @@ body {
 
             .add-form__inner {
               margin: 10px 0px 10px 0px;
+
               .add-form__input {
                 box-sizing: border-box;
                 width:100%;
                 height: 30px;
                 background: white;
+                padding-left: 10px;
+                padding-right: 10px;
                 border: 0px;
                 border-radius: 4px;
                 -webkit-box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7); 
                 box-shadow: 2px 4px 5px -5px rgba(0,0,0,0.7);
+              }
+
+              .add-form__input::placeholder {
+                
               }
             }
             .add-form__flex-inner {
@@ -291,22 +316,19 @@ body {
             }
 
 
-
-
-
-            .add-list__show-btn {
-              font-size: 0.69em;
-              color: white;
-              margin: 17px 10px 17px 10px;
-              cursor: pointer;
+            .add-list__show {
+              .add-form__show-btn {
+                font-size: 0.69em;
+                color: white;
+                margin: 17px 10px 17px 10px;
+                cursor: pointer;
+              }
             }
-
-            
+            .add-list__show:hover {
+              background: darken(#dddcdc, 10%);
+              border-radius: 4px;
+            }
           }
-          .todo__add-list:hover {
-            background: darken(cornflowerblue, 5%)
-          }
-          
         }
       }
     }

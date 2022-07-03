@@ -6,9 +6,9 @@
 
     <todo-item-Iterator :items="list.items" />
     <todo-item-form
-      :listId="list.id"
-      :setFormTargetId="setFormTargetId"
-      :resetFormTargetd="resetFormTargetd"
+      :list-id="list.id"
+      :set-form-target-id="setFormTargetId"
+      :reset-form-target-id="resetFormTargetId"
     />
   </div>
 </template>
@@ -42,7 +42,7 @@ export default {
     // 첫번째 인자 : namespace(없는 경우 생략-두번째 인자만 전달), 두번째 인자 : 바인딩 타겟 data 리스트
     ...mapActions('uiState', [
       'updateFormTargetId',
-      'resetFormTargetd'
+      'resetFormTargetId'
     ]),
 
     setFormTargetId () {

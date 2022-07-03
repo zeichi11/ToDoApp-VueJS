@@ -17,7 +17,7 @@
             <ul class="todo__list-wrapper">
               
               <todo-list-iterator
-                :todoLists="todoLists"
+                :todo-lists="todoLists"
               />
 
               <li class="todo__list-inner">
@@ -25,18 +25,18 @@
 
                   <ul class="todo__add-list-cotainer">
                     <li class="todo__add-list add-list__show">
-                      <div class="add-list__show-btn"
-                        @mouseup="showAddListForm"
-                      >
-                        <span> + Add another list</span>
-                        <span></span>
-                      </div>
+                      <add-list-button
+                        v-if="!isActivated()"
+                        :form-type="'list'"
+                        :show-form-handler="showAddForm"
+                      />
                     </li>
-                    
-                    <li class="todo__add-list add-list__form hide">
+
+                    <li class="todo__add-list add-list__form">
                       <list-creator
-                        :formType="'list'"
-                        :handleMouseUp="showAddListForm"
+                        v-if="isActivated()"
+                        :form-type="'list'"
+                        :close-form-handler="resetFormTargetId"
                       />
                     </li>
                   </ul>
@@ -63,13 +63,15 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import Sidebar from 'componentPath/Sidebar'
 import TodoListIterator from 'componentPath/todos/TodoListIterator'
 import ListCreator from 'componentPath/todos/Creator'
+import AddListButton from 'componentPath/todos/AddButton'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 
 export default {
   components: {
     TodoListIterator,
     Sidebar,
-    ListCreator
+    ListCreator,
+    AddListButton
   },
 
   data () {
@@ -90,15 +92,23 @@ export default {
     // 첫번째 인자 : namespace(없는 경우 생략-두번째 인자만 전달), 두번째 인자 : 바인딩 타겟 data 리스트
     ...mapGetters('board', [
       // getter
-    ]),
+    ])
   },
 
   methods: {
+    ...mapActions('uiState', [
+      'updateFormTargetId',
+      'resetFormTargetId'
+    ]),
     setAddItemListId (listId) {
       this.addItemListId = listId
     },
-
-
+    showAddForm () {
+      this.updateFormTargetId('new')
+    },
+    isActivated () {
+      return this.listId === 'new'
+    },
 
 
     resetSidebar (e) {
@@ -119,10 +129,10 @@ export default {
       
       const textArea = document.querySelector(`.${CSS_NAME.ADD_ITEM_EDITOR}`)
       textArea && (textArea.value = '')
-    },
+    }
 
     // TODO add item, add list form 중복되는 코드 많으니 append로 처리할 것
-    showAddItemForm ({target}) {
+    // showAddItemForm ({target}) {
       
 
 
@@ -147,35 +157,36 @@ export default {
       //   form.classList.remove('hide')
       //   btn.classList.add('hide')
       // }
-    },
+    // }
 
-    showAddListForm (e) {
-      const PARENT_TARGET = e.target.closest(`.${CSS_NAME.LIST_CONTAINER}`)
-      if (PARENT_TARGET === null) return
+  //   showAddListForm (e) {
+  //     const PARENT_TARGET = e.target.closest(`.${CSS_NAME.LIST_CONTAINER}`)
+  //     if (PARENT_TARGET === null) return
       
-      const btn = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_SHOW_BTN}`)
-      const form = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_FORM}`)
+  //     const btn = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_SHOW_BTN}`)
+  //     const form = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_FORM}`)
       
-      if (btn && form) {
-        const targetElement = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_INPUT}`)
+  //     if (btn && form) {
+  //       const targetElement = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_INPUT}`)
 
-        if (btn.classList.contains('hide')) {
-          // textArea?[0].value = ''; Vetur 오류 발생함 원인 확인 필요
-          if (targetElement) {
-            targetElement.value = ''
-          }
-          form.classList.add('hide')
-          btn.classList.remove('hide')
+  //       if (btn.classList.contains('hide')) {
+  //         // textArea?[0].value = ''; Vetur 오류 발생함 원인 확인 필요
+  //         if (targetElement) {
+  //           targetElement.value = ''
+  //         }
+  //         form.classList.add('hide')
+  //         btn.classList.remove('hide')
         
-        } else {
-          if (targetElement) {
-            targetElement.focus()
-          }
-          form.classList.remove('hide')
-          btn.classList.add('hide')
-        }
-      }
-    }
+  //       } else {
+  //         if (targetElement) {
+  //           targetElement.focus()
+  //         }
+  //         form.classList.remove('hide')
+  //         btn.classList.add('hide')
+  //       }
+  //     }
+  //   }
+  // }
   }
 }
 </script>

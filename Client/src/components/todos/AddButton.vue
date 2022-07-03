@@ -1,8 +1,8 @@
 <template>
-    <div class="add-item__show-btn"
+    <div class="add-form__show-btn"
       @mouseup="handleMouseUp"
     >
-      <span> + Add a Plan item</span>
+      <span>{{ formType === 'item' ? '+ Add a Plan item' : '+ Add another list' }} </span>
       <span></span>
     </div>
 </template>
@@ -11,7 +11,8 @@
 export default {
   name: 'AddButton',
   props: {
-    setFormTargetId: Function
+    formType: String,
+    showFormHandler: Function
   },
   data () {
     return {
@@ -25,7 +26,7 @@ export default {
 
   methods: {
     handleMouseUp: function () {
-      this.setFormTargetId()
+      this.showFormHandler()
     }
   }
 }

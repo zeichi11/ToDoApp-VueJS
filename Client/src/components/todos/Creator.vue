@@ -1,10 +1,14 @@
 <template>
   <div id="add-form__wrapper">
     <div class="add-form__inner">
-      <input class="add-form__input"/>
+      <input class="add-form__input"
+        :placeholder="formType === 'item' ?
+          'Enter a title for this item.' : 'Enter list title'"
+      />
       <textarea
         v-if="formType === 'item'"
         class="add-form__textarea"
+        placeholder="Enter item contents."
       />
     </div>
     <div class="add-form__flex-inner">
@@ -15,7 +19,7 @@
           :value="formType === 'item' ? 'Add item' : 'Add list'"
         />
         <span class="add-form__close"
-          @mouseup="handleMouseUp"
+          @mouseup="closeFormHandler"
         >
           X
         </span>
@@ -31,7 +35,7 @@ export default {
   name: 'Creator',
   props: {
     formType: String,
-    handleMouseUp: Function
+    closeFormHandler: Function
   },
   data () {
     return {
