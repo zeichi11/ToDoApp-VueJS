@@ -8,70 +8,47 @@
     <div class="board__top-menu"></div>
     <div class="board__container">
       <sidebar />
-      <main class="board__main-container"
+      <main
+        class="board__main-container"
         @mouseup="resetSidebar"
       >
-        
         <div class="board__todo-container">
           <div class="todo__section">
             <ul class="todo__list-wrapper">
-              
               <todo-list-iterator
                 :todo-lists="todoLists"
               />
-
               <li class="todo__list-inner">
                 <div class="list-container todo__add-list">
-
-                  <ul class="todo__add-list-cotainer">
-                    <li class="todo__add-list add-list__show">
-                      <add-list-button
-                        v-if="!isActivated()"
-                        :form-type="'list'"
-                        :show-form-handler="showAddForm"
-                      />
-                    </li>
-
-                    <li class="todo__add-list add-list__form">
-                      <list-creator
-                        v-if="isActivated()"
-                        :form-type="'list'"
-                        :close-form-handler="resetFormTargetId"
-                      />
-                    </li>
-                  </ul>
-
-
+                  <todo-list-add-form
+                    :form-type="'list'"
+                    :list-id="'new'"
+                  />
                 </div>
               </li>
             </ul>
           </div>
         </div>
-
       </main>
-      
     </div>
-    
   </div>
 </template>
 
 <script>
-// import { mapState, mapGetters, mapMutations, mapActions } from 'vuex' // store의 state와 getters의 바인딩을 지원하는 helpers
+// import { mapState, mapGetters, mapMutations, madd-list__showapActions } from 'vuex' // store의 state와 getters의 바인딩을 지원하는 helpers
 // import TodoCreator from 'componentPath/Creator.vue'
 // import TodoItem from 'componentPath/Item.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import Sidebar from 'componentPath/Sidebar'
 import TodoListIterator from 'componentPath/todos/TodoListIterator'
-import ListCreator from 'componentPath/todos/Creator'
-import AddListButton from 'componentPath/todos/AddButton'
+import TodoListAddForm from 'componentPath/todos/AddForm'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 
 export default {
   components: {
     TodoListIterator,
     Sidebar,
-    ListCreator,
-    AddListButton
+    TodoListAddForm
   },
 
   data () {
@@ -96,21 +73,6 @@ export default {
   },
 
   methods: {
-    ...mapActions('uiState', [
-      'updateFormTargetId',
-      'resetFormTargetId'
-    ]),
-    setAddItemListId (listId) {
-      this.addItemListId = listId
-    },
-    showAddForm () {
-      this.updateFormTargetId('new')
-    },
-    isActivated () {
-      return this.listId === 'new'
-    },
-
-
     resetSidebar (e) {
       const sidebar = document.querySelector('.board__sidebar')
       if (sidebar && !sidebar.classList.contains('sidebar-close')) {
@@ -130,63 +92,6 @@ export default {
       const textArea = document.querySelector(`.${CSS_NAME.ADD_ITEM_EDITOR}`)
       textArea && (textArea.value = '')
     }
-
-    // TODO add item, add list form 중복되는 코드 많으니 append로 처리할 것
-    // showAddItemForm ({target}) {
-      
-
-
-
-      // this.resetAddItemMenu()
-
-      // const IS_BTN = !!target.closest(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
-      // const PARENT_TARGET = target.closest(`.${CSS_NAME.LIST_CONTAINER}`)
-
-      // if (!IS_BTN || PARENT_TARGET === null) return
-
-      // const btn = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
-      // const form = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_ITEM_FORM}`)
-      // const addFormLayout = document.querySelector(`#${CSS_ID.ADD_ITEM_FORM_WRAPPER}`)
-      
-      // if (btn && form && addFormLayout) {
-      //   const textArea = addFormLayout.querySelector(`.${CSS_NAME.ADD_ITEM_TEXTAREA}`)
-      //   textArea && textArea.focus()
-
-      //   form.appendChild(addFormLayout)
-
-      //   form.classList.remove('hide')
-      //   btn.classList.add('hide')
-      // }
-    // }
-
-  //   showAddListForm (e) {
-  //     const PARENT_TARGET = e.target.closest(`.${CSS_NAME.LIST_CONTAINER}`)
-  //     if (PARENT_TARGET === null) return
-      
-  //     const btn = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_SHOW_BTN}`)
-  //     const form = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_FORM}`)
-      
-  //     if (btn && form) {
-  //       const targetElement = PARENT_TARGET.querySelector(`.${CSS_NAME.ADD_LIST_INPUT}`)
-
-  //       if (btn.classList.contains('hide')) {
-  //         // textArea?[0].value = ''; Vetur 오류 발생함 원인 확인 필요
-  //         if (targetElement) {
-  //           targetElement.value = ''
-  //         }
-  //         form.classList.add('hide')
-  //         btn.classList.remove('hide')
-        
-  //       } else {
-  //         if (targetElement) {
-  //           targetElement.focus()
-  //         }
-  //         form.classList.remove('hide')
-  //         btn.classList.add('hide')
-  //       }
-  //     }
-  //   }
-  // }
   }
 }
 </script>

@@ -22,25 +22,6 @@ export default {
   // state는 vue의 data와 동일하게 함수로 정의되어야 한다.
   // 함수로 정의되는 이유 : 객체로 선언 시 실제 data를 사용하는 상황에서 참조관계가 발생함
   // 함수로 정의하고 객체 리터럴을 생성하여 반환하여 참조관계 발생을 방지하기 위함
-
-  // todoLists: [
-  //   {
-  //     listId: 'list-12341',
-  //     title: 'list title 1',
-  //     createdAt: 'date',
-  //     updatedAt: 'date',
-  //     items: [
-  //       {
-  //         itemId: 'item-123123',
-  //         title: 'itme title 1',
-  //         content: 'innerHTML',
-  //         createdAt: 'date',
-  //         updatedAt: 'date'
-  //       }
-  //     ]
-  //   }
-  // ]
-
   state: () => ({
     todoLists: [
       {
@@ -162,27 +143,6 @@ export default {
   }),
   // Computed
   getters: {
-    filteredTodos(state) {
-      switch (state.filter) {
-        case DEFAULTS.ITEM_FILTER_ACTIVE:
-          return state.todos.filter((todo) => !todo.done)
-        case DEFAULTS.ITEM_FILTER_COMPLETED:
-          return state.todos.filter((todo) => todo.done)
-        case DEFAULTS.ITEM_FILTER_ALL:
-        default:
-          return state.todos
-      }
-    },
-    totalCount(state) {
-      return state.todos.length
-    },
-    activeCount(state) {
-      return state.todos.filter((todo) => !todo.done).length
-    },
-    // getters 내에서 다른 getter 함수를 참조하기 위해서는 두번째 인자인 getters를 사용한다.
-    completedCount(state, getters) {
-      return getters.totalCount - getters.activeCount
-    }
   },
   // Methods
   // 실제 값을 변경할 때 (비동기 처리 안됨)
@@ -192,22 +152,26 @@ export default {
     /**
      * Board의 todoList들을 초기화 한다.
      */
-    initBoard(state, todoLists) {
+    initBoard (state, todoLists) {
       todoLists && (state.todoLists = todoLists)
     },
 
     /*
      * Assign todoList
      */
-    assignTodoList(state, listId, todoList) {
+    assignTodoList (state, listId, todoList) {
       const index = _findIndex(state.todoLists, { listId })
       state.todoLists[index] = todoList
+    },
+
+    addList (state, newList) {
+      newList && state.todoLists.push(newList)
     },
 
     /*
      * Assign item
      */
-    assignItem(state, payload) {
+    assignItem (state, payload) {
       const { targetItem, value } = payload
       _assign(targetItem, value)
     },
@@ -215,15 +179,15 @@ export default {
     /**
      * push item
      */
-    pushItem(state, listId, newItem) {
-      const found = _find(state.todoLists, { listId })
-      found.push(newItem)
+    addItem (state, { listId, newItem }) {
+      const found = _find(state.todoLists, { id: listId })
+      found.items.push(newItem)
     },
 
     /**
      * Delete item
      */
-    deleteItem(state, listId, index) {
+    deleteItem (state, listId, index) {
       const found = _find(state.todoLists, { listId })
       Vue.delete(found, index)
     },
@@ -231,7 +195,7 @@ export default {
     /**
      * Update item
      */
-    updateItem(state, payload) {
+    updateItem (state, payload) {
       const { item, key, value } = payload
       item[key] = value
     },
@@ -239,7 +203,7 @@ export default {
     /*
      *  Filter
      */
-    updateFilter(state, filter) {
+    updateFilter (state, filter) {
       state.filter = filter
     }
   },
@@ -256,7 +220,7 @@ export default {
     /**
      * initialize board
      */
-    async initBoard(context, boardId) {
+    async initBoard (context, boardId) {
       const { commit } = context
       const boardData = await Loader.loadBoard(boardId)
 
@@ -280,43 +244,45 @@ export default {
     /**
      * create Todo item
      */
-    createTodo(context, title /* payload */) {
+    createList (context, payload) {
       const { commit } = context
-      const newTodo = {
-        id: cryptoRandomString({ length: 10 }),
+      const { title } = payload
+      const newList = {
+        id: Utils.generateListId(),
         title,
         createdAt: new Date(),
         updatedAt: new Date(),
         done: false
       }
 
-      console.log('asasasasas')
+      console.log(`create list : ${newList.id}`)
       // 컴포넌트 업데이트
-      commit('pushTodo', newTodo) // push Todo
+      commit('addList', newList) // push Todo
     },
 
     /**
      * create Todo item
      */
-    createItem(context, listId, title, content /* payload */) {
+    createItem (context, payload) {
       const { commit } = context
+      const { listId, title, content } = payload
       const newItem = {
-        id: cryptoRandomString({ length: 10 }),
+        id: Utils.generateItemId(),
         title,
         content,
         createdAt: new Date(),
         updatedAt: new Date()
       }
 
-      console.log('create Item')
+      console.log(`create Item at ${listId}`)
       // 컴포넌트 업데이트
-      commit('pushItem', listId, newItem) // push Todo
+      commit('addItem', { listId, newItem }) // push Todo
     },
 
     /**
      * update Todo data
      */
-    updateItem(context, payload) {
+    updateItem (context, payload) {
       const { state, commit } = context
       const { listId, itemId, value } = payload
       const foundList = _find(state.todoLists, { listId })
@@ -327,7 +293,7 @@ export default {
       }
     },
 
-    moveItem(context, payload) {
+    moveItem (context, payload) {
       const { state, commit } = context
       const { fromListId, toListId, itemId, targetIndex } = payload
       const fromList = _find(state.todoLists, { fromListId })
@@ -345,7 +311,7 @@ export default {
     /**
      * delete Todo data
      */
-    deleteItem(context, payload) {
+    deleteItem (context, payload) {
       const { state, commit } = context
       const { listId, itemId } = payload
       const foundList = _find(state.todoLists, { listId })
@@ -360,7 +326,7 @@ export default {
      * set all items to done.
      * @param {boolean} checked
      */
-    completeAll(context, checked) {
+    completeAll (context, checked) {
       const { state, commit } = context
       // DB
       const newTodos = state.db
@@ -386,7 +352,7 @@ export default {
     /**
      * delete done items
      */
-    clearComplete(context, todo) {
+    clearComplete (context, todo) {
       const { state, dispatch } = context
       // 삭제 시에는 index 문제가 발생하지 않도록 뒤에서부터.
       _forEachRight(state.todos, (todo) => {

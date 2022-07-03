@@ -1,28 +1,26 @@
 <template>
   <div class="list-container todo__list">
-    <div class="list-title">
-      <h2>{{ list.title }}</h2>
-    </div>
-
-    <todo-item-Iterator :items="list.items" />
-    <todo-item-form
+    <todo-list-title :title="list.title"/>
+    <todo-item-Iterator :items="list.items"/>
+    <todo-item-add-form
+      :form-type="'item'"
       :list-id="list.id"
-      :set-form-target-id="setFormTargetId"
-      :reset-form-target-id="resetFormTargetId"
     />
   </div>
 </template>
 
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import TodoListTitle from './TodoListTitle'
 import TodoItemIterator from './item/TodoItemIterator'
-import TodoItemForm from './item/TodoItemForm'
+import TodoItemAddForm from './AddForm'
 
 export default {
   name: 'TodoListContainer',
   components: {
+    TodoListTitle,
     TodoItemIterator,
-    TodoItemForm
+    TodoItemAddForm
   },
   props: {
     list: Object
@@ -30,7 +28,6 @@ export default {
 
   data () {
     return {
-      onEditMode: false
     }
   },
   computed: {
