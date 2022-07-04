@@ -118,13 +118,21 @@ body {
             background: #dddede;
 
             .list-title {
-              font-size: 0.72em;
+              font-size: 0.7em;
               font-weight: 510;
               color: #4f4f4f;
               margin-top: 12px;
               margin-bottom: 12px;
               padding-top: 10px;
               padding-bottom: 10px;
+              background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(112,112,177,0) 48%, cornflowerblue 53%, rgba(142,142,193,0) 58%, rgba(255,255,255,0) 100%);
+
+              h2 {
+                display: inline-block;
+                background: #dddede;
+                padding-left: 10px;
+                padding-right: 10px;
+              }
             }
             .todo__item-list {
               .todo__item {
@@ -141,12 +149,12 @@ body {
 
                   .item__title {
                     padding: 5px 0px 5px 0px;
-                    font-size: 0.72em;
+                    font-size: 0.67em;
                   }
 
                   .item__content {
                     padding: 7px 10px 7px 10px;
-                    font-size: 0.71em;
+                    font-size: 0.65em;
                   }
                 }
               }
