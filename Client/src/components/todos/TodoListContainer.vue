@@ -12,7 +12,7 @@
 <script>
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import TodoListTitle from './TodoListTitle'
-import TodoItemIterator from './item/TodoItemIterator'
+import TodoItemIterator from './TodoItemIterator'
 import TodoItemAddForm from './AddForm'
 
 export default {
