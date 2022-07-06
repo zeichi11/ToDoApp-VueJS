@@ -1,19 +1,48 @@
 <template>
-  <nav class="board__sidebar sidebar-close">
+  <nav class="board__sidebar slide-in">
     <div class="icon-wrap"
       @mouseup="slideSidebar"
     >
       <span class></span>
     </div>
-    <div></div>
+    <div class="sidebar-menu">
+      <base-container>
+        <ul slot="containerContents">
+          <li>
+            <base-button>
+              <base-icon-label slot="buttonLayout"
+                :classList="['sidebar-menu__workspace']"
+                :iconClickHandler="workspaceBtn().handleIconClick"
+                :labelClickHandler="workspaceBtn().handleIconClick"
+                :iconSrc="'url'"
+                :label="'workspace'"
+              />
+            </base-button>
+          </li>
+        </ul>
+      </base-container>
+      
+    </div>
+    <div>
+
+    </div>
   </nav>
 </template>
 
 <script>
+import BaseContainer from './ui/atoms/BaseContainer'
+import BaseButton from './ui/atoms/BaseButton'
+import BaseLabel from './ui/atoms/BaseLabel'
+import BaseIconLabel from './ui/BaseIconLabel'
+import BaseIconLabelMore from './ui/BaseIconLabelMore'
 
 export default {
   components: {
-    
+    BaseContainer,
+    BaseButton,
+    BaseLabel,
+    BaseIconLabel,
+    BaseIconLabelMore
   },
 
   data () {
@@ -39,6 +68,16 @@ export default {
           sidebar.classList.remove('sidebar-close')
           sidebar.classList.remove('slide-out')
           sidebar.classList.add('slide-in')
+        }
+      }
+    },
+    workspaceBtn () {
+      return {
+        handleIconClick () {
+          console.log('icon click')
+        },
+        handleLabelClick () {
+          console.log('label click')
         }
       }
     }
