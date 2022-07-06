@@ -13,9 +13,9 @@
               <base-icon-label slot="buttonLayout"
                 :classList="['sidebar-menu__workspace']"
                 :iconClickHandler="workspaceBtn().handleIconClick"
-                :labelClickHandler="workspaceBtn().handleIconClick"
-                :iconSrc="'url'"
-                :label="'workspace'"
+                :labelClickHandler="workspaceBtn().handleLabelClick"
+                :iconSrc="workspaceBtn().iconSrc"
+                :label="workspaceBtn().labelStr"
               />
             </base-button>
           </li>
@@ -73,6 +73,8 @@ export default {
     },
     workspaceBtn () {
       return {
+        iconSrc: 'url',
+        labelStr: 'Workspace',
         handleIconClick () {
           console.log('icon click')
         },
