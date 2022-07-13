@@ -12,10 +12,29 @@
             <base-button>
               <base-icon-label slot="buttonLayout"
                 :classList="['sidebar-menu__workspace']"
-                :iconClickHandler="workspaceBtn().handleIconClick"
-                :labelClickHandler="workspaceBtn().handleLabelClick"
-                :iconSrc="workspaceBtn().iconSrc"
-                :label="workspaceBtn().labelStr"
+                :eventHandling="workspaceBtn.eventHandling"
+                :iconSrc="workspaceBtn.iconSrc"
+                :label="workspaceBtn.labelStr"
+              />
+            </base-button>
+          </li>
+          <li>
+            <base-button>
+              <base-icon-label-more slot="buttonLayout"
+                :classList="['sidebar-menu__member']"
+                :eventHandling="memberBtn.eventHandling"
+                :iconSrc="memberBtn.iconSrc"
+                :label="memberBtn.labelStr"
+              />
+            </base-button>
+          </li>
+          <li>
+            <base-button>
+              <base-icon-label slot="buttonLayout"
+                :classList="['sidebar-menu__setting']"
+                :eventHandling="settingBtn.eventHandling"
+                :iconSrc="settingBtn.iconSrc"
+                :label="settingBtn.labelStr"
               />
             </base-button>
           </li>
@@ -45,14 +64,72 @@ export default {
     BaseIconLabelMore
   },
 
+  // ui rendering을 위한 json 모델로 분리, props 정보로 전달받아서 렌더링하도록 처리할 것
   data () {
     return {
-      
+      container: {
+        workspaceBtn: {
+          type: 'iconLabel',
+          iconSrc: 'url',
+          labelStr: 'Workspace',
+          eventHandling: {
+            type: 'twoButton',
+            handler: [
+              function () {
+                console.log('icon clicked')
+              },
+              function () {
+                console.log('label clicked')
+              }
+            ]
+          }
+        },
+        memberBtn: {
+          type: 'iconLabelAdd',
+          iconSrc: 'url',
+          labelStr: 'Members',
+          eventHandling: {
+            type: 'twoButton',
+            handler: [
+              function () {
+                console.log('icon clicked')
+              },
+              function () {
+                console.log('label clicked')
+              },
+              function () {
+                console.log('add button clicked')
+              }
+            ]
+          }
+        },
+        settingBtn: {
+          type: 'iconLabel',
+          iconSrc: 'url',
+          labelStr: 'Settings',
+          eventHandling: {
+            type: 'oneButton',
+            handler: [
+              function () {
+                console.log('button clicked')
+              }
+            ]
+          }
+        }
+      }
     }
   },
-
   computed: {
-    
+    workspaceBtn () {
+      console.log(this.container)
+      return this.container.workspaceBtn
+    },
+    memberBtn () {
+      return this.container.memberBtn
+    },
+    settingBtn () {
+      return this.container.settingBtn
+    }
   },
 
   methods: {
