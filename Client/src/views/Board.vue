@@ -8,28 +8,9 @@
     <div class="board__top-menu"></div>
     <div class="board__container">
       <sidebar />
-      <main
-        class="board__main-container"
-        @mouseup="resetSidebar"
-      >
-        <div class="board__todo-container">
-          <div class="todo__section">
-            <ul class="todo__list-wrapper">
-              <todo-list-iterator
-                :todo-lists="todoLists"
-              />
-              <li class="todo__list-inner">
-                <div class="list-container todo__add-list">
-                  <todo-list-add-form
-                    :form-type="'list'"
-                    :list-id="'new'"
-                  />
-                </div>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </main>
+      <main-container
+        :todoLists="todoLists"
+      />
     </div>
   </div>
 </template>
@@ -39,16 +20,14 @@
 // import TodoCreator from 'componentPath/Creator.vue'
 // import TodoItem from 'componentPath/Item.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
-import Sidebar from 'componentPath/Sidebar'
-import TodoListIterator from 'componentPath/todos/TodoListIterator'
-import TodoListAddForm from 'componentPath/todos/AddForm'
+import Sidebar from 'layoutPath/Sidebar'
+import MainContainer from 'layoutPath/MainContainer'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 
 export default {
   components: {
-    TodoListIterator,
     Sidebar,
-    TodoListAddForm
+    MainContainer
   },
 
   data () {
@@ -73,25 +52,6 @@ export default {
   },
 
   methods: {
-    resetSidebar (e) {
-      const sidebar = document.querySelector('.board__sidebar')
-      if (sidebar && !sidebar.classList.contains('sidebar-close')) {
-        const iconWrap = sidebar.querySelector('.icon-wrap')
-        const event = new Event('mouseup')
-        iconWrap.dispatchEvent(event)
-      }
-    },
-
-    resetAddItemMenu () {
-      const allBtn = document.querySelectorAll(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
-      allBtn.forEach(el => { el.classList.remove('hide') })
-      
-      const allForm = document.querySelectorAll(`.${CSS_NAME.ADD_ITEM_FORM}`)
-      allForm.forEach(el => { el.classList.add('hide') })
-      
-      const textArea = document.querySelector(`.${CSS_NAME.ADD_ITEM_EDITOR}`)
-      textArea && (textArea.value = '')
-    }
   }
 }
 </script>

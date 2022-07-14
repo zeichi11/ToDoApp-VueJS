@@ -49,11 +49,11 @@
 </template>
 
 <script>
-import BaseContainer from './ui/atoms/BaseContainer'
-import BaseButton from './ui/atoms/BaseButton'
-import BaseLabel from './ui/atoms/BaseLabel'
-import BaseIconLabel from './ui/BaseIconLabel'
-import BaseIconLabelMore from './ui/BaseIconLabelMore'
+import BaseContainer from 'componentPath/ui/atoms/BaseContainer'
+import BaseButton from 'componentPath/ui/atoms/BaseButton'
+import BaseLabel from 'componentPath/ui/atoms/BaseLabel'
+import BaseIconLabel from 'componentPath/ui/BaseIconLabel'
+import BaseIconLabelMore from 'componentPath/ui/BaseIconLabelMore'
 
 export default {
   components: {

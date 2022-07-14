@@ -13,7 +13,7 @@
 // import TodoCreator from 'componentPath/Creator.vue'
 // import TodoItem from 'componentPath/Item.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
-import TodoListContainer from 'componentPath/todos/TodoListContainer'
+import TodoListContainer from './TodoListContainer'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 
 export default {

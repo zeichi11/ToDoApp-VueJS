@@ -11,6 +11,8 @@ module.exports = (env, opts) => {
       extensions: ['.vue', '.js'],
       alias: {
         '~': path.join(__dirname),
+        featurePath: path.join(__dirname, './src/features'),
+        layoutPath: path.join(__dirname, './src/layouts'),
         componentPath: path.join(__dirname, './src/components'),
         viewPath: path.join(__dirname, './src/views'),
         commonPath: path.join(__dirname, './src/common'),

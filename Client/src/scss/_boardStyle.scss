@@ -49,10 +49,10 @@ body {
         -webkit-animation: slide-in 0.5s forwards
       }
       @keyframes slide-in {
-        100% { transform: translateX(240px) }
+        100% { transform: translateX(243px) }
       }
       @-webkit-keyframes slide-in {
-        100% { -webkit-transform: translateX(240px) }
+        100% { -webkit-transform: translateX(243px) }
       }
 
       &.slide-out {
@@ -61,12 +61,12 @@ body {
       }
 
       @keyframes slide-out {
-        0% { transform: translateX(240px); }
+        0% { transform: translateX(243px); }
         100% { transform: translateX(0px); }
       }
 
       @-webkit-keyframes slide-out {
-        0% { -webkit-transform: translateX(240px); }
+        0% { -webkit-transform: translateX(243px); }
         100% { -webkit-transform: translateX(0px); }
       }
 
