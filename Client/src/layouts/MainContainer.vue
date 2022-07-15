@@ -79,10 +79,10 @@ export default {
     resetAddItemMenu () {
       const allBtn = document.querySelectorAll(`.${CSS_NAME.ADD_ITEM_SHOW_BTN}`)
       allBtn.forEach(el => { el.classList.remove('hide') })
-      
+
       const allForm = document.querySelectorAll(`.${CSS_NAME.ADD_ITEM_FORM}`)
       allForm.forEach(el => { el.classList.add('hide') })
-      
+
       const textArea = document.querySelector(`.${CSS_NAME.ADD_ITEM_EDITOR}`)
       textArea && (textArea.value = '')
     }
