@@ -1,28 +1,150 @@
 export default {
+  navigator: {
+    layouts: [
+      {
+        name: 'leftNavContainer',
+        list: [
+          //home button
+          {
+            ui: 'button',
+            type: 'iconLabel',
+            iconSrc: 'url',
+            labelStr: 'TodoApp'
+          },
+          //workspace dropdown menu
+          {
+            ui: 'button',
+            type: 'labelDropdown',
+            labelStr: 'Workspace'
+          },
+          //reccent dropdown menu
+          {
+            ui: 'button',
+            type: 'labelDropdown',
+            labelStr: 'Recent'
+          },
+          //template dropdown menu
+          {
+            ui: 'button',
+            type: 'labelDropdown',
+            iconSrc: 'url',
+            labelStr: 'Template'
+          },
+          //create label button
+          {
+            ui: 'button',
+            type: 'label',
+            labelStr: 'Create'
+          }
+        ]
+      },
+      {
+        name: 'rightNavContainer',
+        list: [
+          // searchBar
+          {
+            ui: 'searchBar',
+            labelStr: 'Search'
+          },
+          // user Button
+          {
+            ui: 'button',
+            type: 'icon',
+            iconSrc: 'url'
+          },
+        ]
+      }
+    ]
+  },
+  boardHeader: {
+    layouts: [
+      {
+        name: 'letfBoardMenuContainer',
+        list: [
+          //board name button - 클릭 시 보드 이름 편집 모드(input)
+          {
+            ui: 'button',
+            type: 'label',
+            labelStr: '$$BoardName$$'
+          },
+          //bookmark button - 즐겨찾기
+          {
+            ui: 'button',
+            type: 'icon',
+            iconSrc: 'url'
+          },
+          //private button
+          {
+            ui: 'button',
+            type: 'iconLabel',
+            iconSrc: 'url',
+            labelStr: 'Private'
+          },
+          //share to other user button(user+)
+          {
+            ui: 'button',
+            type: 'iconLabel',
+            iconSrc: 'url',
+            labelStr: 'Share'
+          },
+          // share button(make url link)
+          {
+            ui: 'button',
+            type: 'icon',
+            iconSrc: 'url',
+          }
+        ]
+      },
+      {
+        
+        list: [
+          //filter button
+          {
+            ui: 'button',
+            type: 'iconLabel',
+            iconSrc: 'url',
+            labelStr: 'filter'
+          },
+          // show menu button(보드 배경색 및 색상 편집, 최근 편집 내역,  )
+          {
+            ui: 'button',
+            type: 'iconLabel',
+            iconSrc: 'url',
+            labelStr: 'Show menu'
+          }
+        ]
+      }
+    ]
+  },
+  
   sidebar: {
-    menuContainer: {
-      list: [
-        //workspace button
-        {
-          ui: 'button',
-          type: 'iconLabel',
-          iconSrc: 'url',
-          labelStr: 'Workspace'
-        },
-        // members button
-        {
-          ui: 'button',
-          type: 'iconLabelAdd',
-          iconSrc: 'url',
-          labelStr: 'Members'
-        },
-        // settings button
-        {
-        type: 'iconLabel',
-        iconSrc: 'url',
-        labelStr: 'Settings'
-      ]
-    }
+    layouts: [
+      {
+        // name: 'menuContainer',
+        list: [
+          //workspace button
+          {
+            ui: 'button',
+            type: 'iconLabel',
+            iconSrc: 'url',
+            labelStr: 'Workspace'
+          },
+          // members button
+          {
+            ui: 'button',
+            type: 'iconLabelAdd',
+            iconSrc: 'url',
+            labelStr: 'Members'
+          },
+          // settings button
+          {
+            type: 'iconLabel',
+            iconSrc: 'url',
+            labelStr: 'Settings'
+          }
+        ]
+      }
+    ]
   }
 }
 
