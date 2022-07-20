@@ -6,9 +6,6 @@
     <div>
       <h2>{{ title }}</h2>
     </div>
-    <div>
-      <input/>
-    </div>
   </div>
 </template>
 

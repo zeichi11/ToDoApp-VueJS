@@ -7,8 +7,7 @@ export default {
           //home button
           {
             ui: 'button',
-            type: 'iconLabel',
-            iconSrc: 'url',
+            type: 'label',
             labelStr: 'TodoApp'
           },
           //workspace dropdown menu
@@ -27,7 +26,6 @@ export default {
           {
             ui: 'button',
             type: 'labelDropdown',
-            iconSrc: 'url',
             labelStr: 'Template'
           },
           //create label button
@@ -51,7 +49,7 @@ export default {
             ui: 'button',
             type: 'icon',
             iconSrc: 'url'
-          },
+          }
         ]
       }
     ]
@@ -71,13 +69,23 @@ export default {
           {
             ui: 'button',
             type: 'icon',
-            iconSrc: 'url'
+            icon: {
+              type: 'template',
+              template: '<span class="material-symbols-outlined">bookmark</span>'
+            }
+            // icon: {
+            //   type: 'url',
+            //   src: 'https://fonts.gstatic.com/s/i/short-term/release/materialsymbolsoutlined/bookmark/default/48px.svg'
+            // }
           },
           //private button
           {
             ui: 'button',
             type: 'iconLabel',
-            iconSrc: 'url',
+            icon: {
+              type: 'template',
+              template: '<span class="material-symbols-outlined">lock</span>'
+            },
             labelStr: 'Private'
           },
           //share to other user button(user+)
@@ -91,12 +99,11 @@ export default {
           {
             ui: 'button',
             type: 'icon',
-            iconSrc: 'url',
+            iconSrc: 'url'
           }
         ]
       },
       {
-        
         list: [
           //filter button
           {
@@ -116,7 +123,7 @@ export default {
       }
     ]
   },
-  
+
   sidebar: {
     layouts: [
       {

@@ -5,8 +5,8 @@
 <template>
   <div class="board__wrapper">
     <nav class="board__navigator"></nav>
-    <div class="board__top-menu"></div>
     <div class="board__container">
+      <div class="board__top-menu"></div>
       <sidebar />
       <main-container
         :todoLists="todoLists"
