@@ -63,6 +63,9 @@ export default {
     BaseIconLabel,
     BaseIconLabelMore
   },
+  props: {
+    uiData: Object
+  },
 
   // ui rendering을 위한 json 모델로 분리, props 정보로 전달받아서 렌더링하도록 처리할 것
   data () {

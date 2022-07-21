@@ -7,7 +7,9 @@
     <nav class="board__navigator"></nav>
     <div class="board__container">
       <div class="board__top-menu"></div>
-      <sidebar />
+      <sidebar 
+        :uiData="UI_STRUCT.SIDEBAR"
+      />
       <main-container
         :todoLists="todoLists"
       />
@@ -23,6 +25,7 @@ import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import Sidebar from 'layoutPath/Sidebar'
 import MainContainer from 'layoutPath/MainContainer'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
+import { UI_STRUCT } from 'dataPath/UiMetadata.js'
 
 export default {
   components: {
@@ -52,6 +55,9 @@ export default {
   },
 
   methods: {
+    UI_STRUCT: function () {
+      return UI_STRUCT
+    }
   }
 }
 </script>
