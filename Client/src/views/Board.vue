@@ -7,7 +7,7 @@
     <nav class="board__navigator"></nav>
     <div class="board__container">
       <div class="board__top-menu"></div>
-      <sidebar 
+      <sidebar
         :uiData="UI_STRUCT.SIDEBAR"
       />
       <main-container

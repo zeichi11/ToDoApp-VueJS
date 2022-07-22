@@ -30,7 +30,7 @@ export default {
     iconClickHandler: Function,
     labelClickHandler: Function,
     label: String,
-    iconSrc: String
+    icon: String
   },
   methods: {
     getClass () {

@@ -17,7 +17,7 @@ module.exports = (env, opts) => {
         viewPath: path.join(__dirname, './src/views'),
         commonPath: path.join(__dirname, './src/common'),
         scssPath: path.join(__dirname, './src/scss'),
-        dataPath: path.join(__dirName, './src/data')
+        dataPath: path.join(__dirname, './src/data')
       }
     },
     entry: {

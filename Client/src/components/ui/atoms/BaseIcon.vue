@@ -17,7 +17,7 @@ export default {
   props: {
     classList: Array,
     clickHandler: Function,
-    iconSrc: String
+    icon: Object
   },
   methods: {
     getClass () {

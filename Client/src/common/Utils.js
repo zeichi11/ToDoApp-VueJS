@@ -24,4 +24,14 @@ export default {
     const { protocol, hostname } = location
     return `${protocol}//${hostname}`
   }
+
+  // generateLayoutMap (layoutList) {
+  //   const layoutMap = new Map()
+  //   this.layoutList.forEach((layout) => {
+  //     layoutMap[layout.name] = {
+  //       list: layout.list
+  //     }
+  //   })
+  //   return layoutMap
+  // }
 }
