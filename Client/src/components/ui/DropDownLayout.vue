@@ -3,17 +3,25 @@
 </style>
 
 <template>
-  <button
-    :class="getClass()"
-    @click="handleClick"
-  >
-    <slot name="buttonLayout"></slot>
-  </button>
+  <div>
+    <button
+      :class="getClass()"
+      @click="handleClick"
+    >
+      <slot name="buttonLayout"></slot>
+    </button>
+    <drop-down-pannel/>
+  </div>
 </template>
 
 <script>
+import DropDownPannel from './DropDownPannel'
+
 export default {
-  name: 'BaseButton',
+  components: {
+    DropDownPannel
+  },
+  name: 'DropDownLayout',
   props: {
     classList: Array,
     clickHandler: Function

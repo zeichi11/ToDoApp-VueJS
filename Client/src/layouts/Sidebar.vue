@@ -9,34 +9,31 @@
       <layout-container
         v-for="(layout, layoutIndex) in uiData.layouts"
         :key="layoutIndex"
-        :classList="[layout.name]"
+        :classList="layout.classList"
       >
         <ul slot="containerContents">
           <li
-            v-for="(list, listIndex) in layout.lists"
+            v-for="(content, listIndex) in layout.contents"
             :key="listIndex"
           >
-            <base-button>
+            <button-layout
+              v-if="content.type === 'iconLabel' || content.type === 'iconLabelAdd'"
+            >
               <icon-label-button
-                v-if="list.type === 'iconLabel'"
                 slot="buttonLayout"
-                :classList="[list.name]"
-                :label="list.label"
-                :icon="list.icon"
+                :classList="content.classList"
+                :buttons="content.buttons"
               />
-              <label-button
-                v-else-if="list.type === 'label'"
+            </button-layout>
+            <drop-down-layout
+              v-if="content.type === 'dropdown'"
+            >
+              <drop-down-button
                 slot="buttonLayout"
-                :classList="[list.name]"
-                :label="list.label"
+                :classList="content.classList"
+                :buttons="content.buttons"
               />
-              <icon-button
-                v-else-if="list.type === 'icon'"
-                slot="buttonLayout"
-                :classList="[list.name]"
-                :icon="list.icon"
-              />
-            </base-button>
+            </drop-down-layout>
           </li>
         </ul>
       </layout-container>
@@ -50,20 +47,20 @@
 
 <script>
 import LayoutContainer from 'componentPath/ui/atoms/LayoutContainer'
-import BaseButton from 'componentPath/ui/atoms/Button'
-import LabelButton from 'componentPath/ui/atoms/BaseLabel'
-import IconButton from 'componentPath/ui/atoms/BaseIcon'
+import ButtonLayout from 'componentPath/ui/ButtonLayout'
 import IconLabelButton from 'componentPath/ui/IconLabelButton'
-import IconLabelMoreButton from 'componentPath/ui/IconLabelMoreButton'
+import IconLabelAddButton from 'componentPath/ui/IconLabelAddButton'
+import DropDownLayout from 'componentPath/ui/DropDownLayout'
+import DropDownButton from 'componentPath/ui/DropDownButton'
 
 export default {
   components: {
     LayoutContainer,
-    BaseButton,
-    LabelButton,
-    IconButton,
+    ButtonLayout,
     IconLabelButton,
-    IconLabelMoreButton
+    IconLabelAddButton,
+    DropDownLayout,
+    DropDownButton
   },
   props: {
     uiData: Object

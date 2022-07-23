@@ -3,17 +3,21 @@
 </style>
 
 <template>
-  <span
-    :class="getClass()"
-    @click="handleClick"
-  >
-  </span>
+  <google-material-icon
+    v-if="icon.type === 'googleMaterial'"
+    :classList="classList"
+    :value="icon.value"
+  />
 </template>
 
 <script>
+import GoogleMaterialIcon from '../../icon/GoogleMaterialIcon'
 
 export default {
   name: 'BaseIcon',
+  components: { 
+    GoogleMaterialIcon
+  },
   props: {
     classList: Array,
     clickHandler: Function,

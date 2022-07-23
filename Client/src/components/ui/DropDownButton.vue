@@ -4,16 +4,23 @@
 
 <template>
   <div :class="getClass()">
-    <base-icon
-      v-if="icon !== undefined"
-      :clickHandler="iconClickHandler ? iconClickHandler : null"
-      :icon="icon"
-    />
-    <base-label
-      v-if="label !== undefined"
-      :clickHandler="labelClickHandler ? labelClickHandler : null"
-      :label="label"
-    />
+    <div>
+      <base-icon
+        v-if="icon !== undefined"
+        :clickHandler="iconClickHandler ? iconClickHandler : null"
+        :icon="icon"
+      />
+      <base-label
+        v-if="label !== undefined"
+        :clickHandler="labelClickHandler ? labelClickHandler : null"
+        :label="label"
+      />
+    </div>
+    <div>
+      <base-icon
+        :icon="isOpen ? expandLess : expandMore"
+      />
+    </div>
   </div>
 </template>
 
@@ -34,6 +41,11 @@ export default {
     buttons: Array
     // label: String,
     // icon: Object
+  },
+  data () {
+    return {
+      isOpen: false
+    }
   },
   computed: {
     label () {

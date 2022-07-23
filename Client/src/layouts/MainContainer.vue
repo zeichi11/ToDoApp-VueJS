@@ -41,9 +41,6 @@ export default {
     TodoListIterator,
     TodoListAddForm
   },
-  props: {
-    todoLists: Array
-  },
 
   data () {
     return {

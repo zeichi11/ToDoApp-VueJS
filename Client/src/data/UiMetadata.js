@@ -142,39 +142,67 @@ const BOARD_HEADER = {
 const SIDEBAR = {
   layouts: [
     {
-      name: 'sidebar-menu-container',
-      lists: [
+      classList: ['sidebar-menu-container'],
+      contents: [
         // workspace button
         {
-          name: 'sidebar-menu__workspace',
-          ui: 'button',
+          classList: ['sidebar-menu__workspace'],
+          ui: 'oneButton',
           type: 'iconLabel',
-          icon: {
-            type: IconData.type,
-            value: IconData.workspace
-          },
-          label: LABEL_STR.WORKSPACE
+          buttons: [
+            {
+              label: LABEL_STR.WORKSPACE,
+              icon: {
+                type: IconData.type,
+                value: IconData.workspaces
+              }
+            }
+          ]
         },
         // members button
         {
-          name: 'sidebar-menu__members',
-          ui: 'button',
+          classList: ['sidebar-menu__members'],
+          ui: 'twobutton',
           type: 'iconLabelAdd',
-          icon: {
-            type: IconData.type,
-            value: IconData.members
-          },
-          label: LABEL_STR.MEMBERS
+          buttons: [
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.members
+              },
+              label: LABEL_STR.MEMBERS
+            },
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.add
+              },
+              options: ['hover']
+            }
+          ]
         },
         // settings button
         {
-          name: 'sidebar-menu__settings',
-          type: 'iconLabel',
-          icon: {
-            type: IconData.type,
-            value: IconData.settings
-          },
-          label: LABEL_STR.SETTINGS
+          classList: ['sidebar-menu__settings'],
+          ui: 'dropdown',
+          type: 'dropdown',
+          buttons: [
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.settings
+              },
+              label: LABEL_STR.SETTINGS,
+              expandMoreIcon: {
+                type: IconData.type,
+                value: IconData.expandMore
+              },
+              expandLessIcon: {
+                type: IconData.type,
+                value: IconData.expandLess
+              }
+            }
+          ]
         }
       ]
     }

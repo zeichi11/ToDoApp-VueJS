@@ -8,11 +8,9 @@
     <div class="board__container">
       <div class="board__top-menu"></div>
       <sidebar
-        :uiData="UI_STRUCT.SIDEBAR"
+        :ui-data="UI_STRUCT.SIDEBAR"
       />
-      <main-container
-        :todoLists="todoLists"
-      />
+      <main-container/>
     </div>
   </div>
 </template>
@@ -32,7 +30,10 @@ export default {
     Sidebar,
     MainContainer
   },
-
+  created: function() {
+    console.log('++++++++')
+    console.log(UI_STRUCT)
+  },
   data () {
     return {
       addItemListId: ''
@@ -51,13 +52,15 @@ export default {
     // 첫번째 인자 : namespace(없는 경우 생략-두번째 인자만 전달), 두번째 인자 : 바인딩 타겟 data 리스트
     ...mapGetters('board', [
       // getter
-    ])
-  },
+    ]),
 
-  methods: {
     UI_STRUCT: function () {
       return UI_STRUCT
     }
+  },
+
+  methods: {
+    
   }
 }
 </script>

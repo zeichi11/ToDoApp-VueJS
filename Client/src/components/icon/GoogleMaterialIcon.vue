@@ -1,12 +1,12 @@
 <template>
-  <span class="material-symbols-outlined">{{ iconName }}</span>
+  <span class="material-symbols-outlined">{{ value }}</span>
 </template>
 
 <script>
 export default {
   name: 'GoogleMaterialIcon',
   props: {
-    iconName: String,
+    value: String,
     width: Number,
     onClick: Function
   },

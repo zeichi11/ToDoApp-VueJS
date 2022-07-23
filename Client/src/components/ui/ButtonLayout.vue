@@ -3,15 +3,17 @@
 </style>
 
 <template>
-  <div>
-  </div>
+  <button
+    :class="getClass()"
+    @click="handleClick"
+  >
+    <slot name="buttonLayout"></slot>
+  </button>
 </template>
 
 <script>
 export default {
-  name: 'DropDownPannel',
-  components: {
-  },
+  name: 'ButtonLayout',
   props: {
     classList: Array,
     clickHandler: Function

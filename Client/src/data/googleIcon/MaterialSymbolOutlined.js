@@ -1,5 +1,5 @@
 export default {
-  type: 'textNode',
+  type: 'googleMaterial',
   style: 'material-symbols-outlined',
   sample: '<span class="material-symbols-outlined">$$bookmark$$</span>',
   bookmark: 'bookmark',
@@ -10,8 +10,10 @@ export default {
   moreHriz: 'more_horiz',
   moreVert: 'more_vert',
   expandMore: 'expand_more',
-  workspace: 'workspace',
+  expandLess: 'expand_less',
+  workspaces: 'workspaces',
   members: 'person',
   settings: 'settings',
-  account: 'account_circle'
+  account: 'account_circle',
+  add: 'add'
 }
