@@ -19,7 +19,6 @@
       />
       <main-container/>
     </div>
-    </div>
   </div>
 </template>
 
