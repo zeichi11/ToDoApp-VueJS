@@ -3,14 +3,22 @@
 </style>
 
 <template>
-  <div class="board__wrapper">
-    <nav class="board__navigator"></nav>
-    <div class="board__container">
-      <div class="board__top-menu"></div>
+  <div class="wrapper">
+    <div id="header">
+      <navigator
+      :ui-data="UI_STRUCT.NAVIGATOR"
+    />
+    </div>
+    <div id="main">
+      <div class="board__container">
+      <board-header
+        :ui-data="UI_STRUCT.BOARD_HEADER"
+      />
       <sidebar
         :ui-data="UI_STRUCT.SIDEBAR"
       />
       <main-container/>
+    </div>
     </div>
   </div>
 </template>
@@ -20,26 +28,25 @@
 // import TodoCreator from 'componentPath/Creator.vue'
 // import TodoItem from 'componentPath/Item.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
+import Navigator from 'layoutPath/Navigator'
 import Sidebar from 'layoutPath/Sidebar'
+import BoardHeader from 'layoutPath/BoardHeader'
 import MainContainer from 'layoutPath/MainContainer'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
 import { UI_STRUCT } from 'dataPath/UiMetadata.js'
 
 export default {
   components: {
+    Navigator,
     Sidebar,
+    
     MainContainer
-  },
-  created: function() {
-    console.log('++++++++')
-    console.log(UI_STRUCT)
   },
   data () {
     return {
       addItemListId: ''
     }
   },
-
   computed: {
     // Helpers - mapState
     // computed 객체에 store의 state를 바인딩한다. (this 객체로 store의 data를 접근하기 위한 방법)
@@ -58,9 +65,7 @@ export default {
       return UI_STRUCT
     }
   },
-
   methods: {
-    
   }
 }
 </script>
