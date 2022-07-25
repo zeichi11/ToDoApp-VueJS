@@ -49,7 +49,7 @@ export default {
   computed: {
   },
 
-  methods: {}
+  methods: {
   }
 }
 </script>

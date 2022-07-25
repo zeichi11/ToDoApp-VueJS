@@ -4,8 +4,8 @@ import IconData from './googleIcon/MaterialSymbolOutlined.js'
 const NAVIGATOR = {
   layouts: [
     {
-      name: 'leftNavContainer',
-      lists: [
+      classList: ['left-navivator__container'],
+      contents: [
         // home button
         {
           ui: 'button',
@@ -39,8 +39,8 @@ const NAVIGATOR = {
       ]
     },
     {
-      name: 'rightNavContainer',
-      lists: [
+      classList: ['right-navigator__container'],
+      contents: [
         // searchBar
         {
           ui: 'searchBar',
@@ -63,8 +63,8 @@ const NAVIGATOR = {
 const BOARD_HEADER = {
   layouts: [
     {
-      name: 'letfBoardMenuContainer',
-      lists: [
+      clasList: ['letf-board-menu__container'],
+      contents: [
         // board name button - 클릭 시 보드 이름 편집 모드(input)
         {
           ui: 'button',
@@ -112,8 +112,8 @@ const BOARD_HEADER = {
       ]
     },
     {
-      name: 'rightBoardMenuContainer',
-      lists: [
+      classList: ['right-board-menu__container'],
+      contents: [
         // filter button
         {
           ui: 'button',
@@ -142,7 +142,7 @@ const BOARD_HEADER = {
 const SIDEBAR = {
   layouts: [
     {
-      classList: ['sidebar-menu-container'],
+      classList: ['sidebar-menu__container'],
       contents: [
         // workspace button
         {
