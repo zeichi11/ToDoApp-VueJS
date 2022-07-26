@@ -6,21 +6,22 @@ body {
   height: 100%;
   width: 100%;
 }
-.board__wrapper {
+.inner-wrapper {
   width: 100%;
   height: 100%;
   margin: 0px;
 
-  .board__navigator {
-    width: 100%;
-    height: 45px;
-    background: royalblue;
+  #header {
+    .header__navigator {
+      width: 100%;
+      height: 45px;
+      background: royalblue;
+    }
   }
 
-  .board__top-menu {
+  #main {
     width: 100%;
-    height: 50px;
-    background:lightseagreen;
+    height: 100%;
   }
 
   .board__container {
@@ -31,12 +32,18 @@ body {
     overflow-y: auto;
     background: linear-gradient(lightseagreen, LemonChiffon);
   
+    .board-header {
+      width: 100%;
+      height: 50px;
+      background: lightseagreen;
+    }
+
     .board__sidebar {
       width: 260px;
       height: 100%;
       top: 0px;
       left: -243px;
-      background: coral;
+      background: royalblue;
       position: absolute;
       box-sizing: border-box;
       border-right: 1px #eaeaea solid;
@@ -76,14 +83,14 @@ body {
         width: 28px;
         height: 28px;
         border-radius: 50%;
-        background: coral;
+        background: royalblue;
         border: 1px #eaeaea solid;
       }
     }
     .slidebar-close:hover {
-      background: lighten(coral, 10%);
+      background: lighten(royalblue, 10%);
       .icon-wrap {
-        background: lighten(coral, 10%);
+        background: lighten(royalblue, 10%);
       }
     }
 

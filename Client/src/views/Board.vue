@@ -3,21 +3,22 @@
 </style>
 
 <template>
-  <div class="wrapper">
+  <div class="inner-wrapper">
     <div id="header">
       <navigator
-      :ui-data="UI_STRUCT.NAVIGATOR"
-    />
+        :ui-data="UI_STRUCT.NAVIGATOR"
+      />
     </div>
     <div id="main">
       <div class="board__container">
-      <board-header
-        :ui-data="UI_STRUCT.BOARD_HEADER"
-      />
-      <sidebar
-        :ui-data="UI_STRUCT.SIDEBAR"
-      />
-      <main-container/>
+        <board-header
+          :ui-data="UI_STRUCT.BOARD_HEADER"
+        />
+        <sidebar
+          :ui-data="UI_STRUCT.SIDEBAR"
+        />
+        <main-container/>
+      </div>
     </div>
   </div>
 </template>
@@ -27,7 +28,7 @@
 // import TodoCreator from 'componentPath/Creator.vue'
 // import TodoItem from 'componentPath/Item.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
-import Navigator from 'layoutPath/Navigator'
+import Navigator from 'layoutPath/HeaderNavigator'
 import Sidebar from 'layoutPath/Sidebar'
 import BoardHeader from 'layoutPath/BoardHeader'
 import MainContainer from 'layoutPath/MainContainer'
@@ -38,7 +39,7 @@ export default {
   components: {
     Navigator,
     Sidebar,
-    
+    BoardHeader,
     MainContainer
   },
   data () {

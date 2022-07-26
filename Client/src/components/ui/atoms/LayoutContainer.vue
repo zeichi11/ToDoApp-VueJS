@@ -11,7 +11,7 @@
 <script>
 
 export default {
-  name: 'BaseContainer',
+  name: 'LayoutContainer',
   props: {
     classList: Array
   },

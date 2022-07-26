@@ -1,45 +1,87 @@
 import { LABEL_STR } from './nls/General.js'
 import IconData from './googleIcon/MaterialSymbolOutlined.js'
 
+const PRESET = {
+  icon: {
+    expandMoreIcon: {
+      type: IconData.type,
+      value: IconData.expandMore
+    },
+    expandLessIcon: {
+      type: IconData.type,
+      value: IconData.expandLess
+    }
+  }
+}
+
 const NAVIGATOR = {
   layouts: [
     {
-      classList: ['left-navivator__container'],
+      classList: ['nav-left-container'],
       contents: [
         // home button
         {
-          ui: 'button',
-          type: 'label',
-          label: LABEL_STR.HOME
+          classList: ['nav-home'],
+          ui: 'oneButton',
+          type: 'iconLabel',
+          buttons: [
+            {
+              label: LABEL_STR.HOME
+            }
+          ]
         },
         // workspace dropdown menu
         {
           ui: 'button',
-          type: 'labelDropdown',
-          label: LABEL_STR.WORKSPACE
+          type: 'dropdown',
+          buttons: [
+            {
+              label: LABEL_STR.WORKSPACE,
+              expandMoreIcon: PRESET.icon.expandMoreIcon,
+              expandLessIcon: PRESET.icon.expandLessIcon
+            }
+          ]
         },
         // reccent dropdown menu
         {
           ui: 'button',
-          type: 'labelDropdown',
-          label: LABEL_STR.RECENT
+          type: 'dropdown',
+          buttons: [
+            {
+              label: LABEL_STR.RECENT,
+              expandMoreIcon: PRESET.icon.expandMoreIcon,
+              expandLessIcon: PRESET.icon.expandLessIcon
+            }
+          ]
         },
         // template dropdown menu
         {
           ui: 'button',
-          type: 'labelDropdown',
-          label: LABEL_STR.TEMPLATE
+          type: 'dropdown',
+          buttons: [
+            {
+              label: LABEL_STR.TEMPLATE,
+              expandMoreIcon: PRESET.icon.expandMoreIcon,
+              expandLessIcon: PRESET.icon.expandLessIcon
+            }
+          ]
         },
         // create label button
         {
           ui: 'button',
-          type: 'label',
-          label: LABEL_STR.CREATE
+          type: 'dropdown',
+          buttons: [
+            {
+              label: LABEL_STR.CREATE,
+              expandMoreIcon: PRESET.icon.expandMoreIcon,
+              expandLessIcon: PRESET.icon.expandLessIcon
+            }
+          ]
         }
       ]
     },
     {
-      classList: ['right-navigator__container'],
+      classList: ['nav-right-container'],
       contents: [
         // searchBar
         {
@@ -49,11 +91,15 @@ const NAVIGATOR = {
         // user Button
         {
           ui: 'button',
-          type: 'icon',
-          icon: {
-            type: IconData.type,
-            value: IconData.account
-          }
+          type: 'iconLabel',
+          buttons: [
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.workspaces
+              }
+            }
+          ]
         }
       ]
     }
@@ -63,7 +109,7 @@ const NAVIGATOR = {
 const BOARD_HEADER = {
   layouts: [
     {
-      clasList: ['letf-board-menu__container'],
+      classList: ['board-header__left-container'],
       contents: [
         // board name button - 클릭 시 보드 이름 편집 모드(input)
         {
@@ -112,7 +158,7 @@ const BOARD_HEADER = {
       ]
     },
     {
-      classList: ['right-board-menu__container'],
+      classList: ['board-header__right-container'],
       contents: [
         // filter button
         {
@@ -142,7 +188,7 @@ const BOARD_HEADER = {
 const SIDEBAR = {
   layouts: [
     {
-      classList: ['sidebar-menu__container'],
+      classList: ['sidebar-menu-container'],
       contents: [
         // workspace button
         {
@@ -184,7 +230,7 @@ const SIDEBAR = {
         // settings button
         {
           classList: ['sidebar-menu__settings'],
-          ui: 'dropdown',
+          ui: 'button',
           type: 'dropdown',
           buttons: [
             {
