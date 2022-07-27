@@ -1,7 +1,7 @@
 <template>
   <li class="todo__list-inner todo__list-inner-first">
     <todo-list-container
-      v-for="list in todoLists"
+      v-for="(list, index) in todoLists"
       :key="list.id"
       :list="list"
     />

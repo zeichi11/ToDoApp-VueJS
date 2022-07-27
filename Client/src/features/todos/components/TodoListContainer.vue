@@ -1,7 +1,16 @@
 <template>
-  <div class="list-container todo__list">
-    <todo-list-title :title="list.title"/>
-    <todo-item-Iterator :items="list.items"/>
+  <div class="list-container todo__list"
+    @drop.prevent="onDrop($event)"
+    @dragenter.prevent
+    @dragover.prevent
+  >
+    <todo-list-title 
+      :title="list.title"
+    />
+    <todo-item-Iterator 
+      :items="list.items"
+      :start-drag="startDrag"
+    />
     <todo-item-add-form
       :form-type="'item'"
       :list-id="list.id"
@@ -23,7 +32,8 @@ export default {
     TodoItemAddForm
   },
   props: {
-    list: Object
+    list: Object,
+    listIndex: number
   },
 
   data () {
@@ -44,6 +54,35 @@ export default {
 
     setFormTargetId () {
       this.updateFormTargetId(this.list.id)
+    },
+
+    startDrag (e, item) {
+      console.log(e)
+      event.dataTransfer.dropEffect = "move"
+      event.dataTransfer.effectAllowed = "move"
+      event.dataTransfer.setData("selectedItem", item)
+    },
+
+    onDrop (e) {
+      console.log(e)
+      const selectedItem = Number(event.dataTransfer.getData("selectedItem"))
+
+      // 리스트에서 선택된 아이템과 같은 content 값을 가진 요소를 찾아 index를 반환한다.
+      let targetIdx
+      let targetItem
+      this.list.items.forEach((item, index) => {
+        item.numberList.forEach((ob) => {
+          if(ob.content === selectedItem) {
+            targetIdx = index
+            targetItem = ob
+          }
+        })
+      })
+
+      // drop이 된 <div> index(=colNum)를 받아 리스트에 추가한다. 
+      // 기존 리스트에서는 요소를 삭제한다. (splice() 사용)
+      this.lists[colNum].numberList.push(targetItem)
+      this.lists[targetIdx].numberList.splice(this.lists[targetIdx].numberList.indexOf(targetItem), 1)
     }
   }
 }

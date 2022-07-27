@@ -1,5 +1,8 @@
 <template>
-  <li class="todo__item">
+  <li class="todo__item"
+    @dragstart="startDrag($event, item)"
+    draggable="true"
+  >
     <div class="item__inner">
       <div class="item__title">
         <span>{{ item.title }}</span>
@@ -20,7 +23,8 @@
 export default {
   name: 'TodoItemCard',
   props: {
-    item: Object
+    item: Object,
+    startDrag: Function
   },
 
   data () {

@@ -4,6 +4,7 @@
       v-for="item in items"
       :key="item.id"
       :item="item"
+      :start-drag=startDrag
     />
   </ul>
 </template>
@@ -17,7 +18,8 @@ export default {
     TodoItemCard
   },
   props: {
-    items: Array
+    items: Array,
+    startDrag: Function
   },
 
   data () {
