@@ -7,6 +7,7 @@ const LABEL_STR = {
   CREATE: 'Create',
   SEARCH: 'Search',
   PRIVATE: 'Private',
+  ADD_USER: 'Add User',
   SHARE: 'Share',
   FILTER: 'Filter',
   SHOW_MENU: 'Show menu',

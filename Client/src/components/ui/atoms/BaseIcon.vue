@@ -5,7 +5,7 @@
 <template>
   <google-material-icon
     v-if="icon.type === 'googleMaterial'"
-    :classList="classList"
+    class="button-icon"
     :value="icon.value"
   />
 </template>
@@ -19,17 +19,10 @@ export default {
     GoogleMaterialIcon
   },
   props: {
-    classList: Array,
     clickHandler: Function,
     icon: Object
   },
   methods: {
-    getClass () {
-      if (this.classList && this.classList.length) {
-        return this.classList.join(' ')
-      }
-      return ''
-    },
     handleClick (e) {
       this.clickHandler && this.clickHandler(e)
     }

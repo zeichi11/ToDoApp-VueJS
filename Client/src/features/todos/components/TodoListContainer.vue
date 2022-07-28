@@ -33,7 +33,7 @@ export default {
   },
   props: {
     list: Object,
-    listIndex: number
+    listIndex: Number
   },
 
   data () {
@@ -58,31 +58,31 @@ export default {
 
     startDrag (e, item) {
       console.log(e)
-      event.dataTransfer.dropEffect = "move"
-      event.dataTransfer.effectAllowed = "move"
-      event.dataTransfer.setData("selectedItem", item)
+      event.dataTransfer.dropEffect = 'move'
+      event.dataTransfer.effectAllowed = 'move'
+      event.dataTransfer.setData('selectedItem', item)
     },
 
     onDrop (e) {
       console.log(e)
-      const selectedItem = Number(event.dataTransfer.getData("selectedItem"))
+      const selectedItem = Number(event.dataTransfer.getData('selectedItem'))
 
       // 리스트에서 선택된 아이템과 같은 content 값을 가진 요소를 찾아 index를 반환한다.
-      let targetIdx
-      let targetItem
-      this.list.items.forEach((item, index) => {
-        item.numberList.forEach((ob) => {
-          if(ob.content === selectedItem) {
-            targetIdx = index
-            targetItem = ob
-          }
-        })
-      })
+      // let targetIdx
+      // let targetItem
+      // this.list.items.forEach((item, index) => {
+      //   item.numberList.forEach((ob) => {
+      //     if(ob.content === selectedItem) {
+      //       targetIdx = index
+      //       targetItem = ob
+      //     }
+      //   })
+      // })
 
-      // drop이 된 <div> index(=colNum)를 받아 리스트에 추가한다. 
-      // 기존 리스트에서는 요소를 삭제한다. (splice() 사용)
-      this.lists[colNum].numberList.push(targetItem)
-      this.lists[targetIdx].numberList.splice(this.lists[targetIdx].numberList.indexOf(targetItem), 1)
+      // // drop이 된 <div> index(=colNum)를 받아 리스트에 추가한다. 
+      // // 기존 리스트에서는 요소를 삭제한다. (splice() 사용)
+      // this.lists[colNum].numberList.push(targetItem)
+      // this.lists[targetIdx].numberList.splice(this.lists[targetIdx].numberList.indexOf(targetItem), 1)
     }
   }
 }

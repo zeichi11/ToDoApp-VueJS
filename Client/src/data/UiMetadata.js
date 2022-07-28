@@ -17,7 +17,7 @@ const PRESET = {
 const NAVIGATOR = {
   layouts: [
     {
-      classList: ['nav-left-container'],
+      classList: ['navivator-menu__left-container'],
       contents: [
         // home button
         {
@@ -81,7 +81,7 @@ const NAVIGATOR = {
       ]
     },
     {
-      classList: ['nav-right-container'],
+      classList: ['navivator-menu__right-container'],
       contents: [
         // searchBar
         {
@@ -96,7 +96,7 @@ const NAVIGATOR = {
             {
               icon: {
                 type: IconData.type,
-                value: IconData.workspaces
+                value: IconData.account
               }
             }
           ]
@@ -109,76 +109,96 @@ const NAVIGATOR = {
 const BOARD_HEADER = {
   layouts: [
     {
-      classList: ['board-header__left-container'],
+      classList: ['board-header__menu-container'],
       contents: [
-        // board name button - 클릭 시 보드 이름 편집 모드(input)
-        {
-          ui: 'button',
-          type: 'label',
-          label: '$$BoardName$$'
-        },
+        // // board name button - 클릭 시 보드 이름 편집 모드(input)
+        // {
+        //   ui: 'button',
+        //   type: 'label',
+        //   label: '$$BoardName$$'
+        // },
         // bookmark button - 즐겨찾기
         {
           ui: 'button',
-          type: 'icon',
-          icon: {
-            type: IconData.type,
-            value: IconData.bookmark
-          }
+          type: 'iconLabel',
+          buttons: [
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.bookmark
+              }
+            }
+          ]
         },
         // private button
         {
           ui: 'button',
           type: 'iconLabel',
-          icon: {
-            type: IconData.type,
-            value: IconData.private
-          },
-          label: LABEL_STR.PRIVATE
+          buttons: [
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.private
+              },
+              label: LABEL_STR.PRIVATE
+            }
+          ]
         },
         // share to other user button(add user+)
         {
           ui: 'button',
           type: 'iconLabel',
-          icon: {
-            type: IconData.type,
-            value: IconData.addUser
-          },
-          label: LABEL_STR.SHARE
+          buttons: [
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.addUser
+              },
+              label: LABEL_STR.ADD_USER
+            }
+          ]
         },
         // share button(make url link)
         {
           ui: 'button',
-          type: 'icon',
-          icon: {
-            type: IconData.type,
-            value: IconData.share
-          }
-        }
-      ]
-    },
-    {
-      classList: ['board-header__right-container'],
-      contents: [
+          type: 'iconLabel',
+          buttons: [
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.share
+              },
+              label: LABEL_STR.SHARE
+            }
+          ]
+        },
         // filter button
         {
           ui: 'button',
           type: 'iconLabel',
-          icon: {
-            type: IconData.type,
-            value: IconData.filter
-          },
-          label: LABEL_STR.FILTER
+          buttons: [
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.filter
+              },
+              label: LABEL_STR.FILTER
+            }
+          ]
         },
         // show menu button(보드 배경색 및 색상 편집, 최근 편집 내역,  )
         {
           ui: 'button',
           type: 'iconLabel',
-          icon: {
-            type: IconData.type,
-            value: IconData.moreHriz
-          },
-          label: LABEL_STR.SHOW_MENU
+          buttons: [
+            {
+              icon: {
+                type: IconData.type,
+                value: IconData.moreHriz
+              },
+              label: LABEL_STR.SHOW_MENU
+            }
+          ]
         }
       ]
     }

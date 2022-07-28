@@ -4,7 +4,7 @@
 
 <template>
   <span
-    :class="getClass()"
+    class="button-label"
     @click="handleClick"
   >
   {{ label }}
@@ -16,17 +16,10 @@
 export default {
   name: 'BaseLabel',
   props: {
-    classList: Array,
     clickHandler: Function,
     label: String
   },
   methods: {
-    getClass () {
-      if (this.classList && this.classList.length) {
-        return this.classList.join(' ')
-      }
-      return ''
-    },
     handleClick (e) {
       this.clickHandler && this.clickHandler(e)
     }

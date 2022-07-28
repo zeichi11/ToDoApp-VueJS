@@ -1,5 +1,5 @@
 <template>
-  <nav class="board__sidebar slide-in">
+  <nav class="board__sidebar sidebar-close slide-out">
     <div class="icon-wrap"
       @mouseup="slideSidebar"
     >

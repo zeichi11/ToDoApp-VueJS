@@ -6,7 +6,7 @@
         :key="layoutIndex"
         :classList="layout.classList"
       >
-        <ul slot="containerContents">
+        <ul class="board-header__menu-list" slot="containerContents">
           <li
             v-for="(content, listIndex) in layout.contents"
             :key="listIndex"
