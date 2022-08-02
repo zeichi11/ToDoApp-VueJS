@@ -1,17 +1,26 @@
 <template>
-  <nav class="board__sidebar sidebar-close slide-out">
+  <nav class="board__sidebar slide-in">
     <div class="icon-wrap"
       @mouseup="slideSidebar"
     >
       <span class></span>
     </div>
     <div class="sidebar-menu">
+      <layout-container :classList="['sidebar-menu__board-name']">
+        <span slot="containerContents">{{ boardName }}</span>
+      </layout-container>
+      <div
+        class="separate-border"
+      />
       <layout-container
         v-for="(layout, layoutIndex) in uiData.layouts"
         :key="layoutIndex"
         :classList="layout.classList"
       >
-        <ul slot="containerContents">
+        <ul
+          class="sidebar-menu__list"
+          slot="containerContents"
+        >
           <li
             v-for="(content, listIndex) in layout.contents"
             :key="listIndex"
@@ -52,7 +61,7 @@ import IconLabelButton from 'componentPath/ui/IconLabelButton'
 import IconLabelAddButton from 'componentPath/ui/IconLabelAddButton'
 import DropDownLayout from 'componentPath/ui/DropDownLayout'
 import DropDownButton from 'componentPath/ui/DropDownButton'
-
+// <nav class="board__sidebar sidebar-close slide-out">
 export default {
   components: {
     LayoutContainer,
@@ -72,6 +81,7 @@ export default {
   // ui rendering을 위한 json 모델로 분리, props 정보로 전달받아서 렌더링하도록 처리할 것
   data () {
     return {
+      boardName: 'My TodoList 123123123123123123'
       // container: {
       //   workspaceBtn: {
       //     type: 'iconLabel',
