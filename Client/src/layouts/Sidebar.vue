@@ -3,14 +3,21 @@
     <div class="icon-wrap"
       @mouseup="slideSidebar"
     >
-      <span class></span>
+      <span class="material-symbols-outlined">chevron_right</span>
     </div>
     <div class="sidebar-menu">
       <layout-container :classList="['sidebar-menu__board-name']">
-        <span slot="containerContents">{{ boardName }}</span>
+        <div slot="containerContents">
+          <span class="board-image"><img/></span>
+          <span class="board-name">{{ boardName }}</span>
+          <span
+            class="slide-out-icon material-symbols-outlined"
+            @mouseup="slideSidebar"
+          >chevron_left</span>
+        </div>
       </layout-container>
-      <div
-        class="separate-border"
+      <hr
+        class="separate-line"
       />
       <layout-container
         v-for="(layout, layoutIndex) in uiData.layouts"

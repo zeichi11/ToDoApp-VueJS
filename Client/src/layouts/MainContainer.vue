@@ -1,5 +1,4 @@
 <style lang="scss">
-  @import "../scss/boardStyle";
 </style>
 
 <template>
