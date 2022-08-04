@@ -1,18 +1,24 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
 
-import Home from 'viewPath/Home.vue'
-import About from 'viewPath/About.vue'
-import TodoApp from 'viewPath/TodoApp.vue'
-import Board from 'viewPath/Board.vue'
+import Home from 'viewPath/Home'
+import About from 'viewPath/About'
+import TodoApp from 'viewPath/TodoApp'
+import Board from 'viewPath/Board'
+import SignIn from 'viewPath/SignIn'
 
 Vue.use(VueRouter)
 
 const routes = [
   // config
   {
-    name: 'board',
+    name: 'signin',
     path: '/',
+    component: SignIn
+  },
+  {
+    name: 'board',
+    path: '/board',
     component: Board,
     children: [
       {
