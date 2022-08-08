@@ -1,13 +1,8 @@
-<template>
-
+<toiemplate>
   <div class="wrapper">
-    <router-link to="/" class="to-home">
-      <i class="material-icons">home</i>
-    </router-link>
-
     <router-view />
   </div>
-</template>
+</toiemplate>
 
 <script>
 export default {

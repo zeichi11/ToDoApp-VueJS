@@ -1,7 +1,23 @@
+html {
+  font-size: 20px;
+}
+
 body {
   height: 100vh;
   min-height: 100vh;
 }
+
+button {
+  display: block;
+  margin: 0;
+  padding: 0;
+  border: none;
+  outline: none;
+  background: none;
+  font-size: inherit;
+  cursor: pointer;
+}
+
 .wrapper {
   height: 100%;
   width: 100%;

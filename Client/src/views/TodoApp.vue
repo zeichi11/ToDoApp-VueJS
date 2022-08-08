@@ -151,5 +151,10 @@ export default {
 </script>
 
 <style lang="scss">
-  
+  @import "../scss/style";
+
+  .filters button.router-link-active {
+    background: royalblue;
+    color: white;
+  }
 </style>

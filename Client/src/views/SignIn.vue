@@ -6,29 +6,37 @@
   <div class="sign-in__wrapper">
     <div class="sign-in__inner-wrapper">
       <div class="sign-in__form-container">
-        <div class="sign-in__form-wrapper">
-          <form
-            class="sign-in__form"
-            action=""
-          >
-            <label for="email-field">{{'Email address'}}</label>
-            <input
-              id="email-field"
-              type="text"
-              name="email"
-            />
-            <label for="password-field">{{'Password'}}</label>
-            <input
-              id="password-field"
-              type="password"
-              name="password"
-            />
-            <input
-              type="submit"
-              name="submit"
-              value="Sign in"
-            />
-          </form>
+        <div class="sign-in__form-inner-container">
+          <h1>{{ 'Sign in to TodoApp' }}</h1>
+          <div class="sign-in__form-wrapper">
+            <form
+              class="sign-in__form"
+              action=""
+            >
+              <label for="email-field">
+                <input
+                  id="email-field"
+                  class="sign-in__input"
+                  type="text"
+                  name="email"
+                />
+              </label>
+              <label for="password-field">
+                <input
+                  id="password-field"
+                  class="sign-in__input"
+                  type="password"
+                  name="password"
+                />
+              </label>
+              <input
+                class="sign-in__submit-button"
+                type="submit"
+                name="submit"
+                value="Sign in"
+              />
+            </form>
+          </div>
         </div>
       </div>
     </div>
