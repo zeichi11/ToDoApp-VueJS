@@ -50,6 +50,10 @@ module.exports = (env, opts) => {
             'postcss-loader',
             'sass-loader'
           ]
+        },
+        {
+          test: /\.(png|jpg|svg)$/,
+          use: ['file-loader']
         }
       ]
     },

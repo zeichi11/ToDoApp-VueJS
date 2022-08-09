@@ -1,8 +1,8 @@
-<toiemplate>
+<template>
   <div class="wrapper">
     <router-view />
   </div>
-</toiemplate>
+</template>
 
 <script>
 export default {
