@@ -17,7 +17,7 @@
                 <input
                   id="email-field"
                   class="sign-in__input"
-                  type="text"
+                  type="email"
                   name="email"
                 />
               </label>

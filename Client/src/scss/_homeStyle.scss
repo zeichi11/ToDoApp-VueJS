@@ -23,19 +23,63 @@
         display: flex;
         flex-direction: row;
         width: 1140px;
-        height: 600px;
-        background-color: beige;
-        padding-top: 60px;
+        height: 590px;
+        // background-color: beige;
+        padding-top: 40px;
         box-sizing: border-box;
+        border-bottom: 1px rgb(209, 209, 209) solid;
 
         .home-main__banner-left {
-          width: 650px;
+          width: 600px;
+          margin-top: 60px;
+          margin-left: 10px;
+          box-sizing: border-box;
+
+          .banner__contents {
+            h1 {
+              margin-top: 10px;
+              font-size: 2.5em;
+              font-weight: 700;
+              line-height: 1.2;
+            }
+            p {
+              margin-top: 20px;
+              margin-left: 30px;
+              line-height: 1.5;
+              color: rgb(81, 81, 81);
+            }
+          }
+          .banner__sign-up-form {
+            margin-top: 70px;
+            
+            input {
+              margin-left: 20px;
+              width: 320px;
+              height: 50px;
+              border: 1px rgb(187, 187, 187) solid;
+              border-radius: 5px;
+              font-size: 0.8em;
+              padding-left: 15px;
+            }
+            button {
+              margin-left: 10px;
+              width: 160px;
+              height: 54px;
+              border: none;
+              background-color: rgba(32, 178, 170, 1);
+              border-radius: 5px;
+              font-size: 0.8em;
+              color: white;
+            }
+          }
+          
         }
 
         .home-main__banner-right {
-          width: 490px;
+          width: 540px;
           height: 100%;
-          background-image: url("../assets/image/home_banner.png");
+          background: url("../assets/image/home_banner-removebg.png") no-repeat center center;
+          background-size: 520px;
         }
       }
     }
