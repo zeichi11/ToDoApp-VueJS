@@ -6,16 +6,16 @@
   <div class="inner-wrapper">
     <div id="header">
       <navigator
-        :ui-data="UI_STRUCT.NAVIGATOR"
+        :ui-data="UI_STRUCT.BOARD.NAVIGATOR"
       />
     </div>
     <div id="main">
       <div class="board__container">
         <board-header
-          :ui-data="UI_STRUCT.BOARD_HEADER"
+          :ui-data="UI_STRUCT.BOARD.HEADER"
         />
         <sidebar
-          :ui-data="UI_STRUCT.SIDEBAR"
+          :ui-data="UI_STRUCT.BOARD.SIDEBAR"
         />
         <main-container/>
       </div>
@@ -33,7 +33,7 @@ import Sidebar from 'layoutPath/Sidebar'
 import BoardHeader from 'layoutPath/BoardHeader'
 import MainContainer from 'layoutPath/MainContainer'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
-import { UI_STRUCT } from 'dataPath/UiMetadata.js'
+import UI_STRUCT from 'dataPath/uiMetadata'
 
 export default {
   components: {

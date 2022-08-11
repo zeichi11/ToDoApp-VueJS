@@ -49,7 +49,7 @@
 // import TodoItem from 'componentPath/Item.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
-import { UI_STRUCT } from 'dataPath/UiMetadata.js'
+import UI_STRUCT from 'dataPath/uiMetadata'
 
 export default {
   components: {
