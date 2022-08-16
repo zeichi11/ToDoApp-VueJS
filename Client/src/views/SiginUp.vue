@@ -3,37 +3,49 @@
 </style>
 
 <template>
-  <div class="sign-in__wrapper">
-    <div class="sign-in__inner-wrapper">
-      <div class="sign-in__form-container">
-        <div class="sign-in__form-inner-container">
-          <h1>{{ 'Sign in to TodoApp' }}</h1>
-          <div class="sign-in__form-wrapper">
+  <div class="sign-up__wrapper">
+    <div class="sign-up__inner-wrapper">
+      <div class="sign-up__form-container">
+        <div class="sign-up__form-inner-container">
+          <h1>{{ 'Sign up to TodoApp' }}</h1>
+          <div class="sign-up__form-wrapper">
             <form
-              class="sign-in__form"
+              class="sign-up__form"
               action=""
             >
               <label for="email-field">
                 <input
                   id="email-field"
-                  class="sign-in__input"
+                  class="sign-up__input"
                   type="email"
                   name="email"
                 />
+                <button>{{'check'}}</button>
               </label>
+              <label>{{'This email connot be used.'}}</label>
               <label for="password-field">
                 <input
                   id="password-field"
-                  class="sign-in__input"
+                  class="sign-up__input"
                   type="password"
                   name="password"
                 />
               </label>
+              <label>{{''}}</label>
+              <label for="password-check-field">
+                <input
+                  id="password-check-field"
+                  class="sign-up__input"
+                  type="password"
+                  name="password-check"
+                />
+              </label>
+              <label>{{''}}</label>
               <input
-                class="sign-in__submit-button"
+                class="sign-up__submit-button"
                 type="submit"
                 name="submit"
-                value="Sign in"
+                value="Sign up"
               />
             </form>
           </div>

@@ -1,16 +1,16 @@
-.sign-in__wrapper {
+.sign-up__wrapper {
     width: 100%;
     height: 100%;
     background: linear-gradient(150deg, lightseagreen 0%, rgba(233, 196, 106, 1) 50%, rgba(244, 162, 97, 1) 100%);
   
-    .sign-in__inner-wrapper {
+    .sign-up__inner-wrapper {
       display: flex;
       align-items: center;
       justify-content: center;
       width: 100%;
       height: 100%;
   
-      .sign-in__form-container {
+      .sign-up__form-container {
         display: flex;
         align-items: center;
         justify-content: center;
@@ -23,7 +23,7 @@
         -moz-box-shadow: 0px 0px 22px -5px rgba(0, 0, 0, 0.75);
         box-shadow: 0px 0px 22px -5px rgba(0, 0, 0, 0.75);
   
-        .sign-in__form-inner-container {
+        .sign-up__form-inner-container {
           display: flex;
           flex-direction: column;
           align-items: center;
@@ -37,7 +37,7 @@
             color:rgba(42, 42, 42, 0.75)
           }
   
-          .sign-in__form {
+          .sign-up__form {
             margin-top: 10px;
             padding-top: 30px;
             padding-left: 20px;
@@ -56,7 +56,7 @@
               margin-bottom: 5px;
             }
   
-            .sign-in__input {
+            .sign-up__input {
               width: 340px;
               height: 50px;
               margin: 0;
@@ -66,7 +66,7 @@
               border: 1px rgba(204, 204, 204, 0.5) solid;
             }
   
-            .sign-in__submit-button {
+            .sign-up__submit-button {
               margin-top: 10px;
               margin-bottom: 10px;
               width: 340px;
