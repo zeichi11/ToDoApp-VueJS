@@ -4,54 +4,7 @@
 
 <template>
   <div class="sign-up__wrapper">
-    <div class="sign-up__inner-wrapper">
-      <div class="sign-up__form-container">
-        <div class="sign-up__form-inner-container">
-          <h1>{{ 'Sign up to TodoApp' }}</h1>
-          <div class="sign-up__form-wrapper">
-            <form
-              class="sign-up__form"
-              action=""
-            >
-              <label for="email-field">
-                <input
-                  id="email-field"
-                  class="sign-up__input"
-                  type="email"
-                  name="email"
-                />
-                <button>{{'check'}}</button>
-              </label>
-              <label>{{'This email connot be used.'}}</label>
-              <label for="password-field">
-                <input
-                  id="password-field"
-                  class="sign-up__input"
-                  type="password"
-                  name="password"
-                />
-              </label>
-              <label>{{''}}</label>
-              <label for="password-check-field">
-                <input
-                  id="password-check-field"
-                  class="sign-up__input"
-                  type="password"
-                  name="password-check"
-                />
-              </label>
-              <label>{{''}}</label>
-              <input
-                class="sign-up__submit-button"
-                type="submit"
-                name="submit"
-                value="Sign up"
-              />
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
+    <sign-up-main/>
   </div>
 </template>
 
@@ -61,10 +14,12 @@
 // import TodoItem from 'componentPath/Item.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
 import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
+import SignUpMain from 'layoutPath/SignUpMain'
 import UI_STRUCT from 'dataPath/uiMetadata'
 
 export default {
   components: {
+    SignUpMain
   },
   data () {
     return {

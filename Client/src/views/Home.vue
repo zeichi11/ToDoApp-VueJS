@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import Navigator from 'layoutPath/HeaderNavigator'
+import Navigator from 'layoutPath/Navigator'
 import UI_STRUCT from 'dataPath/uiMetadata'
 
 export default  {

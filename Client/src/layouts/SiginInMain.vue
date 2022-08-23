@@ -1,25 +1,6 @@
-<style lang="scss">
-  @import "../scss/boardStyle";
-</style>
-
 <template>
-  <div class="inner-wrapper">
-    <div id="header">
-      <navigator
-        :ui-data="UI_STRUCT.BOARD.NAVIGATOR"
-      />
-    </div>
-    <div id="main">
-      <div class="board__container">
-        <board-header
-          :ui-data="UI_STRUCT.BOARD.HEADER"
-        />
-        <board-sidebar
-          :ui-data="UI_STRUCT.BOARD.SIDEBAR"
-        />
-        <board-main/>
-      </div>
-    </div>
+  <div class="sign-in__main">
+    <sign-in-form/>
   </div>
 </template>
 
@@ -28,23 +9,15 @@
 // import TodoCreator from 'componentPath/Creator.vue'
 // import TodoItem from 'componentPath/Item.vue'
 import { mapState, mapGetters, mapMutations, mapActions } from 'vuex'
-import Navigator from 'layoutPath/Navigator'
-import BoardSidebar from 'layoutPath/BoardSidebar'
-import BoardHeader from 'layoutPath/BoardHeader'
-import BoardMain from 'layoutPath/BoardMain'
-import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants.js'
-import UI_STRUCT from 'dataPath/uiMetadata'
+import { RESOURCES, DEFAULTS, CSS_NAME, CSS_ID } from 'commonPath/Constants'
+import SignInForm from 'featurePath/auth/components/SignInForm'
 
 export default {
   components: {
-    Navigator,
-    BoardSidebar,
-    BoardHeader,
-    BoardMain
+    SignInForm
   },
   data () {
     return {
-      addItemListId: ''
     }
   },
   computed: {
@@ -59,13 +32,9 @@ export default {
     // 첫번째 인자 : namespace(없는 경우 생략-두번째 인자만 전달), 두번째 인자 : 바인딩 타겟 data 리스트
     ...mapGetters('board', [
       // getter
-    ]),
-
-    UI_STRUCT: function () {
-      return UI_STRUCT
-    }
+    ])
   },
-  methods: {
+  methods: {  
   }
 }
 </script>

@@ -7,7 +7,7 @@
 import Vue from 'vue'
 import cryptoRandomString from 'crypto-random-string'
 import { DEFAULTS } from 'commonPath/Constants.js'
-import Loader from '../requester/Loader'
+import Loader from '../http/Loader'
 import Utils from '../common/Utils'
 
 import _assign from 'lodash/assign'
