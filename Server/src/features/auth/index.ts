@@ -1,21 +1,21 @@
-import * as pg from pg'
+import * as pg from 'pg'
 
-const { Poool } = pg 
-let _pool = null
+const { Pool } = pg 
+let _pool: Pool || null = null
 let _client = null
 
 async function init () {
   try {
-    _pool = new Pool(
+    _pool = new Pool({
       host: 'localhost',
       user: 'root',
-      password: 'test',
+      password: 'root',
       database: 'auth',
       port: 5432,
       max: 20,
       idleTimeoutMillis: 30000,
-      connectionTimeoutMillis: 2000,
-    )
+      connectionTimeoutMillis: 2000
+    })
     if (_pool) {
       _client = await _pool.connect((err) => {
         if (err) {
