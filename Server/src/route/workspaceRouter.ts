@@ -1,6 +1,6 @@
 import express, { Router } from 'express'
 import workspaceRouteHandler from './workspace'
-import auth from '../middleware/authorization/auth'
+import auth from '../middleware/authorization'
 
 const router: Router = express.Router()
 

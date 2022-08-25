@@ -1,6 +1,6 @@
 import express, { Router, Request, Response } from 'express'
 import TodosRouteHandler from './todos'
-import auth from '../middleware/authorization/auth'
+import auth from '../middleware/authorization'
 
 const router: Router = express.Router()
 

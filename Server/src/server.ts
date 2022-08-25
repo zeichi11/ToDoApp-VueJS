@@ -1,6 +1,6 @@
 import express, { Express } from 'express'
 import Router from './router'
-import SocketChannel from './channel/socketChannel'
+import SocketChannel from './features/todos/channel/socketChannel'
 import Database from './database'
 import Config from './util/config'
 import { RouteTableType } from './route/routeTable.type'
