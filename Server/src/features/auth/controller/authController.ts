@@ -1,7 +1,20 @@
 import express ,{ Request, Response } from 'express';
-import { searchUser } from '../service';
+import AuthService from '../service';
 
 const app = express();
+
+export async function signUp (req: Request, res: Response): Promise<void> {
+  const email: String = req.query.user_email as String
+  const pwd: String = req.query.user_password as String
+  const nickName: String = req.query.user_name as String
+
+  try {
+    if (nickName && email && pwd) {
+      const result: any = await AuthService.signUp(email, pwd, nickName)
+    }
+  }
+} 
+
 
 app.post('/test', async(req: Request, res: Response)=>{    
     const userName: String = req.query.user_name as String;
