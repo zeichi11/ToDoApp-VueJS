@@ -3,12 +3,15 @@ import Router from './router'
 import SocketChannel from './features/todos/channel/socketChannel'
 import Database from './database'
 import Config from './util/config'
+import bodyParser from 'body-parser'
 import { RouteTableType } from './route/routeTable.type'
 
 let _server: Express;
 
 function _initialize (routeTable: RouteTableType) {
   _server = express()
+  _server.use(bodyParser.json())
+
   Router.set(_server, routeTable)
 }
 

@@ -1,5 +1,5 @@
 import Workspace from '../dbModel/todos/workspace/workspace.model'
-import BoardController from './boardController'
+import BoardController from './boardService'
 
 async function _createWorkspace(title: string) {
   const date: string = new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/, '')
@@ -12,7 +12,7 @@ async function _createWorkspace(title: string) {
 }
 
 export default {
-  createWorkspace: function (title: string) {
+  createWorkspace: function (userId: string, title: string) {
     const promise = _createWorkspace(title)
     promise.then((doc) => {
       const workspaceId = doc._id

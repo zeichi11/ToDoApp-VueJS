@@ -1,5 +1,5 @@
-import Board from '../dbModel/todos/board/board.model'
-import TodoListController from './todoListController'
+import Board from '../database/dbModel/todos/board/board.model'
+import TodoListController from './todoListService'
 
 async function _createBoard(workspaceId: string, title: string) {
   const date: string = new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/, '')

@@ -1,7 +1,7 @@
 import mongoose, { Connection } from 'mongoose'
 import Config from '../src/util/config'
-import WorkspaceController from '../src/database/dbController/workspaceController'
-import BoardController from '../src/database/dbController/boardController'
+import WorkspaceController from '../src/database/service/workspaceService'
+import BoardController from '../src/database/service/boardService'
 
 let _db: Connection;
 
