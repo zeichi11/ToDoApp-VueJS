@@ -11,15 +11,37 @@ async function _createWorkspace(title: string) {
   return await workspace.save()
 }
 
+async function _getWorkspace (workspaceId: string) {
+  const workspace = await Workspace.findById(workspaceId)
+  return workspace
+}
+
+async function _removeWorkspace (workspaceId: string) {
+  const result = await Workspace.findByIdAndRemove(workspaceId)
+  return result
+}
+
 export default {
   createWorkspace: function (userId: string, title: string) {
     const promise = _createWorkspace(title)
     promise.then((doc) => {
       const workspaceId = doc._id
-      const workspace = Workspace.findWorkspaceById(workspaceId)
-      BoardController.createBoard(workspaceId, 'board1')
+      BoardController.createBoard(workspaceId, 'New Board')
     })
+  },
+
+  getWorkspace: function (userId: string, workspaceId) {
+    const result = _getWorkspace(workspaceId)
+    return result;
   }
+
+    /**
+   * TodoList를 삭제한다.
+   */
+  removeWorkspace: async function (listId: Schema.Types.ObjectId) {
+    return await Workspace.remove({ _id: listId })
+  },
+
 
 
 
