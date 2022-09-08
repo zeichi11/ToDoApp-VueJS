@@ -1,11 +1,11 @@
 import mongoose, { Connection } from 'mongoose'
-import Config from '../util/config'
+import { ENV } from '../../../config/config'
 
 let _db: Connection;
 
-function getDBUri(): string {
-  const PROTOCOL = 'mongodb://'
-  return `${PROTOCOL}${Config.MONGO_HOST}:${Config.MONGO_PORT}/${Config.MONGO_CONTEXT}`
+function getDBUri (): string {
+  const { PROTOCOL, HOST, PORT, CONTEXT } = ENV.MONGO
+  return `${PROTOCOL}${HOST}:${PORT}/${CONTEXT}`
 }
 
 function initDB() {

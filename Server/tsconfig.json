@@ -12,6 +12,6 @@
     "outDir": "dist-server"
   },
   "files": [
-    "app.ts"
+    "./app.ts"
   ]
 }

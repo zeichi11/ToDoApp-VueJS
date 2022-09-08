@@ -1,5 +1,5 @@
 import { Express } from 'express'
-import { RouteTableType } from './route/interface';
+import { RouteTableType } from './route/routeTable.type';
 
 export default {
   set (app: Express, routerTable: RouteTableType) {
