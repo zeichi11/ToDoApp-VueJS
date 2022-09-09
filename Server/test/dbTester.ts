@@ -1,5 +1,5 @@
 import mongoose, { Connection } from 'mongoose'
-import Config from '../src/util/config'
+import { ENV } from '../src/config/config'
 import WorkspaceController from '../src/database/service/workspaceService'
 import BoardController from '../src/database/service/boardService'
 

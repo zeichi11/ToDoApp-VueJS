@@ -8,6 +8,7 @@
       <h1>{{ 'Sign up to TodoApp' }}</h1>
       <div class="sign-up__form-wrapper">
         <form
+          ref="signUpForm"
           class="sign-up__form"
           action=""
         >
@@ -44,6 +45,7 @@
             type="submit"
             name="submit"
             value="Sign up"
+            @click="onClick"
           />
         </form>
       </div>
@@ -85,6 +87,25 @@ export default {
     }
   },
   methods: {
+    ...mapActions('todoApp', [
+      'signUp'
+    ]),
+
+    redirect: function () {
+
+    },
+
+    signUpError: function () {
+
+    },
+
+    onClick: function () {
+      const form = this.$refs.signUpForm
+      if (form) {
+        const formData = new FormData([form])
+        this.signUp(formData, null, null)
+      }
+    }
   }
 }
 </script>

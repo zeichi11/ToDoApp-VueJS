@@ -1,6 +1,6 @@
 import { Request, Response } from 'express'
 import Middleware from '../../../middleware'
-import workspaceService from '../service/workspaceService'
+import WorkspaceService from '../service/workspaceService'
 
 async function createWorkspace (req: Request, res: Response): Promise<void> {
   try {
@@ -8,7 +8,7 @@ async function createWorkspace (req: Request, res: Response): Promise<void> {
       const userId: String = req.body.userId as String
       const workspaceName: String = req.body.workspaceName as String
       
-      workspaceService.createWorkspace(userId, workspaceName)
+      WorkspaceService.createWorkspace(userId, workspaceName)
     }
   }
 }
@@ -19,7 +19,16 @@ async function getWorkspace (req: Request, res: Response): Promise<void> {
       const userId: String = req.body.userId as String
       const authToken: String = req.body.authToken as String
 
-      const result: any = await AuthService.signUp(email, pwd, nickName)
+      const result: any = await WorkspaceService.getWorkspace(email, pwd, nickName)
+    }
+  }
+}
+
+async function deleteWorkSpace (req: Request, res: Response): Promise<void> {
+  try {
+    if (Middleware.isValidRequest(req, res)) {
+      const userId: String = req.body.userId as String
+      const result: any = await Work
     }
   }
 }

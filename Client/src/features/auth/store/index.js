@@ -9,7 +9,7 @@ import cryptoRandomString from 'crypto-random-string'
 import { DEFAULTS } from 'commonPath/Constants.js'
 import Loader from '../requester/Loader'
 import Utils from '../common/Utils'
-import { SignIn, SignUp } from '../serviece'
+import { info, login, signUp } from '../serviece'
 
 //  import _assign from 'lodash/assign'
 //  import _find from 'lodash/find'
@@ -53,11 +53,16 @@ export default {
     /**
       * initialize board
       */
-    async signUp (context, email, password) {
-      SignIn.post(email, password)
+    async signUp (data) {
+      signUp(data, successCb, errorCb)
     },
-    async signIn (email, password) {
-      SignIn.post(email, password)
+
+    async signIn (data, successCb, errorCb) {
+      login(data, successCb, errorCb)
+    },
+
+    async info (data, successCb, errorCb) {
+      info(data, successCb, errorCb)
     }
   }
 }
