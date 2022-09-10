@@ -4,7 +4,7 @@
   "description": "TodoApp Backend Server.",
   "main": "index.js",
   "scripts": {
-    "clean": "rimraf dist-server",
+    "clean": "rimraf ../dist-server",
     "transpile": "tsc",
     "build": "npm-run-all clean transpile",
     "transpileDBTest": "tsc --project ./test/dbTsconfig.json",

@@ -1,15 +1,15 @@
-import WorkspaceController from '../../controller/workspaceController'
+import WorkspaceController from './workspaceController'
 
-function _executeAction(action) {
+function _executeAction(action: any) {
   WorkspaceController.execute(action)
 }
 
-function _patch(action) {
+function _patch(action: any) {
   action && _executeAction(action)
 }
 
 export default {
-  patch: function (action) {
+  patch: function (action: any) {
     _patch(action)
   }
 }

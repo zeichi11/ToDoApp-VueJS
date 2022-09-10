@@ -9,7 +9,7 @@
     "sourceMap": true,
     "downlevelIteration": true,
     "moduleResolution": "node",
-    "outDir": "dist-server"
+    "outDir": "../dist-server"
   },
   "files": [
     "./app.ts"

@@ -1,4 +1,4 @@
-import Board from '../database/dbModel/todos/board/board.model'
+import Board from '../dbModel/todos/board/board.model'
 import TodoListController from './todoListService'
 
 async function _createBoard(workspaceId: string, title: string) {

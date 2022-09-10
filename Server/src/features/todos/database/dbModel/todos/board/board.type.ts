@@ -9,8 +9,7 @@ export interface IBoard {
 }
 
 // methods
-export interface IBoardDocument extends IBoard, Document {}
+export interface IBoardDocument extends IBoard, Document { }
 
 // static
-export interface IBoardModel extends Model<IBoardDocument> {}
-
+export interface IBoardModel extends Model<IBoardDocument> { }

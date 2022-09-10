@@ -2,7 +2,7 @@
   "apps": [
     {
       "name": "todoAppServer",
-      "script": "./dist-server/server.js",
+      "script": "../dist-server/app.js",
       "instances": 2,
       "exec_mode": "cluster",
       "wait_ready": true,

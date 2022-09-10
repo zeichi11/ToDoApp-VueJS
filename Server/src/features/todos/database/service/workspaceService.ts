@@ -1,3 +1,4 @@
+import { Schema } from 'mongoose'
 import Workspace from '../dbModel/todos/workspace/workspace.model'
 import BoardController from './boardService'
 
@@ -30,10 +31,10 @@ export default {
     })
   },
 
-  getWorkspace: function (userId: string, workspaceId) {
+  getWorkspace: function (userId: string, workspaceId: string) {
     const result = _getWorkspace(workspaceId)
     return result;
-  }
+  },
 
     /**
    * TodoList를 삭제한다.
