@@ -3,17 +3,64 @@ import AuthService from '../service';
 
 const app = express();
 
+/**
+ * sign up
+ * @param req 
+ * @param res 
+ */
 export async function signUp (req: Request, res: Response): Promise<void> {
   const email: String = req.query.user_email as String
   const pwd: String = req.query.user_password as String
   const nickName: String = req.query.user_name as String
+  let result: any = false
+  let statusCode: number = 200
 
   try {
     if (nickName && email && pwd) {
-      const result: any = await AuthService.signUp(email, pwd, nickName)
+      result = await AuthService.signUp(email, pwd, nickName)
+    } else {
+      console.error('[Auth-Server] Request data error.')
+      statusCode = 500
     }
+  } catch (e) {
+    console.error(`[Auth-Server] Server Error. ${e.message}`)
+    statusCode = 500
+
+  } finally {
+    res.status(statusCode).send({
+      result
+    })
   }
-} 
+}
+
+/**
+ * get
+ * @param req 
+ * @param res 
+ */
+export async function get (req: Request, res: Response): Promise<void> {
+  const email: String = req.query.user_email as String
+  const userName: String = req.query.user_name as String
+  let result: boolean = false
+  let statusCode: number = 200
+
+  try {
+    if (userName && email) {
+      result = await AuthService.get(email, userName)
+    } else {
+      console.error('[Auth-Server] Request data error.')
+      statusCode = 500
+    }
+  } catch (e) {
+    console.error(`[Auth-Server] Server Error. ${e.message}`)
+    statusCode = 500
+
+  } finally {
+    res.status(statusCode).send({
+      result
+    })
+  }
+}
 
 
 app.post('/test', async(req: Request, res: Response)=>{    
