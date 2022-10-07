@@ -1,41 +1,29 @@
 import { Request, Response } from 'express'
+import AuthController from '../feature/controller/authController';
+
+function get (req: Request, res: response) {
+  AuthController.get(req, res)
+}
+
+function info (req: Request, res: Response) {
+  AuthController.info(req, res)
+}
+
+function signIn (req: Request, res: Response) {
+  AuthController.signUp(req, res)
+}
+
+function signUp (req: Request, res: Response) {
+  AuthController.signUp(req, res)
+}
+
+function _initialize (server) {
+  server.post('/auth/get', get)
+  server.post('/auth/info', info)
+  server.post('/auth/signUp', signUp)
+  server.post('/auth/signIn', signIn)
+}
 
 export default {
-  get: (req: Request, res: response) => {
-    req.
-  },
-
-  info: (req: Request, res: Response) => {
-
-  },
-
-  signIn: (req: Request, res: Response) => {
-    
-  },
-  
-  signUp: (req: Request, res: Response) => {
-    const { email, password, userName } = req.body
-    
-    // res.send()
-  }
-
-  // userRouter.get('/:id', (req, res) => {
-//   console.log('userRouter get ID')
-//   res.send(req.user)
-// })
-
-// userRouter.post('/', (req, res) => {
-//   // Register user
-//   res.send('User registered.')
-// })
-
-// userRouter.post('/:id/name', (req, res) => {
-//   // req.body: {'name': 'zeichi'}
-//   const { user } = req
-//   const { nickname } = req.body
-
-//   user.nickname = nickname
-
-//   res.send(`User name updated: ${nickname}`)
-// })
+  initialize: _initialize
 }
