@@ -18,10 +18,10 @@ function signUp (req: Request, res: Response) {
 }
 
 function _initialize (server) {
-  server.post('/auth/get', get)
-  server.post('/auth/info', info)
-  server.post('/auth/signUp', signUp)
-  server.post('/auth/signIn', signIn)
+  server.post('/auth/api/get', get)
+  server.post('/auth/api/info', info)
+  server.post('/auth/api/signUp', signUp)
+  server.post('/auth/api/signIn', signIn)
 }
 
 export default {
