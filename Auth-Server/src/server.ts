@@ -17,7 +17,7 @@ function _initialize() {
 }
 
 function _start() {
-  !_server && _initialize(routeTable)
+  !_server && _initialize()
 
   // Database.initDB()
   _httpServer.listen(ENV.SERVER.PORT, () => {
