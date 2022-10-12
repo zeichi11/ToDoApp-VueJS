@@ -4,7 +4,7 @@
   <update id="createUserTable">
     ${query}
   </update>
-  <select id="selctUserById">
+  <select id="selectUserById">
     SELECT
       *
     FROM
@@ -12,6 +12,15 @@
     WHERE
       user_id =#{user_id}
   </select>
+  <select id="selectUserByEmail">
+    SELECT
+      *
+    FROM
+      user
+    WHERE
+      email = #{email} and
+      nickname = #{nickname}
+  </select
   <insert>
     INSERT INTO 
       user(user_id, pwd_hash, nick_name)
