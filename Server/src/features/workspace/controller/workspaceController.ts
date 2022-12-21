@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import Middleware from '..//middleware'
+import Middleware from '../../todos/middleware'
 import WorkspaceService from '../database/service/workspaceService'
 
 async function createWorkspace (req: Request, res: Response): Promise<void> {

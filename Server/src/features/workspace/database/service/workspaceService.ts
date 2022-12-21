@@ -1,6 +1,6 @@
 import { Schema } from 'mongoose'
-import Workspace from '../dbModel/todos/workspace/workspace.model'
-import BoardController from './boardService'
+import Workspace from '../../../todos/database/model/todos/workspace/workspace.model'
+import BoardController from '../../../todos/database/service/boardService'
 
 async function _createWorkspace(title: string) {
   const date: string = new Date(+new Date() + 3240 * 10000).toISOString().replace("T", " ").replace(/\..*/, '')

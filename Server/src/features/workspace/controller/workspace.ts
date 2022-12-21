@@ -1,11 +1,11 @@
-import Command from './command/command'
-import InsertCommand from './command/insertCommand'
-import UpdateCommand from './command/updateCommand'
-import DeleteCommand from './command/deleteCommand'
-import Board from './board'
-import TodoList from './todoList'
-import { COMMAND } from '../common/constants'
-import WorkspaceModel from '../database/dbModel/todos/workspace/workspace.model'
+import Command from '../../todos/core/command/command'
+import InsertCommand from '../../todos/core/command/insertCommand'
+import UpdateCommand from '../../todos/core/command/updateCommand'
+import DeleteCommand from '../../todos/core/command/deleteCommand'
+import Board from '../../todos/core/board'
+import TodoList from '../../todos/core/todoList'
+import { COMMAND } from '../../todos/common/constants'
+import WorkspaceModel from '../../todos/database/model/todos/workspace/workspace.model'
 
 export default class Workspace {
   _workspaceId: string | null = null

@@ -1,5 +1,5 @@
 import { Document, Model } from 'mongoose'
-import { IBoard } from '../board/board.type'
+import { IBoard } from '../../../../todos/database/model/board/board.type'
 
 export interface IWorkspace {
   title: string,
