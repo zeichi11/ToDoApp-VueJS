@@ -1,38 +1,48 @@
-import Workspace from './workspace'
+import Workspace from '../../workspace/controller/workspace'
+import Board from './board'
 
 export default class Worker {
-  _spaceId: string | null = null
-  _workspace: Workspace | null = null
+  _boardId: string = ""
+  _board: Board | null = null
 
-  constructor(spaceId: string) {
-    this._spaceId = spaceId
+  constructor(boardId: string) {
+    this._boardId = boardId
   }
 
   /**
    * open
    */
-  open(boardId: string) {
-    this._workspace = new Workspace(boardId)
+  open () {
+    try {
+      this._board = new Board(this._boardId)
+      console.log('open')
+    } catch (e: any) {
+      console.error(e.message)
+    }
   }
 
   /**
    * save
    */
   save(): boolean {
-    return this._workspace && this._workspace.save()
+    return this._board && this._board.save()
   }
 
   /**
    * do command
    */
   doCommand(commandStr: string): boolean {
-    return this._workspace && this._workspace.executeCommand(commandStr)
+    return this._board && this._board.executeCommand(commandStr)
   }
 
   /**
    * close
    */
   close() {
-    this._workspace && this._workspace.close()
+    this._board && this._board.close()
   }
+
+
+
+  
 }

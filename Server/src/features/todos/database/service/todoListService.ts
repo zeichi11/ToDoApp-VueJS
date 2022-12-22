@@ -1,5 +1,5 @@
-import TodoList from '../dbModel/todos/todoList/list.model'
-import TodoItem from '../dbModel/todos/todoItem/item.model'
+import TodoList from '../model/todos/todoList/list.model'
+import TodoItem from '../model/todos/todoItem/item.model'
 import { Schema } from 'mongoose'
 
 export default {

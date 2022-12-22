@@ -1,4 +1,4 @@
-import WorkspaceController from './workspaceController'
+import WorkspaceController from '../../workspace/controller/workspaceController'
 
 function _executeAction(action: any) {
   WorkspaceController.execute(action)

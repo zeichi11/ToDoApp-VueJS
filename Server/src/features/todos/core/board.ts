@@ -1,5 +1,5 @@
 import List from '../database/todoDoc/todoList/list.schema'
-import BoardModel from '../database/dbModel/todos/board/board.model'
+import BoardModel from '../database/model/todos/board/board.model'
 
 export default class Board {
   _boardId: string | null = null
@@ -8,46 +8,37 @@ export default class Board {
     this._boardId = boardId
   }
 
-  async addList(id, title, createdAt) {
-    const list = new List({
-      _id: id,
-      title,
-      createdAt
-    })
-    await list.save().catch(() => {
-      console.log('add list to db error')
-    })
-  }
+    /**
+   * Execute command
+   */
+  executeCommand(commandStr: string) {
+    if (!commandStr.length) {
+      return false
+    }
 
-  deleteList () {
-  
-  }
-
-  renameList () {
-
-  }
-
-  addTodoList(boardId, listTitle) {
-
-  }
-
-  removeTodoList(boardId, listIndex) {
-
-  }
-
-  moveTodoList(boardId, listIndex, toIndex) {
-
-  }
-
-  addListItem(boardId, listIndex, itemTitle, content) {
-
-  }
-
-  removeListItem(boardId, listIndex, itemIndex) {
-
-  }
-
-  updateListItem(boardId, listIndex) {
+    const command: Command = new Command(commandStr),
+      { cmd, listIndex } = command
+    let board, todoList
     
+    if (this._boardId) {
+      board = new Board(this._boardId)
+      if (!isNaN(listIndex)) {
+        todoList = new TodoList(listIndex)
+
+        switch (cmd) {
+          case COMMAND.CMD_INSERT:
+            return InsertCommand(this._workspaceModel, board, todoList, command)
+            break
+          case COMMAND.CMD_UPDATE:
+            return UpdateCommand(this._workspaceModel, board, todoList, command)
+            break
+          case COMMAND.CMD_DELETE:
+            return DeleteCommand(this._workspaceModel, board, todoList, command)
+            break
+          default:
+            break
+        }
+      } 
+    }
   }
 }

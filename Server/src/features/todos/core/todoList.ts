@@ -8,20 +8,27 @@ export default class TodoList {
   constructor(listIndex: number) {
     this._listIndex = listIndex
   }
+  
+  async insert(id, title, createdAt) {
+    const list = new List({
+      _id: id,
+      title,
+      createdAt
+    })
+    await list.save().catch(() => {
+      console.log('add list to db error')
+    })
+  }
 
-  addItem(content: string) {
+  delete () {
+  
+  }
+
+  rename () {
 
   }
 
-  deleteItem (itemIndex: number) {
-
-  }
-
-  modifyItem () {
-
-  }
-
-  changeItemState () {
+  move (boardId, listIndex, toIndex) {
 
   }
 }

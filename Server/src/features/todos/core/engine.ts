@@ -1,5 +1,5 @@
 import Command from './command/command'
-import Worker from './workspace'
+import Worker from '../../workspace/controller/workspace'
 
 export default class Engine {
   _spaceId: string | null = null
