@@ -25,13 +25,14 @@ export default class Worker {
    * save
    */
   save(): boolean {
-    return this._board && this._board.save()
+    // db data export(save) 처리
   }
 
   /**
    * do command
    */
-  doCommand(commandStr: string): boolean {
+  doCommand (commandStr: string): boolean {
+    
     return this._board && this._board.executeCommand(commandStr)
   }
 
