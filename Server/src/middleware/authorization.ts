@@ -7,3 +7,11 @@ export function isValidRequest (req: Request, res: Response, next: Function): bo
   // 임시
   return true;
 }
+
+export function isValidInfo (req: Request, res: Response, next: Function): any {
+  
+}
+
+export function checkSpaceSession (req: Request, res: Response, next: Function): any {
+
+}
