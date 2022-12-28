@@ -1,52 +1,40 @@
 import { Request, Response } from 'express'
-import Middleware from '../../todos/middleware'
+import { resourceLimits } from 'worker_threads'
 import WorkspaceService from '../database/service/workspaceService'
 
-async function createWorkspace (req: Request, res: Response): Promise<void> {
+async function createWorkspace (userId: string, workspaceName: string): Promise<void> {
+  let result: Promise<void>
   try {
-    if (Middleware.isValidRequest(req, res)) {
-      const userId: string = req.body.userId as string
-      const workspaceName: string = req.body.workspaceName as string
-      
-      WorkspaceService.createWorkspace(userId, workspaceName)
-    }
+    result = await WorkspaceService.createWorkspace(userId, workspaceName)
+  } catch (e: any) {
+    console.error(e.message)
+    result = null
+  }
+  return result
+}
+
+async function getWorkspace (userId: string, workspaceId: string): Promise<void> {
+  let result: Promise<void>
+  try {
+    result = await WorkspaceService.getWorkspace(userId, workspaceId)
   } catch (e: any) {
     console.error(e.message)
   }
+  return result
 }
 
-async function getWorkspace (req: Request, res: Response): Promise<void> {
+async function deleteWorkSpace (userId: string, workspaceId: string): Promise<void> {
+  let result: Promise<void>
   try {
-    if (Middleware.isValidRequest(req, res)) {
-      const userId: string = req.body.userId as string
-      const workspaceId: string = req.body.workspaceId as string
-      // const authToken: string = req.body.authToken as string
-
-      const result: any = await WorkspaceService.getWorkspace(userId, workspaceId)
-    }
-  } catch (e: any) {
-    console.error(e.message)
-  }
-}
-
-async function deleteWorkSpace (req: Request, res: Response): Promise<void> {
-  try {
-    if (Middleware.isValidRequest(req, res)) {
-      const userId: String = req.body.userId as String
-      // const result: any = await Work()
-    }
+    result = await WorkspaceService.deleteWorkspace(userId, workspaceId)
   } catch (e) {
     console.error(e.message)
   }
-}
-
-function execute (action: any) {
-  console.log('execute')
+  return result
 }
 
 export default {
   createWorkspace,
   deleteWorkSpace,
-  getWorkspace,
-  execute
+  getWorkspace
 }
