@@ -32,7 +32,6 @@ export default class Worker {
    * do command
    */
   doCommand (commandStr: string): boolean {
-    
     return this._board && this._board.executeCommand(commandStr)
   }
 
@@ -42,8 +41,4 @@ export default class Worker {
   close() {
     this._board && this._board.close()
   }
-
-
-
-  
 }

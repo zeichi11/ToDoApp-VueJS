@@ -17,13 +17,13 @@ async function _getWorkspace (workspaceId: string) {
   return workspace
 }
 
-async function _removeWorkspace (workspaceId: string) {
+async function _deleteWorkspace (workspaceId: string) {
   const result = await Workspace.findByIdAndRemove(workspaceId)
   return result
 }
 
 export default {
-  createWorkspace: function (userId: string, title: string) {
+  createWorkspace: function (userId: string, workspaceName: string) {
     const promise = _createWorkspace(title)
     promise.then((doc) => {
       const workspaceId = doc._id
@@ -39,7 +39,7 @@ export default {
     /**
    * TodoList를 삭제한다.
    */
-  removeWorkspace: async function (listId: Schema.Types.ObjectId) {
+  deleteWorkspace: async function (workspaceId: Schema.Types.ObjectId) {
     return await Workspace.remove({ _id: listId })
   },
 
