@@ -1,5 +1,8 @@
-import List from '../database/todoDoc/todoList/list.schema'
-import BoardModel from '../database/model/todos/board/board.model'
+import ActionCommand from '../action/actionCommand'
+import { COMMAND } from '../common/constants'
+import insertCommand from './command/insertCommand'
+import updateCommand from './command/updateCommand'
+import deleteCommand from './command/deleteCommand'
 
 export default class Board {
   _boardId: string | null = null
@@ -8,37 +11,26 @@ export default class Board {
     this._boardId = boardId
   }
 
-    /**
+  /**
    * Execute command
    */
-  executeCommand(commandStr: string) {
-    if (!commandStr.length) {
+  executeCommand(actionString: string) {
+    if (!actionString.length) {
       return false
     }
 
-    const command: Command = new Command(commandStr),
-      { cmd, listIndex } = command
-    let board, todoList
-    
-    if (this._boardId) {
-      board = new Board(this._boardId)
-      if (!isNaN(listIndex)) {
-        todoList = new TodoList(listIndex)
-
-        switch (cmd) {
-          case COMMAND.CMD_INSERT:
-            return InsertCommand(this._workspaceModel, board, todoList, command)
-            break
-          case COMMAND.CMD_UPDATE:
-            return UpdateCommand(this._workspaceModel, board, todoList, command)
-            break
-          case COMMAND.CMD_DELETE:
-            return DeleteCommand(this._workspaceModel, board, todoList, command)
-            break
-          default:
-            break
-        }
-      } 
+    const actionCommand: ActionCommand = new ActionCommand(actionString)
+    const cmd = actionCommand.cmd
+  
+    switch (cmd) {
+      case COMMAND.CMD_INSERT:
+        return insertCommand(actionCommand)
+      case COMMAND.CMD_UPDATE:
+        return updateCommand(actionCommand)
+      case COMMAND.CMD_DELETE:
+        return deleteCommand(actionCommand)
+      default:
+        return false
     }
   }
 }

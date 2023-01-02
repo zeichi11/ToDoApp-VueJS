@@ -15,7 +15,7 @@ export default class Worker {
   open () {
     try {
       this._board = new Board(this._boardId)
-      console.log('open')
+      console.log(`[Todo-Server: worker] open board. ID : ${this._boardId}`)
     } catch (e: any) {
       console.error(e.message)
     }
@@ -26,19 +26,20 @@ export default class Worker {
    */
   save(): boolean {
     // db data export(save) 처리
+    return true
   }
 
   /**
    * do command
    */
-  doCommand (commandStr: string): boolean {
-    return this._board && this._board.executeCommand(commandStr)
+  doCommand (actionString: string): boolean {
+    return this._board && this._board.executeCommand(actionString)
   }
 
   /**
    * close
    */
   close() {
-    this._board && this._board.close()
+    // this._board && this._board.close()
   }
 }
