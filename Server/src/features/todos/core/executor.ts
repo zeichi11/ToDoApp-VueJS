@@ -4,13 +4,7 @@ import insertCommand from './command/insertCommand'
 import updateCommand from './command/updateCommand'
 import deleteCommand from './command/deleteCommand'
 
-export default class Board {
-  _boardId: string | null = null
-
-  constructor(boardId: string) {
-    this._boardId = boardId
-  }
-
+export default class Executor {
   /**
    * Execute command
    */

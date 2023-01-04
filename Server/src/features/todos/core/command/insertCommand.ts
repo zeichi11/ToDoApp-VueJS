@@ -1,33 +1,38 @@
+import Command from './command'
 import ActionCommand from '../../action/actionCommand'
 import { COMMAND } from '../../common/constants'
 
-interface ActionProps {
-  listId: string,
-  type: string,
-  value: any,
-  offset: [number, number]
-}
+import Board from '../receiver/board'
+import TodoList from '../receiver/todoList'
+import TodoItem from '../receiver/todoItem'
 
-export default function (actionCommand: ActionCommand) {
-  const { listId, type, value, offset }:  = actionCommand
-
-  if (!type || !value) {
-    return false
+export default class InsertCommand extends Command {
+  constructor(actionCommand: ActionCommand) {
+    super(actionCommand)
   }
 
-  try {
-    switch (type) {
-      case COMMAND.TYPE_BOARD:
-        break
-      case COMMAND.TYPE_TODO_LIST:
-        break
-      case COMMAND.TYPE_TODO_ITEM:
-        break
+  execute () {
+    if (!this._actionCommand || !this._type || !this._value) {
+      return false
     }
-  } catch (e) {
-    console.error(`[Todo-Server: updateCommand] ${actionCommand.toString()}`)
-    return false
-  } 
-  
-  return true
+
+    try {
+      switch (this._type) {
+        case COMMAND.TYPE_BOARD:
+          Board.insert()
+          break
+        case COMMAND.TYPE_TODO_LIST:
+          TodoList.insert()
+          break
+        case COMMAND.TYPE_TODO_ITEM:
+          TodoItem.insert()
+          break
+      }
+    } catch (e) {
+      console.error(`[Todo-Server: insertCommand] ${this._actionCommand.toString()}`)
+      return false
+    }
+    
+    return true
+  }
 }

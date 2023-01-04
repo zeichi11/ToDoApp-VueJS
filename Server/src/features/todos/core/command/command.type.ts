@@ -9,3 +9,10 @@ export interface CommandType {
   listIndex: number,
   value: ValueType
 }
+
+export interface ActionProps {
+  listId: string,
+  type: string,
+  value: any,
+  offset: [number]
+}
