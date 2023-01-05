@@ -2,7 +2,7 @@ export default class ActionCommand {
   _action: any
   
   constructor(actionStr: string) {
-    actionStr.length && this._action = JSON.parse(actionStr)
+    actionStr.length && (this._action = JSON.parse(actionStr))
   }
 
   get boardId () {
@@ -29,3 +29,4 @@ export default class ActionCommand {
   get offset () {
     return this._action.offset
   }
+}

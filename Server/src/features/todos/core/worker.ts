@@ -1,5 +1,5 @@
 import Workspace from '../../workspace/controller/workspace'
-import Board from './board'
+import Board from './receiver/board'
 
 export default class Worker {
   _boardId: string = ""
